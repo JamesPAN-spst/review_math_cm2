@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MC2 期末复习系统</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #08080c;
+  --surface: #101018;
+  --surface2: #16161f;
+  --accent: #7c6aef;
+  --accent2: #a78bfa;
+  --green: #34d399;
+  --amber: #fbbf24;
+  --rose: #fb7185;
+  --cyan: #22d3ee;
+  --txt: #dfdfe5;
+  --dim: #8888a0;
+  --muted: #555568;
+  --bdr: #1e1e2a;
+  --bdr2: #2a2a3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: 'Noto Serif SC', 'Cormorant Garamond', Georgia, serif;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── Grain overlay ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: .5;
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  padding: 100px 24px 70px;
+  text-align: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(124,106,239,.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-label {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  border: 1px solid var(--bdr2);
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  animation: fadeUp .6s ease both;
+}
+.hero h1 {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  animation: fadeUp .6s ease .1s both;
+}
+.hero h1 .hl {
+  background: linear-gradient(135deg, var(--accent2), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero p {
+  color: var(--dim);
+  font-size: 1.05rem;
+  max-width: 520px;
+  margin: 0 auto;
+  animation: fadeUp .6s ease .2s both;
+}
+
+/* ── Section divider ── */
+.sec-div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 50px 0 28px;
+  padding: 0 4px;
+}
+.sec-div .line { flex: 1; height: 1px; background: var(--bdr2); }
+.sec-div .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .7rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ── Grid ── */
+.container { max-width: 920px; margin: 0 auto; padding: 0 20px 80px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 14px;
+}
+
+/* ── Cards ── */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--bdr);
+  border-radius: 12px;
+  padding: 26px 24px 22px;
+  cursor: pointer;
+  transition: all .3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-accent, var(--accent));
+  opacity: 0;
+  transition: opacity .3s;
+}
+.card:hover {
+  border-color: var(--bdr2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0,0,0,.4);
+}
+.card:hover::before { opacity: 1; }
+
+.card .icon {
+  width: 38px; height: 38px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 14px;
+  background: var(--icon-bg, var(--accent));
+  color: #fff;
+  opacity: .85;
+}
+.card .title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  color: #f0f0f4;
+}
+.card .desc {
+  font-size: .84rem;
+  color: var(--dim);
+  line-height: 1.55;
+  flex: 1;
+}
+.card .tag {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .68rem;
+  color: var(--muted);
+  letter-spacing: .04em;
+}
+.card .tag .arrow {
+  transition: transform .2s;
+}
+.card:hover .tag .arrow {
+  transform: translateX(3px);
+}
+.card:hover .tag { color: var(--accent2); }
+
+/* ── Summary cards ── */
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--bdr);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 14px;
+}
+.summary-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #eee;
+}
+.summary-card p, .summary-card li {
+  font-size: .88rem;
+  color: var(--dim);
+  line-height: 1.65;
+}
+.summary-card ul {
+  list-style: none;
+  padding: 0;
+}
+.summary-card li::before {
+  content: '›';
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 8px;
+}
+.summary-card li { margin: 3px 0; }
+
+/* ── Disabled card ── */
+.card.soon {
+  opacity: .45;
+  cursor: default;
+  pointer-events: none;
+}
+.card.soon .tag { display: none; }
+.soon-badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem;
+  padding: 2px 8px;
+  background: var(--bdr2);
+  color: var(--muted);
+  border-radius: 4px;
+  letter-spacing: .05em;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid var(--bdr);
+  font-size: .78rem;
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card { animation: fadeUp .5s ease both; }
+.card:nth-child(1) { animation-delay: .05s; }
+.card:nth-child(2) { animation-delay: .1s; }
+.card:nth-child(3) { animation-delay: .15s; }
+.card:nth-child(4) { animation-delay: .2s; }
+.card:nth-child(5) { animation-delay: .25s; }
+.card:nth-child(6) { animation-delay: .3s; }
+
+@media (max-width: 600px) {
+  .hero { padding: 70px 16px 50px; }
+  .grid { grid-template-columns: 1fr; }
+  .container { padding: 0 14px 60px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Licence 1 — Université Paris Cité</div>
+  <h1>Mathématiques<br>et <span class="hl">Calcul 2</span></h1>
+  <p>公式速查 · 考点精讲 · 拓展知识 · 分级测验<br>覆盖全部 TD 内容，从基础到竞赛</p>
+</div>
+
+<div class="container">
+
+  <!-- ═══ ANALYSE ═══ -->
+  <div class="sec-div">
+    <div class="line"></div>
+    <div class="label">Analyse — 分析</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="mod_primitives.html" style="--card-accent:var(--accent);--icon-bg:var(--accent)">
+      <div class="icon">∫</div>
+      <div class="title">原函数与积分技巧</div>
+      <div class="desc">IPP · 换元法 · 有理分式分解 · 三角/双曲代换 · 万能代换 · 递推积分</div>
+      <div class="tag">进入模块 <span class="arrow">→</span></div>
+    </a>
+    <a class="card" href="mod_riemann.html" style="--card-accent:var(--cyan);--icon-bg:#0d9488">
+      <div class="icon">Σ</div>
+      <div class="title">Riemann 和</div>
+      <div class="desc">Riemann 和的识别与还原 · 积分区间判定 · 含根号/指数型求和</div>
+      <div class="tag">进入模块 <span class="arrow">→</span></div>
+    </a>
+    <a class="card" href="mod_improp.html" style="--card-accent:var(--rose);--icon-bg:#be123c">
+      <div class="icon">∞</div>
+      <div class="title">反常积分</div>
+      <div class="desc">p-判别法 · 比较法 · Dirichlet / Abel · 绝对与条件收敛 · 含参积分</div>
+      <div class="tag">进入模块 <span class="arrow">→</span></div>
+    </a>
+  </div>
+
+  <!-- ═══ ALGÈBRE ═══ -->
+  <div class="sec-div">
+    <div class="line"></div>
+    <div class="label">Algèbre linéaire — 线性代数</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="mod_vecspace.html" style="--card-accent:var(--green);--icon-bg:#059669">
+      <div class="icon">V</div>
+      <div class="title">向量空间</div>
+      <div class="desc">子空间三条件 · 线性无关 · 基与维数 · 补基方法 · 维数公式</div>
+      <div class="tag">进入模块 <span class="arrow">→</span></div>
+    </a>
+    <a class="card" href="mod_linmap.html" style="--card-accent:var(--amber);--icon-bg:#b45309">
+      <div class="icon">f</div>
+      <div class="title">线性映射与矩阵</div>
+      <div class="desc">线性判定 · 核与像 · 秩-零化度定理 · 矩阵表示 · 逆矩阵</div>
+      <div class="tag">进入模块 <span class="arrow">→</span></div>
+    </a>
+    <a class="card" href="mod_det.html" style="--card-accent:#f472b6;--icon-bg:#a21caf">
+      <div class="icon">|·|</div>
+      <div class="title">行列式</div>
+      <div class="desc">展开法 · 行列变换 · 性质 · Cramer 法则 · 几何意义</div>
+      <div class="tag">进入模块 <span class="arrow">→</span></div>
+    </a>
+    <a class="card" href="mod_geo.html" style="--card-accent:var(--cyan);--icon-bg:#0e7490">
+      <div class="icon">⊥</div>
+      <div class="title">几何与内积</div>
+      <div class="desc">点积 · 外积 · 直线与平面方程 · Gram-Schmidt 正交化</div>
+      <div class="tag">进入模块 <span class="arrow">→</span></div>
+    </a>
+  </div>
+
+  <!-- ═══ QUIZ ═══ -->
+  <div class="sec-div">
+    <div class="line"></div>
+    <div class="label">Exercices — 分级测验</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="quiz_analyse.html" style="--card-accent:var(--rose);--icon-bg:var(--rose)">
+      <div class="icon">✎</div>
+      <div class="title">分析综合测验</div>
+      <div class="desc">40+ 题 · 基础→中级→高级 · 错题详解与统计 · 覆盖积分 + 反常积分全部考点</div>
+      <div class="tag">开始测验 <span class="arrow">→</span></div>
+    </a>
+    <a class="card" href="quiz_algebre.html" style="--card-accent:var(--green);--icon-bg:var(--green)">
+      <div class="icon">✎</div>
+      <div class="title">代数综合测验</div>
+      <div class="desc">30+ 题 · 基础→中级→高级 · 错题详解与统计 · 覆盖向量空间 + 行列式全部考点</div>
+      <div class="tag">开始测验 <span class="arrow">→</span></div>
+    </a>
+  </div>
+
+  <!-- ═══ 考点速查 ═══ -->
+  <div class="sec-div">
+    <div class="line"></div>
+    <div class="label">Quick Reference — 考点速查</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="summary-card">
+    <h3 style="color:var(--rose)">⚠ 最高频易错点</h3>
+    <ul>
+      <li><strong>p-判别法条件反转</strong>：无穷积分 p&gt;1 收敛，瑕积分 p&lt;1 收敛。口诀：远严近宽。</li>
+      <li><strong>极限比较法单向性</strong>：极限为 0 时只能从分母推分子（分母收敛→分子收敛），不能反推。</li>
+      <li><strong>Dirichlet 条件</strong>：对振荡部分要求的是「积分有界」，而非函数本身有界。</li>
+      <li><strong>子空间并集</strong>：两个子空间的并集一般不是子空间，交集才是。</li>
+      <li><strong>det(A+B) ≠ det A + det B</strong>：行列式对行/列线性，但不对矩阵加法线性。</li>
+      <li><strong>det(λA) = λⁿ det A</strong>：不要忘记 n 次方。</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  MC2 Review System · Built for Paris Cité L1 · 2025–26
+</div>
+
+</body>
+</html>

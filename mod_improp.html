@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>反常积分 — MC2</title>
+
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  /* MathJax rendering improvements */
+  mjx-container { font-size: 105% !important; }
+  mjx-container[display="true"] { margin: 16px 0 !important; }
+  .MathJax { font-size: 105% !important; }
+</style>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  chtml: { 
+    fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2',
+    matchFontHeight: true,
+    mtextInheritFont: true
+  },
+  startup: { typeset: true }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08080c;--sf:#101018;--sf2:#16161f;--acc:#be123c;--acc2:#fda4af;--grn:#34d399;--amb:#fbbf24;--ros:#fb7185;--cyn:#22d3ee;--vio:#7c6aef;--txt:#dfdfe5;--dim:#8888a0;--mut:#555568;--bd:#1e1e2a;--bd2:#2a2a3a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Noto Serif SC','Source Serif 4','STIX Two Text',Georgia,serif;line-height:1.75;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:.5}
+.back{position:fixed;top:16px;left:16px;z-index:100;font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--dim);text-decoration:none;padding:6px 14px;border:1px solid var(--bd2);border-radius:8px;background:rgba(16,16,24,.85);backdrop-filter:blur(8px);transition:.2s}
+.back:hover{color:var(--acc2);border-color:var(--acc)}
+.hero{padding:80px 24px 40px;text-align:center;border-bottom:1px solid var(--bd)}
+.hero .tag{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--acc2);margin-bottom:12px}
+.hero h1{font-family:'Source Serif 4',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:8px}
+.hero h1 .hl{background:linear-gradient(135deg,var(--acc2),var(--amb));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--dim);font-size:.95rem;max-width:500px;margin:0 auto}
+.wrap{max-width:820px;margin:0 auto;padding:30px 20px 80px}
+.shd{font-size:1.3rem;font-weight:700;margin:40px 0 16px;padding-left:14px;border-left:4px solid var(--acc);color:#ffe4e6}
+.sub{font-size:1.05rem;font-weight:600;margin:28px 0 12px;color:var(--cyn)}
+.cd{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:20px 22px;margin-bottom:14px}
+.cd:hover{border-color:var(--bd2)}
+.cd.fc{border-left:3px solid var(--acc)}
+.cd.tc{border-left:3px solid var(--amb);background:rgba(251,191,36,.04)}
+.cd.wc{border-left:3px solid var(--ros);background:rgba(251,113,133,.04)}
+.cd.ec{border-left:3px solid var(--cyn);background:rgba(34,211,238,.04)}
+.cd.vc{border-left:3px solid var(--vio);background:rgba(124,106,239,.04)}
+.ct{font-weight:700;font-size:.95rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.bg{font-size:.65rem;padding:2px 7px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.bg-f{background:rgba(190,18,60,.15);color:var(--acc2)}.bg-t{background:rgba(251,191,36,.1);color:var(--amb)}.bg-w{background:rgba(251,113,133,.1);color:var(--ros)}.bg-e{background:rgba(34,211,238,.1);color:var(--cyn)}.bg-v{background:rgba(124,106,239,.1);color:#c4b5fd}
+.fb{background:rgba(190,18,60,.04);border:1px solid rgba(190,18,60,.12);border-radius:8px;padding:14px 16px;margin:8px 0;overflow-x:auto}
+.sm{font-size:.88rem}.dm{color:var(--dim)}.mt{margin-top:12px}
+details{margin-bottom:8px}details summary{cursor:pointer;padding:10px 14px;background:var(--sf);border:1px solid var(--bd);border-radius:8px;font-weight:600;font-size:.9rem;list-style:none;transition:.2s}
+details summary::-webkit-details-marker{display:none}details summary::before{content:"▸ ";color:var(--acc2)}
+details[open] summary::before{content:"▾ "}details[open] summary{border-radius:8px 8px 0 0;border-bottom-color:transparent}
+.db{padding:14px 18px;background:var(--sf2);border:1px solid var(--bd);border-top:none;border-radius:0 0 8px 8px;font-size:.9rem;line-height:1.7}
+.footer{text-align:center;padding:24px;border-top:1px solid var(--bd);font-size:.72rem;color:var(--mut);font-family:'IBM Plex Mono',monospace}
+.tbl{width:100%;border-collapse:collapse;font-size:.88rem;margin:8px 0}
+.tbl th,.tbl td{padding:8px 12px;border:1px solid var(--bd2);text-align:center}
+.tbl th{background:var(--sf2);color:var(--dim);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+@media(max-width:600px){.wrap{padding:20px 12px 60px}.hero{padding:60px 14px 30px}}
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">← 返回主页</a>
+
+<div class="hero">
+  <div class="tag">Analyse · Module 3 — 重点</div>
+  <h1><span class="hl">反常积分</span></h1>
+  <p>Intégrales impropres — 敛散性判定全攻略</p>
+</div>
+
+<div class="wrap">
+
+<!-- ═══ 1. 定义 ═══ -->
+<h2 class="shd">定义与分类</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">定义</span> 两类反常积分</div>
+<p class="sm"><strong>无穷积分</strong>（积分上限为 \(\infty\)）：\(\displaystyle\int_a^{+\infty}f(t)\,dt = \lim_{A\to+\infty}\int_a^A f(t)\,dt\)</p>
+<p class="sm mt"><strong>瑕积分</strong>（被积函数在端点处无界）：\(\displaystyle\int_a^b f(t)\,dt = \lim_{\varepsilon\to 0^+}\int_{a+\varepsilon}^b f(t)\,dt\)（瑕点为 \(a\)）</p>
+</div>
+
+<!-- ═══ 2. p-判别法 ═══ -->
+<h2 class="shd">p-判别法 — 最核心的工具</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> p-判别法：两套准则，方向相反！</div>
+<div class="fb">
+\[\int_1^{+\infty}\frac{dt}{t^p}:\quad \begin{cases}\text{收敛} & p > 1 \\ \text{发散} & p \le 1\end{cases} \qquad\qquad \int_0^{1}\frac{dt}{t^p}:\quad \begin{cases}\text{收敛} & p < 1 \\ \text{发散} & p \ge 1\end{cases}\]
+</div>
+</div>
+
+<div class="cd wc"><div class="ct"><span class="bg bg-w">⚠ 最高频错误</span> 条件反转</div>
+<p class="sm">无穷端要 \(p>1\)，瑕点端要 \(p<1\)。记忆口诀：<strong>「远严近宽」</strong>。</p>
+<p class="sm mt">对比表格：</p>
+<table class="tbl">
+<tr><th></th><th>收敛条件</th><th>发散条件</th><th>临界 \(p=1\)</th></tr>
+<tr><td style="color:var(--acc2)">\(\int_1^{+\infty}1/t^p\)</td><td>\(p > 1\)</td><td>\(p \le 1\)</td><td>发散（\(\ln t \to \infty\)）</td></tr>
+<tr><td style="color:var(--acc2)">\(\int_0^1 1/t^p\)</td><td>\(p < 1\)</td><td>\(p \ge 1\)</td><td>发散（\(\ln t \to -\infty\)）</td></tr>
+</table>
+</div>
+
+<!-- ═══ 3. 比较判别法 ═══ -->
+<h2 class="shd">比较判别法</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> 直接比较（放缩法）</div>
+<p class="sm">设 \(0 \le f(x) \le g(x)\)：</p>
+<div class="fb">
+\[\int g \text{ 收敛} \implies \int f \text{ 收敛}, \qquad \int f \text{ 发散} \implies \int g \text{ 发散}\]
+</div>
+</div>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> 极限比较判别法</div>
+<div class="fb">
+\[\text{设 } f,g > 0,\quad L = \lim \frac{f(x)}{g(x)} \implies \begin{cases} 0<L<+\infty &: \int f \text{ 与 } \int g \text{ 同敛散} \\ L=0 &: \int g \text{ 收敛} \Rightarrow \int f \text{ 收敛} \\ L=+\infty &: \int g \text{ 发散} \Rightarrow \int f \text{ 发散} \end{cases}\]
+</div>
+</div>
+
+<div class="cd wc"><div class="ct"><span class="bg bg-w">⚠ 易错</span> \(L=0\) 或 \(L=\infty\) 时只能单向推导</div>
+<p class="sm">\(L=0\) 说明 \(f\) 比 \(g\) 衰减更快，但「多快」未知。例：\(f = 1/(x\ln x)\)，\(g = 1/x\)，\(L=0\)，\(\int g\) 发散，但 \(\int f\) 也发散。必须换更精确的 \(g\)。</p>
+<p class="sm mt">\(L=\infty\) 说明 \(f\) 比 \(g\) 衰减更慢，但 \(g\) 收敛不能排除 \(f\) 也收敛的可能。例：\(f=1/x^{1.5}\)，\(g=1/x^2\)，\(L=\infty\)，两者都收敛。</p>
+</div>
+
+<!-- ═══ 4. 试探函数 ═══ -->
+<h2 class="shd">试探函数选取策略</h2>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">方法</span> 「抓大头」确定阶数</div>
+<p class="sm"><strong>有理函数</strong>：分子最高次 / 分母最高次 = 整体阶数。例：\(\frac{3x^2+5}{x^5+2x^2+1} \sim \frac{3}{x^3}\)，选 \(g = 1/x^3\)。</p>
+<p class="sm mt"><strong>根号</strong>：\(\frac{1}{\sqrt{x(x+1)(x+2)}} \sim \frac{1}{x^{3/2}}\)（根号内是 3 次）。</p>
+</div>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">方法</span> 指数必杀多项式</div>
+<p class="sm">对任意实数 \(n\)：\(\displaystyle\lim_{x\to+\infty}\frac{x^n}{e^x} = 0\)。因此 \(\int x^n e^{-x}dx\) 永远收敛。</p>
+<p class="sm mt">甚至 \(e^{-\sqrt{x}}\) 也足够杀死任何多项式：\(\int x^n e^{-\sqrt{x}}dx\) 收敛。</p>
+</div>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">方法</span> 对数太慢</div>
+<p class="sm">\(\ln x\) 增长极慢，不影响敛散性的「阶」：\(\frac{\ln x}{x^p} \sim 1/x^{p-\varepsilon}\)（对任意 \(\varepsilon > 0\)）。</p>
+<p class="sm mt">但 \(\frac{1}{\ln x}\) 衰减极慢，比 \(1/x\) 还慢 → \(\int_2^{+\infty}\frac{dx}{\ln x}\) 发散。</p>
+</div>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">方法</span> 有界量直接放缩</div>
+<p class="sm">\(|\sin x| \le 1\)，\(|\cos x| \le 1\)，\(\arctan x \le \pi/2\)。直接替换为常数后看剩余的 \(p\) 值。</p>
+</div>
+
+<!-- ═══ 5. 等价无穷小 ═══ -->
+<h2 class="shd">等价无穷小工具箱</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> \(u \to 0\) 时的标准等价</div>
+<div class="fb">
+\[\sin u \sim u,\quad 1-\cos u \sim \frac{u^2}{2},\quad \tan u \sim u,\quad \arctan u \sim u\]
+\[\ln(1+u) \sim u,\quad e^u-1 \sim u,\quad (1+u)^\alpha-1 \sim \alpha u\]
+\[x - \sin x \sim \frac{x^3}{6},\quad \arctan x = x - \frac{x^3}{3}+o(x^3)\]
+</div>
+</div>
+
+<details><summary>例题：\(\int_0^{+\infty}\frac{\arctan(t^3)}{t^2}dt\)（TD Exercice 3.1）</summary>
+<div class="db">
+<p><strong>双端积分 → 拆分</strong>：\(\int_0^1 + \int_1^{+\infty}\)。</p>
+<p class="mt"><strong>瑕点 \(t\to 0^+\)</strong>：\(\arctan(t^3)\sim t^3\)，故 \(\frac{\arctan(t^3)}{t^2}\sim t\)，在 0 附近连续，无瑕点。✓</p>
+<p class="mt"><strong>无穷远 \(t\to+\infty\)</strong>：\(\arctan(t^3)\to\pi/2\)（有界），故 \(\sim \frac{\pi/2}{t^2}\)，\(p=2>1\)，收敛。✓</p>
+<p class="mt">结论：<strong>收敛</strong>。</p>
+</div></details>
+
+<details><summary>例题：\(\int_0^1\frac{dt}{\tan(\sqrt{t})}\)（TD Exercice 3.4）</summary>
+<div class="db">
+<p>瑕点在 \(t=0\)。当 \(t\to 0^+\)：\(\sqrt{t}\to 0\)，\(\tan(\sqrt{t})\sim\sqrt{t}\)。</p>
+<p>故 \(\frac{1}{\tan(\sqrt{t})} \sim \frac{1}{\sqrt{t}} = t^{-1/2}\)。</p>
+<p>瑕积分 \(p = 1/2 < 1\)，<strong>收敛</strong>。</p>
+</div></details>
+
+<!-- ═══ 6. Dirichlet / Abel ═══ -->
+<h2 class="shd">Dirichlet 与 Abel 判别法</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> Dirichlet 判别法</div>
+<div class="fb">
+\[\text{若}\;\left|\int_a^A f(x)\,dx\right| \le M\;(\text{积分有界}),\quad g(x)\;\text{单调}\to 0,\quad \text{则}\;\int_a^{+\infty}f(x)g(x)\,dx\;\text{收敛。}\]
+</div>
+</div>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> Abel 判别法</div>
+<div class="fb">
+\[\text{若}\;\int_a^{+\infty}f(x)\,dx\;\text{收敛},\quad g(x)\;\text{单调有界},\quad \text{则}\;\int_a^{+\infty}f(x)g(x)\,dx\;\text{收敛。}\]
+</div>
+</div>
+
+<div class="cd wc"><div class="ct"><span class="bg bg-w">⚠ 关键区分</span> Dirichlet 要求「积分有界」而非「函数有界」</div>
+<p class="sm">对于 \(\int \frac{\sin x}{x}dx\)，\(\sin x\) 本身有界（\(|\sin x|\le 1\)），但这不是 Dirichlet 所要求的条件！</p>
+<p class="sm mt">你必须写：\(\left|\int_1^A \sin x\,dx\right| = |\cos 1 - \cos A| \le 2\)，即<strong>原函数有界</strong>。</p>
+</div>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">考点</span> 答题模板：Dirichlet 判别法</div>
+<p class="sm">1. 「令 \(f(x) = \sin x\)（振荡部分），\(g(x) = 1/x\)（衰减部分）。」</p>
+<p class="sm">2. 「\(\int_1^A f(x)\,dx = [-\cos x]_1^A = \cos 1 - \cos A\)，故 \(\left|\int_1^A \sin x\,dx\right| \le 2\)，积分有界。」</p>
+<p class="sm">3. 「\(g(x) = 1/x\) 在 \([1,+\infty)\) 上单调递减，且 \(\lim_{x\to+\infty}g(x)=0\)。」</p>
+<p class="sm">4. 「由 Dirichlet 判别法，\(\int_1^{+\infty}\frac{\sin x}{x}\,dx\) 收敛。」</p>
+</div>
+
+<details><summary>例题：\(\int_1^{+\infty}\sin(2t)\arctan(4/t^3)\,dt\)（TD Exercice 7.1c）</summary>
+<div class="db">
+<p>令 \(f(t) = \sin(2t)\)，\(g(t) = \arctan(4/t^3)\)。</p>
+<p>\(\int_1^A \sin(2t)\,dt = [-\frac{\cos 2t}{2}]_1^A\)，有界（\(\le 1\)）。</p>
+<p>\(g(t) = \arctan(4/t^3)\) 单调递减趋于 0。</p>
+<p>由 Dirichlet，\(\int\) 收敛。加绝对值后 \(|\sin(2t)|\cdot\arctan(4/t^3) \sim \frac{4|\sin(2t)|}{t^3}\)，由 \(\int\frac{dt}{t^3}\) 收敛知绝对收敛。</p>
+<p class="mt">结论：<strong>绝对收敛</strong>。</p>
+</div></details>
+
+<!-- ═══ 7. 绝对/条件 ═══ -->
+<h2 class="shd">绝对收敛与条件收敛</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">定义</span></div>
+<p class="sm"><strong>绝对收敛</strong>：\(\int|f(x)|dx\) 收敛 → 自动保证 \(\int f(x)dx\) 也收敛。</p>
+<p class="sm mt"><strong>条件收敛</strong>：\(\int f(x)dx\) 收敛但 \(\int|f(x)|dx\) 发散。依赖正负抵消。</p>
+</div>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">考点</span> 判断流程</div>
+<p class="sm">① 先加绝对值，尝试直接放缩为 \(1/x^p\)（\(p>1\)）。若成功 → 绝对收敛。</p>
+<p class="sm mt">② 若绝对值后发散，则用 Dirichlet/Abel 证明原积分收敛 → 条件收敛。</p>
+<p class="sm mt">③ 若两者都做不到 → 可能发散（例如 \(\int\sin^2 x/x\)）。</p>
+</div>
+
+<div class="cd"><div class="ct">经典判例速查</div>
+<table class="tbl">
+<tr><th>积分</th><th>结论</th><th>关键理由</th></tr>
+<tr><td>\(\int_1^\infty\frac{\sin x}{x}dx\)</td><td style="color:var(--amb)">条件收敛</td><td>Dirichlet 证收敛；\(|\sin x|/x \ge \sin^2 x/x\) 发散</td></tr>
+<tr><td>\(\int_1^\infty\frac{\cos x}{x^3}dx\)</td><td style="color:var(--grn)">绝对收敛</td><td>\(|\cos x|/x^3 \le 1/x^3\)，\(p=3>1\)</td></tr>
+<tr><td>\(\int_1^\infty\sin(x^2)dx\)</td><td style="color:var(--amb)">条件收敛</td><td>Fresnel 积分，换元后 Dirichlet</td></tr>
+<tr><td>\(\int_1^\infty\frac{\sin^2 x}{x}dx\)</td><td style="color:var(--ros)">发散</td><td>\(\sin^2 x = \frac{1-\cos 2x}{2}\)，\(\int\frac{1}{2x}\) 发散</td></tr>
+<tr><td>\(\int_1^\infty\frac{\sin x}{\sqrt{x}}e^{-x}dx\)</td><td style="color:var(--grn)">绝对收敛</td><td>指数兜底：\(\le\frac{e^{-x}}{\sqrt{x}}\)</td></tr>
+</table>
+</div>
+
+<!-- ═══ 8. 混合型 ═══ -->
+<h2 class="shd">混合型积分与含参讨论</h2>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">方法</span> 奇点隔离原则</div>
+<p class="sm">对 \(\int_0^{+\infty}\) 型，<strong>必须从中间截断</strong>（通常在 \(x=1\)），分别处理两端。两端都收敛才整体收敛。</p>
+</div>
+
+<details><summary>例题：\(\int_0^{+\infty}\frac{t^a}{1+t^2}dt\) 的收敛条件（TD Exercice 5.1）</summary>
+<div class="db">
+<p>拆为 \(\int_0^1 + \int_1^{+\infty}\)。</p>
+<p class="mt"><strong>在 0 附近</strong>：\(1+t^2 \sim 1\)，被积函数 \(\sim t^a\)，瑕积分需 \(a > -1\)。</p>
+<p class="mt"><strong>在 \(\infty\)</strong>：\(1+t^2 \sim t^2\)，被积函数 \(\sim t^{a-2}\)，无穷积分需 \(a-2 < -1\) 即 \(a < 1\)。</p>
+<p class="mt">收敛条件：\(\boxed{-1 < a < 1}\)。</p>
+</div></details>
+
+<details><summary>例题：\(\int_1^{+\infty}\frac{\ln t}{t^a}dt\) 的收敛条件（TD Exercice 5.5）</summary>
+<div class="db">
+<p>无穷积分。\(\ln t\) 增长极慢，对任意 \(\varepsilon > 0\)，\(\ln t \le t^\varepsilon\)（充分大时）。</p>
+<p>所以 \(\frac{\ln t}{t^a} \le \frac{1}{t^{a-\varepsilon}}\)，需 \(a-\varepsilon > 1\)，即 \(a > 1\)。</p>
+<p>当 \(a = 1\)：\(\int\frac{\ln t}{t}dt = \frac{(\ln t)^2}{2} \to \infty\)，发散。</p>
+<p class="mt">收敛条件：\(\boxed{a > 1}\)。</p>
+</div></details>
+
+<details><summary>例题：\(\int_0^1\frac{\ln t}{t^a}dt\) 的收敛条件（TD Exercice 5.6）</summary>
+<div class="db">
+<p>瑕积分（瑕点 0）。换元 \(t = 1/u\)，\(dt = -du/u^2\)：</p>
+<p>\(\int_1^{+\infty}\frac{-\ln u}{u^{-a}}\cdot\frac{du}{u^2} = \int_1^{+\infty}\frac{\ln u}{u^{2-a}}du\)</p>
+<p>由上一题，需 \(2-a > 1\) 即 \(a < 1\)。</p>
+<p class="mt">收敛条件：\(\boxed{a < 1}\)。</p>
+</div></details>
+
+<!-- ═══ 9. 变量代换降阶 ═══ -->
+<h2 class="shd">拓展：变量代换降阶</h2>
+
+<div class="cd ec"><div class="ct"><span class="bg bg-e">拓展</span> 高频振荡积分的处理</div>
+<p class="sm">遇到 \(\int x^k\sin(x^m)dx\) 型，令 \(t = x^m\) 降低振荡频率。</p>
+<div class="fb">
+\[\int_1^{+\infty}x^2\sin(x^4)\,dx \xrightarrow{t=x^4} \frac{1}{4}\int_1^{+\infty}\frac{\sin t}{t^{1/4}}dt\]
+</div>
+<p class="sm mt">后者可用 Dirichlet 证收敛。</p>
+</div>
+
+<div class="cd ec"><div class="ct"><span class="bg bg-e">拓展</span> Frullani 积分（TD Exercice 13.2）</div>
+<div class="fb">
+\[\int_0^{+\infty}\frac{f(at)-f(bt)}{t}\,dt = f(0)\ln\frac{b}{a}\]
+</div>
+<p class="sm mt">条件：\(f\) 连续，\(\int_1^\infty f(t)/t\,dt\) 收敛。</p>
+<p class="sm mt">应用：\(\int_0^{+\infty}\frac{e^{-at}-e^{-bt}}{t}dt = \ln(b/a)\)。</p>
+</div>
+
+<div class="cd ec"><div class="ct"><span class="bg bg-e">拓展</span> \(\int_0^{\pi/2}\ln(\sin t)\,dt = -\frac{\pi}{2}\ln 2\)（TD Exercice 8）</div>
+<p class="sm">利用对称性 \(\int_0^{\pi/2}\ln(\sin t)dt = \int_0^{\pi/2}\ln(\cos t)dt = A\)，加上换元 \(t=2s\) 得到 \(I = 2A\)，最终 \(I = -\pi\ln 2\)。这类技巧在竞赛中常见。</p>
+</div>
+
+<!-- ═══ 10. 理论深化 ═══ -->
+<h2 class="shd">拓展：理论深化</h2>
+
+<div class="cd vc"><div class="ct"><span class="bg bg-v">理论</span> 极限为 0 不保证积分收敛</div>
+<p class="sm">\(\lim_{t\to\infty}f(t)=0\) 是积分收敛的<strong>必要非充分</strong>条件（对正函数）。反例：\(f(t) = 1/t\)。</p>
+<p class="sm mt">甚至存在 \(\lim f(t) \ne 0\) 但 \(\int f\) 收敛的函数（需要正负抵消）。</p>
+</div>
+
+<div class="cd vc"><div class="ct"><span class="bg bg-v">理论</span> 收敛 + 导数收敛 → 极限为 0（TD Exercice 11.5）</div>
+<p class="sm">若 \(f \in C^1\)，\(\int_0^\infty f\) 和 \(\int_0^\infty f'\) 都收敛，则 \(\lim_{t\to\infty}f(t)=0\)。</p>
+<p class="sm dm mt">证明思路：\(f(t) = f(0)+\int_0^t f'(s)ds\)，两项极限都存在，故 \(f\) 的极限存在。若极限 \(\ne 0\) 则 \(\int f\) 发散（矛盾）。</p>
+</div>
+
+<div class="cd vc"><div class="ct"><span class="bg bg-v">理论</span> 连续不趋于 0 但积分收敛（TD Exercice 11.4b）</div>
+<p class="sm">构造：在每个整数 \(k\) 附近放一个高度为 1、宽度为 \(1/2^k\) 的「尖峰」，面积之和 \(= \sum 1/2^k = 1 < \infty\)。积分收敛但函数不趋于 0。</p>
+</div>
+
+</div>
+
+<div class="footer">MC2 Review · Intégrales impropres</div>
+</body>
+</html>

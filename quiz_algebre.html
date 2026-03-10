@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>代数综合测验 — MC2</title>
+
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  /* MathJax rendering improvements */
+  mjx-container { font-size: 105% !important; }
+  mjx-container[display="true"] { margin: 16px 0 !important; }
+  .MathJax { font-size: 105% !important; }
+</style>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  chtml: { 
+    fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2',
+    matchFontHeight: true,
+    mtextInheritFont: true
+  },
+  startup: { typeset: true }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08080c;--sf:#101018;--sf2:#16161f;--acc:#059669;--acc2:#6ee7b7;--grn:#34d399;--grn2:rgba(34,197,94,.08);--amb:#fbbf24;--amb2:rgba(251,191,36,.08);--ros:#fb7185;--ros2:rgba(251,113,133,.06);--cyn:#22d3ee;--txt:#dfdfe5;--dim:#8888a0;--mut:#555568;--bd:#1e1e2a;--bd2:#2a2a3a}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--txt);font-family:'Noto Serif SC','Source Serif 4','STIX Two Text',Georgia,serif;line-height:1.75}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:.5}
+.back{position:fixed;top:16px;left:16px;z-index:100;font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--dim);text-decoration:none;padding:6px 14px;border:1px solid var(--bd2);border-radius:8px;background:rgba(16,16,24,.85);backdrop-filter:blur(8px);transition:.2s}.back:hover{color:var(--acc2);border-color:var(--acc)}
+.hero{padding:80px 24px 40px;text-align:center;border-bottom:1px solid var(--bd)}.hero .tag{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--acc2);margin-bottom:12px}.hero h1{font-family:'Source Serif 4',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;margin-bottom:8px}.hero p{color:var(--dim);font-size:.92rem;max-width:520px;margin:0 auto}
+.wrap{max-width:820px;margin:0 auto;padding:24px 20px 80px}
+.sec{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:11px 16px;margin:28px 0 12px;font-weight:700;color:var(--acc2);font-size:.95rem}
+.qc{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:16px 20px;margin-bottom:10px;transition:.3s}
+.qn{font-size:.72rem;color:var(--mut);font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.df{font-size:.62rem;padding:1px 6px;border-radius:3px;font-weight:700}.de{background:var(--grn2);color:var(--grn)}.dm{background:var(--amb2);color:var(--amb)}.dh{background:var(--ros2);color:var(--ros)}
+.qt{font-size:.92rem;margin-bottom:10px}
+.opts label{display:block;margin:3px 0;padding:8px 12px;border-radius:6px;background:rgba(14,14,22,.7);border:1px solid var(--bd);cursor:pointer;transition:.2s;font-size:.88rem}
+.opts label:hover{border-color:var(--acc);background:rgba(5,150,105,.06)}
+.opts input{margin-right:8px;accent-color:var(--acc)}
+.qc.ok{border-color:var(--grn);background:var(--grn2)}.qc.no{border-color:var(--ros);background:var(--ros2)}.qc.un{border-color:var(--amb)}
+.bc{text-align:center;margin:30px 0}
+.btn{padding:14px 40px;background:var(--acc);color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}.btn:hover{filter:brightness(1.15)}
+.btn2{padding:10px 24px;background:transparent;color:var(--acc2);border:1px solid var(--acc);border-radius:8px;font-size:.88rem;cursor:pointer;font-family:inherit;margin-left:10px}
+.rp{display:none;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:28px;margin-top:28px}
+.sb{text-align:center;font-size:2.6rem;font-weight:800;margin-bottom:4px}.sc{text-align:center;color:var(--dim);margin-bottom:16px;font-size:.95rem}
+.stb{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}.stc{padding:5px 12px;border-radius:6px;font-size:.78rem;font-weight:600;background:var(--sf2);border:1px solid var(--bd)}
+.mi{border-left:3px solid var(--ros);background:var(--ros2);border-radius:8px;padding:14px 18px;margin-bottom:12px}
+.mi .ep{margin-top:8px;padding:10px;background:rgba(0,0,0,.25);border-radius:6px;border:1px dashed var(--bd2);color:var(--dim);font-size:.86rem;line-height:1.65}
+.footer{text-align:center;padding:24px;border-top:1px solid var(--bd);font-size:.72rem;color:var(--mut);font-family:'IBM Plex Mono',monospace}
+@media(max-width:600px){.wrap{padding:16px 12px 60px}.hero{padding:60px 14px 30px}}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← 返回主页</a>
+<div class="hero"><div class="tag">Exercices · Algèbre</div><h1>代数综合测验</h1><p>30 题 · 基础→中级→高级 · 向量空间 + 线性映射 + 行列式 + 几何</p></div>
+<div class="wrap">
+<div id="qbox"></div>
+<div class="bc">
+<button class="btn" onclick="submit()">交卷并查看解析</button>
+<button class="btn2" onclick="reset()">重置</button>
+</div>
+<div class="rp" id="rp"></div>
+</div>
+<div class="footer">MC2 Quiz · Algèbre linéaire</div>
+
+<script>
+const Q=[
+// ── 子空间 ──
+{s:"基础 · 子空间判定"},
+{q:"\\(\\{(x,y,z):3x-y=0\\}\\) 是子空间吗？",o:["是","不是"],a:0,d:0,e:"齐次线性方程的解集总是子空间。"},
+{q:"\\(\\{(x,y,z):x+z=0\\;\\text{或}\\;2x+y-z=0\\}\\) 是子空间吗？",o:["是","不是"],a:1,d:0,e:""或"的并集一般不封闭。\\((1,0,-1)+(0,1,1)=(1,1,0)\\) 不满足任一条件。"},
+{q:"\\(\\{P\\in\\mathbb{R}[X]:P(0)=1\\}\\) 是子空间吗？",o:["是","不是"],a:1,d:0,e:"零多项式 \\(P(0)=0\\ne 1\\)。"},
+{q:"\\(\\{P\\in\\mathbb{R}[X]:\\deg P=n\\}\\) 是子空间吗？",o:["是","不是"],a:1,d:0,e:"\\(X^n+(-X^n)=0\\) 的度数不是 \\(n\\)，加法不封闭。"},
+{q:"两个子空间的交集一定是子空间吗？",o:["是","不一定"],a:0,d:0,e:"交集永远是子空间（三条件逐一验证）。"},
+
+// ── 基与无关 ──
+{s:"基础 · 基与线性无关"},
+{q:"\\(\\mathbb{R}^3\\) 中 4 个向量能构成基吗？",o:["能","不能"],a:1,d:0,e:"基的向量数 = \\(\\dim=3\\)。4 > 3 必线性相关。"},
+{q:"\\((1,0,2)\\) 和 \\((0,1,2)\\) 线性无关吗？",o:["是","不是"],a:0,d:0,e:"不成比例，必线性无关。"},
+{q:"将 \\(\\{(1,0,2),(0,1,2)\\}\\) 补全为基，哪个可加入？",o:["\\((1,1,4)\\)","\\((2,1,6)\\)","\\(e_3=(0,0,1)\\)","前两个均可"],a:2,d:1,e:"\\((1,1,4)=(1,0,2)+(0,1,2)\\)，相关。\\(e_3\\) 与前两者无关。"},
+{q:"\\(\\mathbb{R}_2[X]\\) 的维数是？",o:["2","3","4","\\(\\infty\\)"],a:1,d:0,e:"基 \\((1,X,X^2)\\)，维数 3。"},
+
+// ── 行列式 ──
+{s:"中级 · 行列式"},
+{q:"\\(\\begin{vmatrix}1&2\\\\2&-1\\end{vmatrix}=\\)?",o:["\\(-5\\)","\\(5\\)","\\(-3\\)","\\(3\\)"],a:0,d:0,e:"\\(1\\times(-1)-2\\times2=-5\\)。"},
+{q:"\\(\\begin{vmatrix}-3&1&1\\\\0&2&0\\\\0&7&1\\end{vmatrix}=\\)?",o:["\\(-6\\)","\\(6\\)","\\(-3\\)","\\(0\\)"],a:0,d:1,e:"沿第一列展开：\\(-3(2\\times1-0\\times7)=-6\\)。"},
+{q:"\\(\\det(\\lambda A)\\) 对 \\(n\\) 阶矩阵等于？",o:["\\(\\lambda\\det A\\)","\\(\\lambda^n\\det A\\)","\\(n\\lambda\\det A\\)","\\(\\det A\\)"],a:1,d:0,e:"每行都乘了 \\(\\lambda\\)，共 \\(n\\) 行。"},
+{q:"若 \\(\\det A=2,\\det B=-1\\)，则 3 阶矩阵 \\(\\det(-A^2BA)=\\)?",o:["8","\\(-8\\)","16","4"],a:0,d:1,e:"\\((-1)^3\\cdot(\\det A)^2\\cdot\\det B\\cdot\\det A=-1\\cdot4\\cdot(-1)\\cdot2=8\\)。"},
+{q:"若 \\(\\det A=10\\)，\\(B\\) 可逆，2阶矩阵 \\(\\det(3B^{-1}A^2B)=\\)?",o:["900","90","300","9000"],a:0,d:2,e:"\\(3^2\\cdot\\frac{1}{\\det B}\\cdot100\\cdot\\det B=900\\)。"},
+
+// ── 线性映射 ──
+{s:"中级 · 线性映射与矩阵"},
+{q:"\\(f(x,y,z)=(x+2y+3z,y-z,y+z)\\) 的 \\(\\ker f\\)？",o:["\\(\\{0\\}\\)","一条直线","一个平面","\\(\\mathbb{R}^3\\)"],a:0,d:1,e:"\\(y-z=0,y+z=0\\implies y=z=0,x=0\\)。核只有零向量。"},
+{q:"\\(f(x,y,z)=x+y+z\\) 的 \\(\\dim\\ker f\\)？",o:["0","1","2","3"],a:2,d:0,e:"\\(\\text{rg}=1\\)（值域 \\(\\mathbb{R}\\)），\\(3=\\dim\\ker+1\\)。"},
+{q:"\\(f:\\mathbb{R}^n\\to\\mathbb{R}^n\\)，\\(\\ker f=\\{0\\}\\)，则 \\(f\\) 是？",o:["单射不一定满射","满射不一定单射","双射","不确定"],a:2,d:1,e:"有限维同空间：单射 ⟺ 满射 ⟺ 双射。"},
+{q:"若 \\(A\\) 可逆且 \\(AB=0\\)，则？",o:["\\(B=0\\)","\\(A=0\\)","无法确定","\\(\\det B=0\\)"],a:0,d:1,e:"左乘 \\(A^{-1}\\)：\\(B=A^{-1}\\cdot0=0\\)。"},
+{q:"\\((A+B)^2=A^2+2AB+B^2\\) 成立的条件？",o:["总是成立","\\(AB=BA\\)","\\(A=B\\)","\\(A\\) 可逆"],a:1,d:1,e:"\\((A+B)^2=A^2+AB+BA+B^2\\)。需 \\(AB=BA\\) 才能合并。"},
+
+// ── 方程组 ──
+{s:"中级 · 线性方程组"},
+{q:"3×3 系数矩阵 \\(\\det A\\ne 0\\)，系统有多少解？",o:["0","1","无穷多","不确定"],a:1,d:0,e:"可逆 → 唯一解 \\(x=A^{-1}b\\)。"},
+{q:"若 \\(\\det A=0\\)，\\(Ax=b\\) 一定无解吗？",o:["是","不是"],a:1,d:1,e:"可能无穷多解（\\(b\\in\\text{Im}A\\)）或无解。"},
+
+// ── 几何 ──
+{s:"中级 · 几何"},
+{q:"\\(u=(1,1,0),v=(-1,2,0)\\)，\\(u\\wedge v=\\)?",o:["\\((0,0,3)\\)","\\((0,0,-3)\\)","\\((2,-1,3)\\)","\\((3,0,0)\\)"],a:0,d:1,e:"\\((0-0,0-0,2-(-1))=(0,0,3)\\)。"},
+{q:"标准正交基的平行六面体体积？",o:["0","1","\\(\\sqrt{3}\\)","3"],a:1,d:0,e:"\\(|\\det I|=1\\)。"},
+{q:"\\(\\{x+y+z=0\\}\\cap\\{x-y-z=0\\}\\) 的维数？",o:["0","1","2","3"],a:1,d:1,e:"两个独立方程在 \\(\\mathbb{R}^3\\) 中：\\(3-2=1\\)，是直线。"},
+
+// ── 高级 ──
+{s:"高级 · 综合"},
+{q:"\\(A^2=6A\\)，\\(B=2A-6I_3\\)，则 \\(\\det B\\in\\)?",o:["\\(\\{0\\}\\)","\\(\\{\\pm 6\\}\\)","\\(\\{\\pm 216\\}\\)","\\(\\{\\pm 36\\}\\)"],a:2,d:2,e:"\\(B^2=4A^2-24A+36I=36I\\)。\\((\\det B)^2=36^3\\)，\\(\\det B=\\pm 216\\)。"},
+{q:"\\(\\det A=1,\\det B=2,\\det(AB^2C)=2\\)，则 \\(n\\) 阶 \\(\\det(2C)=\\)?",o:["\\(2^n/2\\)","\\(2^{n-1}\\)","\\(2^n\\)","\\(2^{n+1}\\)"],a:1,d:2,e:"\\(1\\cdot4\\cdot\\det C=2\\implies\\det C=1/2\\)。\\(\\det(2C)=2^n/2=2^{n-1}\\)。"},
+{q:"\\(f:\\mathbb{R}_3[X]\\to\\mathbb{R}_3[X],P\\mapsto P-P'\\) 是同构吗？",o:["是","不是"],a:0,d:2,e:"\\(P=P'\\) 在多项式中只有 \\(P=0\\)（\\(e^x\\notin\\mathbb{R}_3[X]\\)）。\\(\\ker=\\{0\\}\\)，同维同构。"},
+];
+
+let qIdx=0;
+const box=document.getElementById('qbox');
+let html='';
+Q.forEach(item=>{
+  if(item.s){html+=`<div class="sec">${item.s}</div>`;return;}
+  const dc=['de','dm','dh'][item.d],dl=['基础','中级','高级'][item.d];
+  let oh='';item.o.forEach((o,i)=>{oh+=`<label><input type="radio" name="q${qIdx}" value="${i}"> ${o}</label>`;});
+  html+=`<div class="qc" id="c${qIdx}"><div class="qn">第 ${qIdx+1} 题 <span class="df ${dc}">${dl}</span></div><div class="qt">${item.q}</div><div class="opts">${oh}</div></div>`;
+  item._i=qIdx++;
+});
+box.innerHTML=html;
+MathJax.typesetPromise();
+
+function submit(){
+  let sc=0,tot=0,un=0,mis=[];
+  let by=[{c:0,t:0},{c:0,t:0},{c:0,t:0}];
+  Q.forEach(item=>{
+    if(item.s)return;tot++;by[item.d].t++;
+    const el=document.querySelector(`input[name="q${item._i}"]:checked`);
+    const cd=document.getElementById(`c${item._i}`);
+    cd.classList.remove('ok','no','un');
+    if(!el){un++;cd.classList.add('un');}
+    else if(+el.value===item.a){sc++;by[item.d].c++;cd.classList.add('ok');}
+    else{cd.classList.add('no');mis.push({i:item._i,q:item.q,y:item.o[+el.value],c:item.o[item.a],e:item.e,d:item.d});}
+  });
+  if(un>0&&!confirm(`还有 ${un} 题未作答，确定交卷？`))return;
+  let pct=Math.round(sc/tot*100);
+  let col=pct>=80?'var(--grn)':pct>=60?'var(--amb)':'var(--ros)';
+  let cmt=pct>=90?'出色！代数基础和应用都很扎实。':pct>=70?'不错，关注错题中的概念漏洞。':pct>=50?'中等水平，需要强化行列式计算和核/像的求解。':'建议从子空间判定和行列式性质开始重新复习。';
+  let mh='';mis.forEach(m=>{
+    const dl=['基础','中级','高级'][m.d];
+    mh+=`<div class="mi"><div style="font-weight:700;margin-bottom:6px">❌ 第 ${m.i+1} 题 <span class="df ${['de','dm','dh'][m.d]}">${dl}</span></div><div class="qt">${m.q}</div><div style="font-size:.85rem;margin-top:6px"><span style="color:var(--mut);text-decoration:line-through">你的答案：${m.y}</span><br><strong style="color:var(--grn)">正确答案：${m.c}</strong></div><div class="ep">${m.e}</div></div>`;
+  });
+  document.getElementById('rp').style.display='block';
+  document.getElementById('rp').innerHTML=`<div class="sb" style="color:${col}">${sc} / ${tot}</div><div class="sc">${cmt}</div><div class="stb"><div class="stc" style="color:var(--grn)">基础 ${by[0].c}/${by[0].t}</div><div class="stc" style="color:var(--amb)">中级 ${by[1].c}/${by[1].t}</div><div class="stc" style="color:var(--ros)">高级 ${by[2].c}/${by[2].t}</div></div>${mis.length?'<h3 style="color:var(--ros);margin-bottom:14px">错题详解</h3>'+mh:'<p style="text-align:center;color:var(--grn);font-size:1.1rem;font-weight:700">🎉 全对！</p>'}`;
+  MathJax.typesetPromise();
+  document.getElementById('rp').scrollIntoView({behavior:'smooth'});
+}
+function reset(){
+  document.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
+  document.querySelectorAll('.qc').forEach(c=>c.classList.remove('ok','no','un'));
+  document.getElementById('rp').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body></html>

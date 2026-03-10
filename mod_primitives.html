@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原函数与积分技巧 — MC2</title>
+
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  /* MathJax rendering improvements */
+  mjx-container { font-size: 105% !important; }
+  mjx-container[display="true"] { margin: 16px 0 !important; }
+  .MathJax { font-size: 105% !important; }
+</style>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  chtml: { 
+    fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2',
+    matchFontHeight: true,
+    mtextInheritFont: true
+  },
+  startup: { typeset: true }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08080c;--sf:#101018;--sf2:#16161f;--acc:#7c6aef;--acc2:#a78bfa;--grn:#34d399;--amb:#fbbf24;--ros:#fb7185;--cyn:#22d3ee;--txt:#dfdfe5;--dim:#8888a0;--mut:#555568;--bd:#1e1e2a;--bd2:#2a2a3a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Noto Serif SC','Source Serif 4','STIX Two Text',Georgia,serif;line-height:1.75;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:.5}
+
+.back{position:fixed;top:16px;left:16px;z-index:100;font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--dim);text-decoration:none;padding:6px 14px;border:1px solid var(--bd2);border-radius:8px;background:rgba(16,16,24,.85);backdrop-filter:blur(8px);transition:.2s}
+.back:hover{color:var(--acc2);border-color:var(--acc)}
+
+.hero{padding:80px 24px 40px;text-align:center;border-bottom:1px solid var(--bd)}
+.hero .tag{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--acc2);margin-bottom:12px}
+.hero h1{font-family:'Source Serif 4',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:8px}
+.hero h1 .hl{background:linear-gradient(135deg,var(--acc2),var(--cyn));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--dim);font-size:.95rem;max-width:500px;margin:0 auto}
+
+.wrap{max-width:820px;margin:0 auto;padding:30px 20px 80px}
+
+.shd{font-size:1.3rem;font-weight:700;margin:40px 0 16px;padding-left:14px;border-left:4px solid var(--acc);color:#e0e7ff}
+.sub{font-size:1.05rem;font-weight:600;margin:28px 0 12px;color:var(--cyn)}
+
+.cd{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:20px 22px;margin-bottom:14px}
+.cd:hover{border-color:var(--bd2)}
+.cd.fc{border-left:3px solid var(--acc)}
+.cd.tc{border-left:3px solid var(--amb);background:rgba(251,191,36,.04)}
+.cd.wc{border-left:3px solid var(--ros);background:rgba(251,113,133,.04)}
+.cd.ec{border-left:3px solid var(--cyn);background:rgba(34,211,238,.04)}
+
+.ct{font-weight:700;font-size:.95rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.bg{font-size:.65rem;padding:2px 7px;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.bg-f{background:rgba(124,106,239,.12);color:var(--acc2)}
+.bg-t{background:rgba(251,191,36,.1);color:var(--amb)}
+.bg-w{background:rgba(251,113,133,.1);color:var(--ros)}
+.bg-e{background:rgba(34,211,238,.1);color:var(--cyn)}
+
+.fb{background:rgba(124,106,239,.04);border:1px solid rgba(124,106,239,.1);border-radius:8px;padding:14px 16px;margin:8px 0;overflow-x:auto}
+.sm{font-size:.88rem}.dm{color:var(--dim)}.mt{margin-top:12px}
+
+details{margin-bottom:8px}
+details summary{cursor:pointer;padding:10px 14px;background:var(--sf);border:1px solid var(--bd);border-radius:8px;font-weight:600;font-size:.9rem;list-style:none;transition:.2s}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▸ ";color:var(--acc)}
+details[open] summary::before{content:"▾ "}
+details[open] summary{border-radius:8px 8px 0 0;border-bottom-color:transparent}
+.db{padding:14px 18px;background:var(--sf2);border:1px solid var(--bd);border-top:none;border-radius:0 0 8px 8px;font-size:.9rem;line-height:1.7}
+
+.footer{text-align:center;padding:24px;border-top:1px solid var(--bd);font-size:.72rem;color:var(--mut);font-family:'IBM Plex Mono',monospace}
+@media(max-width:600px){.wrap{padding:20px 12px 60px}.hero{padding:60px 14px 30px}}
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">← 返回主页</a>
+
+<div class="hero">
+  <div class="tag">Analyse · Module 1</div>
+  <h1>原函数与<span class="hl">积分技巧</span></h1>
+  <p>Primitives et techniques d'intégration</p>
+</div>
+
+<div class="wrap">
+
+<!-- ═══ 1. 基本公式 ═══ -->
+<h2 class="shd">基本原函数表</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> 幂函数与指数</div>
+<div class="fb">
+\[\int x^n\,dx = \frac{x^{n+1}}{n+1}+C \;(n \ne -1), \quad \int \frac{dx}{x} = \ln|x|+C\]
+\[\int e^x\,dx = e^x+C, \quad \int a^x\,dx = \frac{a^x}{\ln a}+C\]
+</div></div>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> 三角函数</div>
+<div class="fb">
+\[\int \sin x\,dx = -\cos x+C, \quad \int \cos x\,dx = \sin x+C\]
+\[\int \frac{dx}{\cos^2 x} = \tan x+C, \quad \int \frac{dx}{\sin^2 x} = -\cot x+C\]
+</div></div>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> 反三角 / 根式</div>
+<div class="fb">
+\[\int \frac{dx}{1+x^2} = \arctan x+C, \quad \int \frac{dx}{\sqrt{1-x^2}} = \arcsin x+C\]
+\[\int \frac{dx}{\sqrt{x^2+a}} = \ln\left|x+\sqrt{x^2+a}\right|+C \quad (a = \pm1)\]
+</div>
+<p class="sm dm mt">最后一个公式来自课件 Exercice 1.1：对 \(g_a(t) = \ln(t+\sqrt{t^2+a})\) 求导可验证。</p>
+</div>
+
+<!-- ═══ 2. 分部积分 ═══ -->
+<h2 class="shd">分部积分 (IPP)</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> Integration by Parts</div>
+<div class="fb">
+\[\int u\,dv = uv - \int v\,du\]
+</div>
+<p class="sm mt">选取 \(u\) 的优先级口诀 <strong>LIATE</strong>：<strong>L</strong>og → <strong>I</strong>nverse trig → <strong>A</strong>lgebraic → <strong>T</strong>rig → <strong>E</strong>xponential。越靠左越适合做 \(u\)（因为求导后更简单）。</p>
+</div>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">考点</span> 三种典型 IPP 场景</div>
+<p class="sm"><strong>① 多项式 × 指数/三角</strong>：\(\int x^n e^x dx\)，令 \(u = x^n\)，IPP \(n\) 次直到多项式消失。</p>
+<p class="sm mt"><strong>② 对数/反三角</strong>：\(\int \ln x\,dx\)，令 \(u = \ln x,\, dv = dx\)。同理 \(\int \arctan x\,dx\)。</p>
+<p class="sm mt"><strong>③ 循环型</strong>：\(\int e^x \cos x\,dx\)，IPP 两次后出现原积分 \(I\)，联立 \(I = \cdots - I\) 解出。</p>
+</div>
+
+<details><summary>例题：计算 \(\int t^2 e^{-t}\,dt\)（TD Exercice 4）</summary>
+<div class="db">
+<p><strong>第一次</strong>：\(u=t^2,\, dv=e^{-t}dt \implies du=2t\,dt,\, v=-e^{-t}\)</p>
+<p>\(= -t^2 e^{-t} + 2\int t e^{-t} dt\)</p>
+<p class="mt"><strong>第二次</strong>：\(u=t,\, dv=e^{-t}dt \implies du=dt,\, v=-e^{-t}\)</p>
+<p>\(= -t^2 e^{-t} + 2\left[-te^{-t}+\int e^{-t}dt\right] = -t^2 e^{-t}-2te^{-t}-2e^{-t}+C\)</p>
+<p class="mt">\(= -(t^2+2t+2)e^{-t}+C\)</p>
+</div></details>
+
+<details><summary>例题：计算 \(\int e^t \cos t\,dt\)（循环型 IPP）</summary>
+<div class="db">
+<p>令 \(I = \int e^t\cos t\,dt\)。</p>
+<p><strong>第一次</strong>：\(u=\cos t,\, dv=e^t dt\) → \(I = e^t\cos t + \int e^t\sin t\,dt\)</p>
+<p><strong>第二次</strong>：\(u=\sin t,\, dv=e^t dt\) → \(I = e^t\cos t + e^t\sin t - I\)</p>
+<p class="mt">因此 \(2I = e^t(\cos t+\sin t)\)，即 \(I = \frac{e^t(\cos t+\sin t)}{2}+C\)。</p>
+</div></details>
+
+<!-- ═══ 3. 换元法 ═══ -->
+<h2 class="shd">换元法 (Changement de variable)</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> 基本形式</div>
+<div class="fb">
+\[\int_a^b f(g(t))\,g'(t)\,dt = \int_{g(a)}^{g(b)} f(u)\,du, \quad u = g(t)\]
+</div></div>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">考点</span> 三角代换一览</div>
+<p class="sm">含 \(\sqrt{a^2-x^2}\)：令 \(x = a\sin\theta\)，利用 \(1-\sin^2=\cos^2\)。</p>
+<p class="sm mt">含 \(\sqrt{a^2+x^2}\)：令 \(x = a\tan\theta\)，利用 \(1+\tan^2=\sec^2\)。</p>
+<p class="sm mt">含 \(\sqrt{x^2-a^2}\)：令 \(x = a\sec\theta\) 或 \(x = a\cosh t\)。</p>
+</div>
+
+<details><summary>例题：\(\int_0^{1/2}\sqrt{1-t^2}\,dt\)（TD Exercice 5.1）</summary>
+<div class="db">
+<p>令 \(t = \cos u\)，则 \(dt = -\sin u\,du\)。</p>
+<p>当 \(t=0 \Rightarrow u=\pi/2\)，\(t=1/2 \Rightarrow u=\pi/3\)。</p>
+<p>\(\int_{\pi/2}^{\pi/3} \sqrt{1-\cos^2 u}\cdot(-\sin u)\,du = \int_{\pi/3}^{\pi/2} \sin^2 u\,du\)</p>
+<p>利用 \(\sin^2 u = \frac{1-\cos 2u}{2}\)：</p>
+<p>\(= \left[\frac{u}{2}-\frac{\sin 2u}{4}\right]_{\pi/3}^{\pi/2} = \left(\frac{\pi}{4}-0\right)-\left(\frac{\pi}{6}-\frac{\sqrt{3}}{8}\right) = \frac{\pi}{12}+\frac{\sqrt{3}}{8}\)</p>
+</div></details>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">考点</span> 答题书写规范</div>
+<p class="sm"><strong>必须写明</strong>：① 换元表达式 \(u = g(t)\)；② \(du = g'(t)\,dt\)；③ 新积分限（定积分时）。</p>
+<p class="sm mt">漏写任意一项都可能被扣分。</p>
+</div>
+
+<!-- ═══ 4. 三角积分 ═══ -->
+<h2 class="shd">三角函数积分</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> 降幂/线性化</div>
+<div class="fb">
+\[\sin^2 x = \frac{1-\cos 2x}{2}, \quad \cos^2 x = \frac{1+\cos 2x}{2}\]
+\[\sin^3 x = \sin x(1-\cos^2 x), \quad \cos^3 x = \cos x(1-\sin^2 x)\]
+</div>
+<p class="sm dm mt">奇数次幂：拆出一个 \(\sin\) 或 \(\cos\) 做换元。偶数次幂：用降幂公式线性化。</p>
+</div>
+
+<details><summary>例题：\(\int_0^{\pi/2}\sin^3 t\,dt\) 与 \(\int_0^{\pi/2}\cos^4 t\,dt\)（TD Exercice 3）</summary>
+<div class="db">
+<p><strong>\(\sin^3 t\)</strong>（奇次）：\(= \sin t(1-\cos^2 t)\)，令 \(u=\cos t\)：</p>
+<p>\(\int_1^0 -(1-u^2)du = \int_0^1(1-u^2)du = 1-\frac{1}{3} = \frac{2}{3}\)</p>
+<p class="mt"><strong>\(\cos^4 t\)</strong>（偶次）：\(\cos^4 t = \left(\frac{1+\cos 2t}{2}\right)^2 = \frac{1}{4}(1+2\cos 2t+\cos^2 2t)\)</p>
+<p>其中 \(\cos^2 2t = \frac{1+\cos 4t}{2}\)，因此：</p>
+<p>\(\cos^4 t = \frac{3}{8}+\frac{1}{2}\cos 2t+\frac{1}{8}\cos 4t\)</p>
+<p>\(\int_0^{\pi/2} = \frac{3\pi}{16}+0+0 = \frac{3\pi}{16}\)</p>
+</div></details>
+
+<!-- ═══ 5. 有理分式 ═══ -->
+<h2 class="shd">有理分式分解 (Éléments simples)</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> 分解规则</div>
+<p class="sm">对 \(\frac{P(x)}{Q(x)}\)（\(\deg P \ge \deg Q\) 时先做多项式除法）：</p>
+<div class="fb">
+\[\frac{1}{(x-a)(x-b)} = \frac{1}{a-b}\left(\frac{1}{x-a}-\frac{1}{x-b}\right)\]
+</div>
+<p class="sm mt">不可约二次因子 \((x^2+px+q)\) 对应分子为 \(Ax+B\)（一次多项式）。</p>
+<p class="sm mt">重根 \((x-a)^k\) 产生 \(k\) 个分式：\(\frac{A_1}{x-a}+\frac{A_2}{(x-a)^2}+\cdots+\frac{A_k}{(x-a)^k}\)。</p>
+</div>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">考点</span> 配方处理不可约二次</div>
+<p class="sm">\(\int \frac{Ax+B}{x^2+px+q}dx\)：先凑分母导数 \(\frac{A}{2}(2x+p)\)，剩余部分配方后化为 \(\arctan\) 型。</p>
+<div class="fb">
+\[\int \frac{dx}{x^2+x+\frac{5}{4}} = \int \frac{dx}{(x+\frac{1}{2})^2+1} = \arctan\!\left(x+\tfrac{1}{2}\right)+C\]
+</div>
+</div>
+
+<details><summary>例题：\(\int \frac{t}{t^3-3t+2}dt\)（TD Exercice 7.1）</summary>
+<div class="db">
+<p>分母因式分解：\(t^3-3t+2 = (t-1)^2(t+2)\)。</p>
+<p>设 \(\frac{t}{(t-1)^2(t+2)} = \frac{A}{t-1}+\frac{B}{(t-1)^2}+\frac{C}{t+2}\)</p>
+<p>通分后比较系数（或代入特值 \(t=1, t=-2\) 速算）：</p>
+<p>\(t=1 \Rightarrow 1=3B \Rightarrow B=\frac{1}{3}\)；\(t=-2 \Rightarrow -2=9C \Rightarrow C=-\frac{2}{9}\)。</p>
+<p>比较 \(t^2\) 系数：\(0=A+C \Rightarrow A=\frac{2}{9}\)。</p>
+<p class="mt">\(\int = \frac{2}{9}\ln|t-1| - \frac{1}{3(t-1)} - \frac{2}{9}\ln|t+2| + K\)</p>
+</div></details>
+
+<!-- ═══ 6. 万能代换 ═══ -->
+<h2 class="shd">万能代换 (Weierstrass)</h2>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> 半角代换</div>
+<div class="fb">
+\[u = \tan\frac{t}{2} \implies \begin{cases} \sin t = \dfrac{2u}{1+u^2} \\[6pt] \cos t = \dfrac{1-u^2}{1+u^2} \\[6pt] dt = \dfrac{2\,du}{1+u^2} \end{cases}\]
+</div>
+<p class="sm dm mt">适用场景：\(\int R(\sin t,\cos t)dt\)，当没有更高效的对称可利用时。</p>
+</div>
+
+<div class="cd wc"><div class="ct"><span class="bg bg-w">注意</span> 万能代换不总是最优</div>
+<p class="sm">如果被积函数关于 \(\sin\) 和 \(\cos\) 有特殊对称性（如只含 \(\cos 2t\)，或分子恰好是分母导数），先检查更简单的换元（如 \(u = \cos t\)、\(u = \sin t\)）再考虑万能代换。</p>
+</div>
+
+<details><summary>例题：\(\int \frac{dt}{2\cos t+\sin t+1}\)（TD Exercice 12.2a）</summary>
+<div class="db">
+<p>令 \(u=\tan(t/2)\)：</p>
+<p>\(\int \frac{1}{2\cdot\frac{1-u^2}{1+u^2}+\frac{2u}{1+u^2}+1}\cdot\frac{2}{1+u^2}du\)</p>
+<p>分母通分：\(\frac{2(1-u^2)+2u+(1+u^2)}{1+u^2} = \frac{3+2u-u^2}{1+u^2}\)</p>
+<p>所以 \(\int \frac{2\,du}{3+2u-u^2} = \int \frac{2\,du}{4-(u-1)^2}\)。</p>
+<p>这是标准形式，用分式分解或令 \(u-1=2\sin\theta\) 处理即可。</p>
+</div></details>
+
+<!-- ═══ 7. 指数换元 ═══ -->
+<h2 class="shd">指数型换元</h2>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">考点</span> \(e^t\) 换元处理指数有理式</div>
+<p class="sm">形如 \(\int R(e^t)dt\) 的积分，令 \(u = e^t\)，\(du = e^t dt = u\,dt\)，即 \(dt = du/u\)，化为有理分式。</p>
+<div class="fb">
+\[\int \frac{e^t+1}{e^{2t}-5e^t+6}dt \xrightarrow{u=e^t} \int \frac{u+1}{u(u^2-5u+6)}du = \int \frac{u+1}{u(u-2)(u-3)}du\]
+</div>
+<p class="sm dm mt">这类题在 TD Exercice 8 中大量出现。</p>
+</div>
+
+<!-- ═══ 8. 拓展 ═══ -->
+<h2 class="shd">拓展知识</h2>
+
+<div class="cd ec"><div class="ct"><span class="bg bg-e">拓展</span> 双曲函数</div>
+<div class="fb">
+\[\cosh t = \frac{e^t+e^{-t}}{2},\quad \sinh t = \frac{e^t-e^{-t}}{2},\quad \cosh^2 t - \sinh^2 t = 1\]
+\[\int \frac{dt}{\cosh^2 t} = \tanh t + C, \quad \int \frac{dt}{\sinh^2 t} = -\coth t + C\]
+</div>
+<p class="sm mt">双曲万能代换：令 \(u = \tanh(t/2)\)，类似三角万能代换（TD Exercice 9）。</p>
+</div>
+
+<div class="cd ec"><div class="ct"><span class="bg bg-e">拓展</span> 递推积分 (Intégrales de réduction)</div>
+<p class="sm">典型递推关系（TD Exercice 10）：设 \(I_n = \int_0^{1/2}\frac{dt}{(t^2-1)^n}\)，通过 IPP 建立 \(I_{n+1}\) 与 \(I_n\) 的关系：</p>
+<div class="fb">
+\[I_n = \frac{1}{2}\cdot\frac{(-4)^n}{3^n}+2n(I_n+I_{n+1})\]
+</div>
+<p class="sm mt">另一经典递推：\(J_n = \int_0^{\pi/2}\sin^n x\,dx\)，有 \(J_n = \frac{n-1}{n}J_{n-2}\)，\(J_0 = \pi/2\)，\(J_1 = 1\)（Wallis 积分）。</p>
+</div>
+
+<div class="cd ec"><div class="ct"><span class="bg bg-e">拓展</span> Cauchy-Schwarz 积分不等式</div>
+<div class="fb">
+\[\left(\int_a^b f(x)g(x)\,dx\right)^2 \le \int_a^b f(x)^2\,dx \cdot \int_a^b g(x)^2\,dx\]
+</div>
+<p class="sm mt">等号成立当且仅当 \(f\) 与 \(g\) 成比例。应用：若 \(f(a)=0\)，\(f\in C^1\)，则 \(\int_a^b|f|^2 dx \le \frac{(b-a)^2}{2}\int_a^b|f'|^2 dx\)（TD Exercice 14）。</p>
+</div>
+
+<div class="cd ec"><div class="ct"><span class="bg bg-e">拓展</span> 广义中值定理</div>
+<p class="sm">设 \(g\) 连续，\(h \ge 0\) 连续，则存在 \(c \in [a,b]\) 使得：</p>
+<div class="fb">
+\[\int_a^b g(t)h(t)\,dt = g(c)\int_a^b h(t)\,dt\]
+</div>
+<p class="sm dm mt">TD Exercice 13.1 的内容。是积分中值定理的加权版本。</p>
+</div>
+
+</div>
+
+<div class="footer">MC2 Review · Primitives et intégration</div>
+</body>
+</html>
