@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>线性方程组 · 测验 — MC2</title>
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>mjx-container{font-size:105%!important}mjx-container[display="true"]{margin:16px 0!important}.MathJax{font-size:105%!important}</style>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  chtml: { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2', matchFontHeight: true, mtextInheritFont: true },
+  startup: { typeset: true }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08080c;--sf:#101018;--sf2:#16161f;--acc:#7c3aed;--acc2:#c4b5fd;--grn:#34d399;--grn2:rgba(34,197,94,.08);--amb:#fbbf24;--amb2:rgba(251,191,36,.08);--ros:#fb7185;--ros2:rgba(251,113,133,.06);--cyn:#22d3ee;--txt:#dfdfe5;--dim:#8888a0;--mut:#555568;--bd:#1e1e2a;--bd2:#2a2a3a}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--txt);font-family:'Noto Serif SC','Source Serif 4','STIX Two Text',Georgia,serif;line-height:1.75}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:.5}
+.back{position:fixed;top:16px;left:16px;z-index:100;font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--dim);text-decoration:none;padding:6px 14px;border:1px solid var(--bd2);border-radius:8px;background:rgba(16,16,24,.85);backdrop-filter:blur(8px);transition:.2s}.back:hover{color:var(--acc2);border-color:var(--acc)}
+.hero{padding:80px 24px 40px;text-align:center;border-bottom:1px solid var(--bd)}.hero .tag{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--acc2);margin-bottom:12px}.hero h1{font-family:'Source Serif 4',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;margin-bottom:8px}.hero p{color:var(--dim);font-size:.92rem;max-width:520px;margin:0 auto}
+.wrap{max-width:820px;margin:0 auto;padding:24px 20px 80px}
+.sec{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:11px 16px;margin:28px 0 12px;font-weight:700;color:var(--acc2);font-size:.95rem}
+.qc{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:16px 20px;margin-bottom:10px;transition:.3s}
+.qn{font-size:.72rem;color:var(--mut);font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.df{font-size:.62rem;padding:1px 6px;border-radius:3px;font-weight:700}.de{background:var(--grn2);color:var(--grn)}.dm{background:var(--amb2);color:var(--amb)}.dh{background:var(--ros2);color:var(--ros)}
+.qt{font-size:.92rem;margin-bottom:10px}
+.opts label{display:block;margin:3px 0;padding:8px 12px;border-radius:6px;background:rgba(14,14,22,.7);border:1px solid var(--bd);cursor:pointer;transition:.2s;font-size:.88rem}
+.opts label:hover{border-color:var(--acc)}
+.opts input{margin-right:8px;accent-color:var(--acc)}
+.qc.ok{border-color:var(--grn);background:var(--grn2)}.qc.no{border-color:var(--ros);background:var(--ros2)}.qc.un{border-color:var(--amb)}
+.bc{text-align:center;margin:30px 0}
+.btn{padding:14px 40px;background:var(--acc);color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}.btn:hover{filter:brightness(1.15)}
+.btn2{padding:10px 24px;background:transparent;color:var(--acc2);border:1px solid var(--acc);border-radius:8px;font-size:.88rem;cursor:pointer;font-family:inherit;margin-left:10px}
+.rp{display:none;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:28px;margin-top:28px}
+.sb{text-align:center;font-size:2.6rem;font-weight:800;margin-bottom:4px}.sc{text-align:center;color:var(--dim);margin-bottom:16px;font-size:.95rem}
+.stb{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}.stc{padding:5px 12px;border-radius:6px;font-size:.78rem;font-weight:600;background:var(--sf2);border:1px solid var(--bd)}
+.mi{border-left:3px solid var(--ros);background:var(--ros2);border-radius:8px;padding:14px 18px;margin-bottom:12px}
+.mi .ep{margin-top:8px;padding:10px;background:rgba(0,0,0,.25);border-radius:6px;border:1px dashed var(--bd2);color:var(--dim);font-size:.86rem;line-height:1.65}
+.footer{text-align:center;padding:24px;border-top:1px solid var(--bd);font-size:.72rem;color:var(--mut);font-family:'IBM Plex Mono',monospace}
+@media(max-width:600px){.wrap{padding:16px 12px 60px}.hero{padding:60px 14px 30px}}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">&larr; 返回主页</a>
+<div class="hero"><div class="tag">Quiz · Algèbre M6</div><h1>线性方程组 · 测验</h1><p>15 题 · Gauss消元 · 解集结构 · 含参系统</p></div>
+<div class="wrap">
+<div id="qbox"></div>
+<div class="bc">
+<button class="btn" onclick="submit()">交卷并查看解析</button>
+<button class="btn2" onclick="reset()">重置</button>
+</div>
+<div class="rp" id="rp"></div>
+</div>
+<div class="footer">MC2 Quiz</div>
+<script>
+function mjRender(){
+  if(window.MathJax&&typeof MathJax.typesetPromise==="function"){MathJax.typesetPromise().catch(()=>{})}
+}
+window.addEventListener("DOMContentLoaded",function(){
+  var t=setInterval(function(){
+    if(window.MathJax&&typeof MathJax.typesetPromise==="function"){clearInterval(t);mjRender()}
+  },200);
+});
+
+var Q=[{"s": "基础 · Gauss消元"}, {"q": "Gauss消元中，哪个操作会改变行列式？", "o": ["交换两行", "一行加另一行的倍数", "两个都不改变"], "a": 0, "d": 0, "e": "交换两行使 \\(\\det\\) 变号。加倍数不变。"}, {"q": "阶梯形矩阵的秩等于？", "o": ["非零行的数量", "总行数", "列数", "最大元素"], "a": 0, "d": 0, "e": "秩 = 主元个数 = 非零行数。"}, {"q": "\\(Ax=0\\) 一定有解吗？", "o": ["一定有", "不一定", "只有方阵时有"], "a": 0, "d": 0, "e": "齐次系统永远有平凡解 \\(x=0\\)。"}, {"q": "自由变量对应矩阵的？", "o": ["有主元的列", "没有主元的列", "零行", "非零行"], "a": 1, "d": 0, "e": "自由变量 = 没有主元的列。"}, {"s": "中级 · 解集结构"}, {"q": "\\(Ax=b\\) 的解集结构是？", "o": ["\\(x_0 + \\ker A\\)", "\\(\\ker A\\)", "\\(\\text{Im}\\,A\\)", "\\(x_0 \\cdot \\ker A\\)"], "a": 0, "d": 1, "e": "特解 + 齐次解空间。"}, {"q": "Rouché-Capelli：\\(Ax=b\\) 有解当且仅当？", "o": ["\\(\\det A \\ne 0\\)", "\\(\\text{rg}(A) = \\text{rg}(A|b)\\)", "\\(b = 0\\)", "\\(A\\) 是方阵"], "a": 1, "d": 1, "e": "增广矩阵秩 = 系数矩阵秩。"}, {"q": "3×3系统，\\(\\text{rg}(A)=2\\)，解空间维数？", "o": ["0", "1", "2", "3"], "a": 1, "d": 1, "e": "\\(3 - 2 = 1\\)，一个自由变量。"}, {"q": "两个方程三个未知数，满秩(rg=2)，解是？", "o": ["唯一的", "一条直线", "一个平面", "空集"], "a": 1, "d": 1, "e": "自由变量 = 3-2 = 1，解是一条直线。"}, {"q": "\\(\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}x=\\begin{pmatrix}1\\\\2\\end{pmatrix}\\) 有解吗？", "o": ["有", "没有"], "a": 1, "d": 1, "e": "消元后 \\(0=1\\)，矛盾。"}, {"s": "中级 · 含参系统"}, {"q": "\\(\\det A = a^2-1\\)。唯一解的条件？", "o": ["\\(a \\ne \\pm 1\\)", "\\(a = 0\\)", "\\(a > 0\\)", "总是唯一"], "a": 0, "d": 1, "e": "\\(\\det \\ne 0 \\iff a \\ne \\pm1\\)。"}, {"q": "消元后末行 \\((0\\;0\\;a\\;|\\;b)\\)，\\(a=0,b\\ne0\\) 时？", "o": ["唯一解", "无穷解", "无解", "需更多信息"], "a": 2, "d": 1, "e": "\\(0=b \\ne 0\\)，矛盾。"}, {"s": "高级 · 应用"}, {"q": "求 \\(A^{-1}\\) 的 Gauss 方法是？", "o": ["\\((A|I)\\) 行化简为 \\((I|A^{-1})\\)", "\\(\\det(A)\\) 除以每个元素", "转置"], "a": 0, "d": 2, "e": "Gauss-Jordan 消元。"}, {"q": "超定系统最小二乘解满足？", "o": ["\\(A^TAx=A^Tb\\)", "\\(Ax=b\\)", "\\(A^{-1}b\\)"], "a": 0, "d": 2, "e": "法方程，将 \\(b\\) 投影到 \\(\\text{Im}(A)\\)。"}, {"q": "LU分解中 \\(L\\) 和 \\(U\\) 分别是？", "o": ["下三角和上三角", "上三角和下三角", "对角和对角"], "a": 0, "d": 2, "e": "L=Lower, U=Upper。"}];
+var qIdx=0;
+var box=document.getElementById("qbox");
+var h="";
+Q.forEach(function(item){
+  if(item.s){h+='<div class="sec">'+item.s+'</div>';return;}
+  var dc=["de","dm","dh"][item.d],dl=["基础","中级","高级"][item.d];
+  var oh="";item.o.forEach(function(o,i){oh+='<label><input type="radio" name="q'+qIdx+'" value="'+i+'"> '+o+'</label>';});
+  h+='<div class="qc" id="c'+qIdx+'"><div class="qn">第 '+(qIdx+1)+' 题 <span class="df '+dc+'">'+dl+'</span></div><div class="qt">'+item.q+'</div><div class="opts">'+oh+'</div></div>';
+  item._i=qIdx++;
+});
+box.innerHTML=h;
+mjRender();
+
+function submit(){
+  var sc=0,tot=0,un=0,mis=[];
+  var by=[{c:0,t:0},{c:0,t:0},{c:0,t:0}];
+  Q.forEach(function(item){
+    if(item.s)return;tot++;by[item.d].t++;
+    var el=document.querySelector('input[name="q'+item._i+'"]:checked');
+    var cd=document.getElementById("c"+item._i);
+    cd.classList.remove("ok","no","un");
+    if(!el){un++;cd.classList.add("un");}
+    else if(+el.value===item.a){sc++;by[item.d].c++;cd.classList.add("ok");}
+    else{cd.classList.add("no");mis.push({i:item._i,q:item.q,y:item.o[+el.value],c:item.o[item.a],e:item.e,d:item.d});}
+  });
+  if(un>0&&!confirm("还有 "+un+" 题未作答，确定交卷？"))return;
+  var pct=Math.round(sc/tot*100);
+  var col=pct>=80?"var(--grn)":pct>=60?"var(--amb)":"var(--ros)";
+  var cmt=pct>=90?"出色！":pct>=70?"不错，关注错题。":pct>=50?"中等，需要强化。":"建议重新复习本模块知识页。";
+  var mh="";mis.forEach(function(m){
+    var dl=["基础","中级","高级"][m.d];
+    mh+='<div class="mi"><div style="font-weight:700;margin-bottom:6px">\u274c 第 '+(m.i+1)+' 题 <span class="df '+["de","dm","dh"][m.d]+'">'+dl+'</span></div><div class="qt">'+m.q+'</div><div style="font-size:.85rem;margin-top:6px"><span style="color:var(--mut);text-decoration:line-through">你的答案：'+m.y+'</span><br><strong style="color:var(--grn)">正确答案：'+m.c+'</strong></div><div class="ep">'+m.e+'</div></div>';
+  });
+  document.getElementById("rp").style.display="block";
+  document.getElementById("rp").innerHTML='<div class="sb" style="color:'+col+'">'+sc+' / '+tot+'</div><div class="sc">'+cmt+'</div><div class="stb"><div class="stc" style="color:var(--grn)">基础 '+by[0].c+'/'+by[0].t+'</div><div class="stc" style="color:var(--amb)">中级 '+by[1].c+'/'+by[1].t+'</div><div class="stc" style="color:var(--ros)">高级 '+by[2].c+'/'+by[2].t+'</div></div>'+(mis.length?'<h3 style="color:var(--ros);margin-bottom:14px">错题详解</h3>'+mh:'<p style="text-align:center;color:var(--grn);font-size:1.1rem;font-weight:700">\ud83c\udf89 全对！</p>');
+  mjRender();
+  document.getElementById("rp").scrollIntoView({behavior:"smooth"});
+}
+function reset(){
+  document.querySelectorAll("input[type=radio]").forEach(function(r){r.checked=false});
+  document.querySelectorAll(".qc").forEach(function(c){c.classList.remove("ok","no","un")});
+  document.getElementById("rp").style.display="none";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+</body></html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>线性代数的几何灵魂 — MC2</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], tags: 'ams',
+         macros: { R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}', Id: '\\mathrm{Id}',
+                   Ker: '\\mathrm{Ker}', Im: '\\mathrm{Im}', rg: '\\mathrm{rg}',
+                   tr: '\\mathrm{tr}', Sp: '\\mathrm{Sp}', Vect: '\\mathrm{Vect}',
+                   Mat: '\\mathrm{Mat}', diag: '\\mathrm{diag}', rank: '\\mathrm{rank}' }},
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08080c;--sf:#101018;--sf2:#16161f;--acc:#0e7490;--acc2:#67e8f9;
+  --grn:#34d399;--amb:#fbbf24;--ros:#fb7185;--cyn:#22d3ee;--vio:#a78bfa;
+  --txt:#dfdfe5;--dim:#8888a0;--mut:#555568;--bd:#1e1e2a;--bd2:#2a2a3a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Noto Serif SC','Source Serif 4','STIX Two Text',Georgia,serif;line-height:1.8;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:.5}
+a{color:var(--acc2);text-decoration:none}a:hover{text-decoration:underline}
+.back{position:fixed;top:16px;left:16px;z-index:100;font-size:.85rem;color:var(--dim);padding:6px 14px;border:1px solid var(--bd2);border-radius:8px;background:rgba(16,16,24,.85);backdrop-filter:blur(8px);transition:.2s}
+.hero{text-align:center;padding:80px 24px 40px;position:relative;border-bottom:1px solid var(--bd)}
+.hero .tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--acc2);margin-bottom:8px}
+.hero h1{font-family:"Source Serif 4",serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:8px}
+.hero h1 .hl{color:var(--cyn)}
+.hero p{color:var(--dim);font-size:.95rem}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px 80px}
+h2.shd{font-size:1.3rem;font-weight:700;color:#cffafe;margin:40px 0 18px;padding-bottom:8px;padding-left:14px;border-left:4px solid var(--cyn);display:flex;align-items:center;gap:8px}
+
+.cd{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:18px 20px;margin-bottom:14px;transition:.2s;position:relative}
+.cd:hover{box-shadow:0 4px 16px rgba(0,0,0,.3);border-color:var(--bd2)}
+.ct{font-weight:700;font-size:.95rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.bg{font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0}
+.bg-f{background:rgba(37,99,235,.08);color:var(--acc)}
+.bg-t{background:rgba(5,150,105,.08);color:var(--grn)}
+.bg-w{background:rgba(225,29,72,.08);color:var(--ros)}
+.bg-e{background:rgba(124,58,237,.08);color:var(--vio)}
+.bg-g{background:rgba(8,145,178,.08);color:var(--cyn)}
+.fc{border-left:3px solid var(--acc)}.tc{border-left:3px solid var(--grn)}
+.wc{border-left:3px solid var(--ros)}.ec{border-left:3px solid var(--vio)}
+.gc{border-left:3px solid var(--cyn)}
+.fb{background:rgba(8,145,178,.04);border:1px solid rgba(8,145,178,.12);border-radius:8px;padding:14px 16px;margin:8px 0;overflow-x:auto}
+.sm{font-size:.88rem}.dm{color:var(--dim)}.mt{margin-top:12px}
+.geo-box{background:rgba(34,211,238,.04);border:1px solid rgba(34,211,238,.12);border-radius:10px;padding:16px 18px;margin:10px 0}
+.geo-box::before{content:'🔭 Geometric Insight';display:block;font-weight:700;font-size:.75rem;color:var(--cyn);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.analogy{background:rgba(251,191,36,.04);border:1px solid rgba(251,191,36,.12);border-radius:10px;padding:16px 18px;margin:10px 0}
+.analogy::before{content:'💡 Intuition';display:block;font-weight:700;font-size:.75rem;color:var(--amb);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+details{margin-bottom:10px}
+details summary{cursor:pointer;padding:12px 16px;background:var(--sf);border:1px solid var(--bd);border-radius:10px;font-weight:600;font-size:.9rem;list-style:none;transition:.2s;color:var(--txt)}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▸ ";color:var(--cyn)}
+details[open] summary::before{content:"▾ "}
+details[open] summary{border-radius:10px 10px 0 0;border-bottom-color:transparent}
+.db{padding:16px 20px;background:var(--sf);border:1px solid var(--bd);border-top:none;border-radius:0 0 10px 10px;font-size:.88rem;line-height:1.8}
+.footer{text-align:center;padding:24px;border-top:1px solid var(--bd);font-size:.72rem;color:var(--mut);font-family:'JetBrains Mono',monospace;font-family:'IBM Plex Mono',monospace;font-family:'JetBrains Mono',monospace}
+@media(max-width:600px){.wrap{padding:0 14px 60px}.hero{padding:60px 14px 30px}.hero h1{font-size:1.6rem}}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← 返回主页</a>
+<div class="hero"><div class="tag">Algèbre · Deep Dive</div><h1>线性代数的<span class="hl">几何灵魂</span></h1><p>The Geometric Soul of Linear Algebra</p></div>
+<div class="wrap">
+
+<!-- ═══ 1. MATRIX = TRANSFORMATION ═══ -->
+<h2 class="shd">Matrix = Geometric Transformation</h2>
+
+<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> A matrix IS a function on space</div>
+<p class="sm">Every \(m \times n\) matrix \(A\) defines a function \(f: \R^n \to \R^m\) by \(f(x) = Ax\). The columns of \(A\) tell you <b>where the basis vectors land</b>.</p>
+<div class="fb">\[A = \begin{pmatrix} | & | \\ Ae_1 & Ae_2 \\ | & | \end{pmatrix}\]</div>
+<p class="sm mt">Column \(j\) of \(A\) = the image of the \(j\)-th standard basis vector \(e_j\).</p>
+<div class="analogy"><p class="sm">Think of it like this: a matrix is a <b>recipe</b>. It tells you: "send \(e_1\) here, send \(e_2\) there." Since the map is linear, everything else follows: any vector \(v = x_1 e_1 + x_2 e_2\) gets mapped to \(x_1 (Ae_1) + x_2 (Ae_2)\).</p></div>
+</div>
+
+<div class="cd gc"><div class="ct"><span class="bg bg-g">Gallery</span> What common matrices look like</div>
+<p class="sm"><b>Identity \(I\):</b> Does nothing. Every vector maps to itself.</p>
+<p class="sm mt"><b>Scaling \(\begin{pmatrix}k&0\\0&k\end{pmatrix}\):</b> Uniform zoom by factor \(k\).</p>
+<p class="sm mt"><b>Stretch \(\begin{pmatrix}a&0\\0&b\end{pmatrix}\):</b> Stretch \(x\)-axis by \(a\), \(y\)-axis by \(b\). If \(a \ne b\), circles become ellipses.</p>
+<p class="sm mt"><b>Rotation \(\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}\):</b> Rotate by \(\theta\) counterclockwise. Preserves lengths and angles.</p>
+<p class="sm mt"><b>Reflection \(\begin{pmatrix}1&0\\0&-1\end{pmatrix}\):</b> Reflect across the \(x\)-axis.</p>
+<p class="sm mt"><b>Shear \(\begin{pmatrix}1&k\\0&1\end{pmatrix}\):</b> Slides points horizontally proportional to their \(y\). Turns rectangles into parallelograms.</p>
+<p class="sm mt"><b>Projection \(\begin{pmatrix}1&0\\0&0\end{pmatrix}\):</b> Collapses onto the \(x\)-axis. All vertical information is lost.</p>
+</div>
+
+<!-- ═══ 2. DETERMINANT ═══ -->
+<h2 class="shd">Determinant = Signed Volume Factor</h2>
+
+<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> What \(\det A\) really means</div>
+<div class="fb">\[\det A = \text{signed factor by which } A \text{ scales volumes}\]</div>
+<p class="sm"><b>|det A| = 2:</b> areas double. <b>|det A| = 0.5:</b> areas halve. <b>det A = 0:</b> dimension collapses (flat).</p>
+<p class="sm mt"><b>Sign:</b> positive = orientation preserved; negative = orientation flipped (like a reflection).</p>
+<div class="analogy"><p class="sm">Take the unit square (vertices at origin, \(e_1\), \(e_2\), \(e_1+e_2\)). After applying \(A\), it becomes a parallelogram. Its area = \(|\det A|\). If the vertices go clockwise instead of counterclockwise, \(\det A < 0\).</p></div>
+</div>
+
+<div class="cd wc"><div class="ct"><span class="bg bg-w">Deep Point</span> Why \(\det(AB) = \det A \cdot \det B\)</div>
+<p class="sm">Applying \(A\) then \(B\): first scale volumes by \(\det A\), then by \(\det B\). Total scaling = product. This is why composition of transformations corresponds to multiplication of matrices <b>and</b> multiplication of determinants.</p>
+</div>
+
+<details><summary>Example: \(\det\begin{pmatrix} 3&1\\0&2 \end{pmatrix} = 6\)</summary>
+<div class="db">
+<p>The unit square gets mapped to a parallelogram with vertices at \((0,0)\), \((3,0)\), \((1,2)\), \((4,2)\).</p>
+<p class="mt">Area = base × height = 3 × 2 = 6 ✓. Positive sign: orientation preserved (counterclockwise stays counterclockwise).</p>
+</div></details>
+
+<!-- ═══ 3. KERNEL & IMAGE ═══ -->
+<h2 class="shd">Kernel & Image: What survives, what's lost</h2>
+
+<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> Ker = what gets killed, Im = what gets reached</div>
+<p class="sm"><b>\(\Ker A\):</b> all vectors that \(A\) maps to \(\vec{0}\). These are the "invisible" directions — the dimensions that get <b>collapsed</b>.</p>
+<p class="sm mt"><b>\(\Im A\):</b> all vectors that can be reached as outputs. This is the "effective range" of the transformation.</p>
+<div class="geo-box"><p class="sm">Imagine projecting 3D space onto a plane. The <b>kernel</b> is the direction perpendicular to the plane (everything along this line gets crushed to zero). The <b>image</b> is the plane itself (every output lands here). Rank-nullity: 3 = 1 + 2.</p></div>
+</div>
+
+<div class="cd fc"><div class="ct"><span class="bg bg-f">Theorem</span> Rank-Nullity (Geometric Version)</div>
+<div class="fb">\[\underbrace{\dim \R^n}_{\text{original space}} = \underbrace{\dim \Ker A}_{\text{collapsed dimensions}} + \underbrace{\rank A}_{\text{surviving dimensions}}\]</div>
+<div class="analogy"><p class="sm">Think of a tablecloth (2D) being crumpled onto a line (1D). One dimension survives (\(\rank = 1\)), one is lost (\(\dim \Ker = 1\)). Total = 2. The theorem says you can't create or destroy dimensions — you can only redistribute them between "surviving" and "killed".</p></div>
+</div>
+
+<!-- ═══ 4. CHANGE OF BASIS ═══ -->
+<h2 class="shd">Change of Basis: Same map, different coordinates</h2>
+
+<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> \(A' = P^{-1}AP\)</div>
+<p class="sm">The linear map \(f\) doesn't change — only your <b>coordinate system</b> changes. \(P\) converts from new basis to old basis.</p>
+<div class="fb">\[\underbrace{P^{-1}}_{\text{new coords}} \underbrace{A}_{\text{apply map}} \underbrace{P}_{\text{old coords}} = A'\]</div>
+<div class="analogy"><p class="sm">Imagine you're in Paris and someone gives you directions in miles. You convert miles → km, follow the directions, then convert the result km → miles. The physical path is the same; only the units changed. \(P\) is the unit converter.</p></div>
+</div>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">Method</span> Transition Matrix</div>
+<p class="sm">If \(\mathcal{B} = (b_1, \ldots, b_n)\) is the old basis and \(\mathcal{B}' = (b'_1, \ldots, b'_n)\) is the new basis:</p>
+<p class="sm mt">\(P_{\mathcal{B}' \to \mathcal{B}}\) has columns = coordinates of new basis vectors in the old basis.</p>
+<p class="sm mt"><b>Formula:</b> \([v]_{\mathcal{B}} = P \cdot [v]_{\mathcal{B}'}\) and \([v]_{\mathcal{B}'} = P^{-1} \cdot [v]_{\mathcal{B}}\).</p>
+</div>
+
+<details><summary>Worked Example: Rotation is diagonal in the right basis</summary>
+<div class="db">
+<p>\(R_{45°} = \begin{pmatrix}\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}\\\frac{\sqrt2}{2}&\frac{\sqrt2}{2}\end{pmatrix}\) in the standard basis.</p>
+<p class="mt">Over \(\C\), eigenvalues are \(e^{\pm i\pi/4}\). In the eigenbasis, \(R_{45°}\) becomes \(\begin{pmatrix}e^{i\pi/4}&0\\0&e^{-i\pi/4}\end{pmatrix}\).</p>
+<div class="geo-box"><p class="sm">A rotation in 2D has <b>no real eigenvectors</b> (nothing stays on its line!). But in complex coordinates, the two "circular" modes \(e^{\pm i\theta}\) decouple perfectly. This is the deep reason Fourier analysis works: rotations become diagonal in the frequency basis.</p></div>
+</div></details>
+
+<!-- ═══ 5. RANK ═══ -->
+<h2 class="shd">Rank: The true dimension of information</h2>
+
+<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> Rank = effective dimension of the output</div>
+<p class="sm">\(\rank(A)\) = dimension of the column space = number of "independent directions" in the image.</p>
+<p class="sm mt"><b>Full rank</b> (\(\rank = \min(m,n)\)): no dimension is wasted. The map is as "spread out" as possible.</p>
+<p class="sm mt"><b>Rank deficient</b>: some dimensions collapse. Output lives in a lower-dimensional subspace.</p>
+<div class="analogy"><p class="sm">A \(1000 \times 1000\) matrix with rank 3 is like a movie projector: it takes a 1000-dimensional input but the output lives on a 3D "screen". The other 997 dimensions are redundant. This is why <b>low-rank approximation</b> (SVD) is the foundation of data compression.</p></div>
+</div>
+
+<!-- ═══ 6. SYSTEMS Ax=b ═══ -->
+<h2 class="shd">Systems \(Ax = b\): Geometry of solutions</h2>
+
+<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> Three cases, geometrically</div>
+<p class="sm"><b>Case 1: \(b \in \Im A\) and \(\Ker A = \{0\}\)</b> → Unique solution. The map is bijective, so there's exactly one preimage.</p>
+<p class="sm mt"><b>Case 2: \(b \in \Im A\) but \(\Ker A \ne \{0\}\)</b> → Infinitely many solutions. One particular solution \(x_0\) plus any element of \(\Ker A\): the solution set is the <b>affine subspace</b> \(x_0 + \Ker A\).</p>
+<p class="sm mt"><b>Case 3: \(b \notin \Im A\)</b> → No solution. The target \(b\) is "off the screen".</p>
+<div class="geo-box"><p class="sm">For a \(2 \times 2\) system with \(\Ker A = \) a line through origin: solutions form a <b>line parallel to the kernel</b>, shifted to pass through any particular solution. All solution lines for different \(b\) are parallel.</p></div>
+</div>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">Theorem</span> Rouché-Capelli (Kronecker-Capelli)</div>
+<div class="fb">\[Ax = b \text{ has a solution} \iff \rank(A) = \rank(A|b)\]</div>
+<p class="sm">The augmented matrix \((A|b)\) has the same rank as \(A\) iff \(b\) is in the column space of \(A\).</p>
+<p class="sm mt">When solutions exist, the solution space has dimension \(n - \rank(A)\).</p>
+</div>
+
+<details><summary>Worked Example: Geometric interpretation of a \(3 \times 3\) system</summary>
+<div class="db">
+<p>\[\begin{cases} x+y+z=1 \\ 2x+2y+2z=2 \\ x-y+z=0 \end{cases}\]</p>
+<p class="mt">Row 2 = 2 × Row 1 (redundant). So rank = 2, but \(n = 3\). Solution space has dim = 1 (a line).</p>
+<p class="mt">Geometrically: equations 1 and 2 define the <b>same plane</b>. Equation 3 defines a different plane. Their intersection = a <b>line</b> in \(\R^3\).</p>
+<p class="mt">Parametrically: from row 1 and 3: \(z = 1-x-y\) and \(x+z = y \implies y = x + (1-x-y) \implies 2y = 1 \implies y = 1/2\). Then \(x + z = 1/2\), so \(x = t, z = 1/2 - t\). Solution: \((t, 1/2, 1/2-t)\), a line.</p>
+</div></details>
+
+<!-- ═══ 7. INNER PRODUCT ═══ -->
+<h2 class="shd">Inner Product: Length, angle, projection</h2>
+
+<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> Dot product = "how much does \(u\) point in the direction of \(v\)?"</div>
+<div class="fb">\[\langle u, v \rangle = \|u\| \cdot \|v\| \cos \theta\]</div>
+<p class="sm">If \(\theta = 0\): vectors aligned, dot product maximal. If \(\theta = 90°\): orthogonal, dot product zero. If \(\theta = 180°\): opposed, dot product minimal (most negative).</p>
+<div class="analogy"><p class="sm"><b>Projection formula:</b> The shadow of \(u\) onto \(v\) has length \(\frac{\langle u,v\rangle}{\|v\|}\). This is the foundation of <b>Fourier analysis</b> (project a signal onto sinusoids) and <b>least squares</b> (project data onto a model).</p></div>
+</div>
+
+<div class="cd tc"><div class="ct"><span class="bg bg-t">Application</span> Orthogonal Projection Matrix</div>
+<div class="fb">\[P_v = \frac{vv^T}{v^Tv}\]</div>
+<p class="sm">\(P_v u\) = projection of \(u\) onto the line spanned by \(v\). Note: \(P_v^2 = P_v\) (projecting twice = projecting once) and \(P_v^T = P_v\) (symmetric).</p>
+<p class="sm mt">For projection onto a subspace spanned by columns of \(Q\) (orthonormal): \(P = QQ^T\).</p>
+</div>
+
+<!-- ═══ 8. SVD PREVIEW ═══ -->
+<h2 class="shd">Extension: SVD — The Ultimate Decomposition</h2>
+
+<div class="cd ec"><div class="ct"><span class="bg bg-e">Preview</span> Singular Value Decomposition</div>
+<div class="fb">\[A = U \Sigma V^T\]</div>
+<p class="sm">Every matrix — any size, any rank — can be decomposed as: rotate (\(V^T\)) → scale (\(\Sigma\)) → rotate (\(U\)).</p>
+<p class="sm mt">The \(\sigma_i\) (singular values) tell you how much stretching happens along each principal axis. Eigenvalues are only defined for square matrices; SVD works for <b>everything</b>.</p>
+<div class="geo-box"><p class="sm">A linear map sends the unit sphere to an <b>ellipsoid</b>. The singular values are the <b>semi-axis lengths</b> of this ellipsoid, and \(U, V\) encode the orientation. SVD = the ellipsoid decomposition. This is why it's the backbone of PCA, recommender systems, image compression, and pseudo-inverses.</p></div>
+</div>
+
+</div>
+<div class="footer">MC2 Review · The Geometric Soul of Linear Algebra</div>
+</body>
+</html>

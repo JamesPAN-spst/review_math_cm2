@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -129,7 +128,7 @@ Q.forEach(item=>{
   item._i=qIdx++;
 });
 box.innerHTML=html;
-MathJax.typesetPromise();
+(function(){var t=setInterval(function(){if(window.MathJax&&typeof MathJax.typesetPromise==="function"){clearInterval(t);MathJax.typesetPromise().catch(function(){})}},200)})();;
 
 function submit(){
   let sc=0,tot=0,un=0,mis=[];
@@ -153,7 +152,7 @@ function submit(){
   });
   document.getElementById('rp').style.display='block';
   document.getElementById('rp').innerHTML=`<div class="sb" style="color:${col}">${sc} / ${tot}</div><div class="sc">${cmt}</div><div class="stb"><div class="stc" style="color:var(--grn)">基础 ${by[0].c}/${by[0].t}</div><div class="stc" style="color:var(--amb)">中级 ${by[1].c}/${by[1].t}</div><div class="stc" style="color:var(--ros)">高级 ${by[2].c}/${by[2].t}</div></div>${mis.length?'<h3 style="color:var(--ros);margin-bottom:14px">错题详解</h3>'+mh:'<p style="text-align:center;color:var(--grn);font-size:1.1rem;font-weight:700">🎉 全对！</p>'}`;
-  MathJax.typesetPromise();
+  if(typeof MathJax!=="undefined"&&typeof MathJax.typesetPromise==="function"){MathJax.typesetPromise().catch(function(){})};
   document.getElementById('rp').scrollIntoView({behavior:'smooth'});
 }
 function reset(){
@@ -163,5 +162,4 @@ function reset(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
-
 </body></html>
