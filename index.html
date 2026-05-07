@@ -278,8 +278,8 @@ body::before {
 <body>
 
 <div class="hero">
-  <div class="hero-label">Licence 1 — Université Paris Cité</div>
-  <h1>Mathématiques<br>et <span class="hl">Calcul 2</span></h1>
+  <div class="hero-label">巴黎西岱大学 · 本科一年级</div>
+  <h1>数学与<br><span class="hl">Calcul 2</span></h1>
   <p>公式速查 · 考点精讲 · 拓展知识 · 分级测验<br>覆盖全部 TD 内容，从基础到竞赛</p>
 </div>
 
@@ -288,7 +288,7 @@ body::before {
   <!-- ═══ ANALYSE ═══ -->
   <div class="sec-div">
     <div class="line"></div>
-    <div class="label">Analyse — 分析</div>
+    <div class="label">分析模块</div>
     <div class="line"></div>
   </div>
 
@@ -311,12 +311,33 @@ body::before {
       <div class="desc">p-判别法 · 比较法 · Dirichlet / Abel · 绝对与条件收敛 · 含参积分</div>
       <div class="tag">进入模块 <span class="arrow">→</span></div>
     </a>
+    <a class="card" href="mod_series.html" style="--card-accent:#14b8a6;--icon-bg:#0f766e">
+      <div class="icon">∑</div>
+      <div class="title">无穷级数敛散性</div>
+      <div class="desc">正项级数 · 等价比较 · 比值/根值判别 · 交错级数 · 望远镜求和</div>
+      <div class="tag">进入模块 <span class="arrow">→</span></div>
+    </a>
+    <a class="card" href="mod_ode.html" style="--card-accent:#8b5cf6;--icon-bg:#6d28d9">
+      <div class="icon">y′</div>
+      <div class="title">单变量微分方程</div>
+      <div class="desc">一阶线性方程 · 常数变易法 · 叠加原理 · 二阶常系数方程</div>
+      <div class="tag">进入模块 <span class="arrow">→</span></div>
+    </a>
+  </div>
+
+  <div class="grid" style="margin-top:14px">
+    <a class="card" href="mod_french_process.html" style="--card-accent:#f59e0b;--icon-bg:#b45309">
+      <div class="icon">Fr</div>
+      <div class="title">法语过程书写与词汇速记</div>
+      <div class="desc">原函数 · 黎曼和 · 反常积分 · 级数 · 微分方程的证明题/分析题法语模板</div>
+      <div class="tag">进入补充 <span class="arrow">→</span></div>
+    </a>
   </div>
 
   <!-- ═══ ALGÈBRE ═══ -->
   <div class="sec-div">
     <div class="line"></div>
-    <div class="label">Algèbre linéaire — 线性代数</div>
+    <div class="label">线性代数模块</div>
     <div class="line"></div>
   </div>
 
@@ -368,7 +389,7 @@ body::before {
   <!-- ═══ QUIZ ═══ -->
   <div class="sec-div">
     <div class="line"></div>
-    <div class="label">Exercices — 单元测验</div>
+    <div class="label">单元测验</div>
     <div class="line"></div>
   </div>
 
@@ -408,7 +429,7 @@ body::before {
   <!-- ═══ 考点速查 ═══ -->
   <div class="sec-div">
     <div class="line"></div>
-    <div class="label">Quick Reference — 考点速查</div>
+    <div class="label">考点速查</div>
     <div class="line"></div>
   </div>
 
@@ -418,6 +439,9 @@ body::before {
       <li><strong>p-判别法条件反转</strong>：无穷积分 p&gt;1 收敛，瑕积分 p&lt;1 收敛。口诀：远严近宽。</li>
       <li><strong>极限比较法单向性</strong>：极限为 0 时只能从分母推分子（分母收敛→分子收敛），不能反推。</li>
       <li><strong>Dirichlet 条件</strong>：对振荡部分要求的是「积分有界」，而非函数本身有界。</li>
+      <li><strong>级数必要条件</strong>：∑uₙ 收敛必有 uₙ→0，但 uₙ→0 不能推出收敛。</li>
+      <li><strong>变号级数等价陷阱</strong>：等价比较优先用于正项级数；变号级数需先看绝对收敛或 Leibniz。</li>
+      <li><strong>微分方程通解结构</strong>：非齐次线性方程必须写「齐次通解 + 一个特解」，初值最后代入完整通解。</li>
       <li><strong>子空间并集</strong>：两个子空间的并集一般不是子空间，交集才是。</li>
       <li><strong>det(A+B) ≠ det A + det B</strong>：行列式对行/列线性，但不对矩阵加法线性。</li>
       <li><strong>det(λA) = λⁿ det A</strong>：不要忘记 n 次方。</li>
@@ -430,7 +454,7 @@ body::before {
 </div>
 
 <div class="footer">
-  MC2 Review System · Built for Paris Cité L1 · 2025–26
+  MC2 复习系统 · 巴黎西岱大学 L1 · 2025–26
 </div>
 
 </body>
