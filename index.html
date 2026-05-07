@@ -221,6 +221,15 @@ body::before {
   margin-right: 8px;
 }
 .summary-card li { margin: 3px 0; }
+.mistake-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 22px;
+}
+.mistake-col h4 {
+  font-size: .92rem;
+  margin: 4px 0 10px;
+}
 
 /* ── Disabled card ── */
 .card.soon {
@@ -394,7 +403,7 @@ body::before {
     <a class="card" href="quiz_analyse.html" style="--card-accent:var(--rose);--icon-bg:var(--rose)">
       <div class="icon">✎</div>
       <div class="title">分析综合测验</div>
-      <div class="desc">40+ 题 · 覆盖积分 + Riemann和 + 反常积分</div>
+      <div class="desc">约60题 · 积分 + Riemann和 + 反常积分 + 级数 + ODE + 法语书写</div>
       <div class="tag">开始测验 <span class="arrow">→</span></div>
     </a>
     <a class="card" href="quiz_algebre.html" style="--card-accent:var(--green);--icon-bg:var(--green)">
@@ -432,26 +441,52 @@ body::before {
 
   <div class="summary-card">
     <h3 style="color:var(--rose)">⚠ 最高频易错点</h3>
-    <ul>
-      <li><strong>p-判别法条件反转</strong>：无穷积分 p&gt;1 收敛，瑕积分 p&lt;1 收敛。口诀：远严近宽。</li>
-      <li><strong>Riemann 和区间误判</strong>：积分区间不一定是 [0,1]；求和上下限变了，区间也要跟着变，必要时先平移指标。</li>
-      <li><strong>极限比较法单向性</strong>：极限为 0 时只能从分母推分子（分母收敛→分子收敛），不能反推。</li>
-      <li><strong>Dirichlet 条件</strong>：对振荡部分要求的是「积分有界」，而非函数本身有界。</li>
-      <li><strong>级数必要条件</strong>：∑uₙ 收敛必有 uₙ→0，但 uₙ→0 不能推出收敛。</li>
-      <li><strong>变号级数等价陷阱</strong>：等价比较优先用于正项级数；变号级数需先看绝对收敛或 Leibniz。</li>
-      <li><strong>微分方程通解结构</strong>：非齐次线性方程必须写「齐次通解 + 一个特解」，初值最后代入完整通解。</li>
-      <li><strong>子空间先看零向量</strong>：非齐次条件如 x+y=1 一定不是子空间；含“或”、绝对值的集合也要优先警惕。</li>
-      <li><strong>子空间并集</strong>：两个子空间的并集一般不是子空间，交集才是。</li>
-      <li><strong>线性映射判定要看两条</strong>：必须同时满足加法和数乘；常数项、乘积项、max、det 这类映射通常都不是线性映射。</li>
-      <li><strong>det(A+B) ≠ det A + det B</strong>：行列式对行/列线性，但不对矩阵加法线性。</li>
-      <li><strong>det(λA) = λⁿ det A</strong>：不要忘记 n 次方。</li>
-      <li><strong>Gauss 消元看主元列</strong>：秩要在消元结束后数非零行；自由变量对应没有主元的列，不是随便挑的。</li>
-      <li><strong>非齐次解集不是子空间</strong>：Sol(Ax=b)=x₀+Ker A，通常是仿射子空间，不一定经过原点。</li>
-      <li><strong>特征多项式写法</strong>：χ_A(λ)=det(A-λI)，不是 det A-λ。</li>
-      <li><strong>特征值 λ=0 是合法的</strong>：意味着 Ker A ≠ {0}，矩阵奇异。零向量永远不是特征向量。</li>
-      <li><strong>几何重数 ≤ 代数重数</strong>：不等时矩阵不可对角化（Jordan块）。</li>
-      <li><strong>对称矩阵总可对角化</strong>：特征值全实，特征向量正交（谱定理）。</li>
-    </ul>
+    <div class="mistake-grid">
+      <div class="mistake-col">
+        <h4 style="color:var(--rose)">分析</h4>
+        <ul>
+          <li><strong>原函数常数项</strong>：不定积分最后必须加 C；定积分换元后不要再加 C。</li>
+          <li><strong>分部积分选项</strong>：优先让多项式、ln、arctan 去求导；指数、三角通常留给积分。</li>
+          <li><strong>有理分式分解</strong>：不可约二次因子要配一次分子 Ax+B，不是只写常数。</li>
+          <li><strong>Riemann 和步长</strong>：先提取 Δx，再识别 f(x_k)；上限是 2n 时区间常常是 [0,2]。</li>
+          <li><strong>Riemann 和平移</strong>：出现 k+a 或 a+k(b-a)/n 时先找左端点，不要机械套 [0,1]。</li>
+          <li><strong>p-判别条件</strong>：无穷远 p&gt;1 收敛，0 附近瑕点 p&lt;1 收敛，口诀是远严近宽。</li>
+          <li><strong>混合反常点</strong>：同时有 0、1、∞ 等反常点时必须拆开；全部收敛才整体收敛。</li>
+          <li><strong>等价比较前提</strong>：等价比较主要用于正项函数/级数；变号对象先看绝对值或使用 Dirichlet、Leibniz。</li>
+          <li><strong>极限比较单向性</strong>：比值极限为 0 时只能由“大者收敛”推出“小者收敛”，不能反推发散。</li>
+          <li><strong>级数必要条件</strong>：∑u_n 收敛必有 u_n→0，但 u_n→0 远远不够，例如调和级数。</li>
+          <li><strong>比值/根值 L=1</strong>：d'Alembert 或 Cauchy 得到 1 时无结论，需要换比较、等价或积分判别。</li>
+          <li><strong>Leibniz 三条件</strong>：交错级数要写正项、递减、趋于 0；只说“有 (-1)^n”不够。</li>
+          <li><strong>Dirichlet 条件</strong>：要求振荡部分的原函数有界，不是函数本身有界。</li>
+          <li><strong>ODE 通解结构</strong>：非齐次线性方程必须写齐次通解 + 一个特解，初值最后代入完整通解。</li>
+          <li><strong>二阶重根/共振</strong>：重根要乘 x；右端与齐次解重复时特解也要乘 x。</li>
+          <li><strong>法语过程句</strong>：使用判别法前要写 On vérifie les hypothèses，不要只写 Donc converge。</li>
+        </ul>
+      </div>
+      <div class="mistake-col">
+        <h4 style="color:var(--green)">线性代数</h4>
+        <ul>
+          <li><strong>子空间零向量</strong>：先检查 0 是否在集合内；x+y=1 这类非齐次条件一定不是子空间。</li>
+          <li><strong>子空间并集</strong>：交集一定是子空间，并集一般不是；除非一个包含另一个。</li>
+          <li><strong>生成族与基</strong>：生成族可以冗余，基必须同时线性无关且生成整个空间。</li>
+          <li><strong>维数公式</strong>：dim(F+G)=dim F+dim G-dim(F∩G)，不要漏掉交集。</li>
+          <li><strong>线性映射判定</strong>：必须同时满足加法和数乘；常数项、乘积项、max、det 通常破坏线性。</li>
+          <li><strong>核与像</strong>：Ker f 是定义域里的子空间，Im f 是到达空间里的子空间，别放错空间。</li>
+          <li><strong>秩-零化度</strong>：dim Ker f + dim Im f = dim E，右边是定义域维数。</li>
+          <li><strong>矩阵表示依赖基</strong>：同一个线性映射换基后矩阵会变，计算前先确认基的顺序。</li>
+          <li><strong>行列式线性误用</strong>：det(A+B) 不等于 det A + det B；det(λA)=λ^n det A。</li>
+          <li><strong>行变换与 det</strong>：交换两行变号；某行乘 λ，det 乘 λ；行加倍数不变。</li>
+          <li><strong>Gauss 消元看主元</strong>：秩数非零行；自由变量对应没有主元的列。</li>
+          <li><strong>非齐次解集</strong>：Ax=b 的解集是 x0+Ker A，通常不是子空间。</li>
+          <li><strong>Rouché-Capelli</strong>：有解当且仅当 rg(A)=rg(A|b)；唯一解还要等于未知数个数。</li>
+          <li><strong>特征多项式</strong>：χ_A(λ)=det(A-λI) 或 det(λI-A)，不能写 det A-λ。</li>
+          <li><strong>特征向量</strong>：λ=0 可以是特征值，但零向量永远不是特征向量。</li>
+          <li><strong>对角化判据</strong>：每个特征值的几何重数之和等于 n 才可对角化。</li>
+          <li><strong>PDP⁻¹ 顺序</strong>：P 的列是 D 中对应顺序的特征向量，顺序错会导致结果错。</li>
+          <li><strong>Gram-Schmidt</strong>：每一步都要减去对所有已得正交向量的投影，不是只减前一个。</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
 </div>
