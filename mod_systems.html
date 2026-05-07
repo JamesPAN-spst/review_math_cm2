@@ -62,109 +62,21 @@ details[open] summary{border-radius:10px 10px 0 0;border-bottom-color:transparen
 </head>
 <body>
 <a class="back" href="index.html">← 返回主页</a>
-<div class="hero"><div class="tag">Algèbre · Module 6</div><h1>线性方程组与<span class="hl">Gauss消元</span></h1><p>Systèmes linéaires, échelonnement, Rouché-Capelli</p></div>
+<div class="hero"><div class="tag">代数 · 模块 6</div><h1>线性方程组与<span class="hl">Gauss消元</span></h1><p>线性方程组、阶梯形矩阵、Rouché-Capelli 判据与最小二乘</p></div>
 <div class="wrap">
-
-<!-- ═══ 1. GAUSS ═══ -->
-<h2 class="shd">Gauss Elimination</h2>
-
-<div class="cd tc"><div class="ct"><span class="bg bg-t">Method</span> Row Echelon Form (REF)</div>
-<p class="sm">Three allowed operations (they don't change the solution set):</p>
-<p class="sm mt">① Swap two rows: \(L_i \leftrightarrow L_j\)</p>
-<p class="sm mt">② Multiply a row by a non-zero scalar: \(L_i \leftarrow \alpha L_i\), \(\alpha \ne 0\)</p>
-<p class="sm mt">③ Add a multiple of one row to another: \(L_i \leftarrow L_i + \alpha L_j\)</p>
-<div class="geo-box"><p class="sm">Each row operation corresponds to an <b>elementary matrix</b> multiplied on the left. Gauss elimination is secretly computing \(A = E_1^{-1} E_2^{-1} \cdots E_k^{-1} U\) where \(U\) is upper triangular. This is the <b>LU decomposition</b>.</p></div>
-</div>
-
-<details><summary>Worked Example: Complete Gauss elimination</summary>
-<div class="db" style="counter-reset:step">
-<p>\[\begin{pmatrix} 1 & 2 & -1 & | & 3 \\ 2 & 5 & 0 & | & 8 \\ 3 & 6 & -2 & | & 10 \end{pmatrix}\]</p>
-<div class="step"><p>\(L_2 \leftarrow L_2 - 2L_1\), \(L_3 \leftarrow L_3 - 3L_1\):</p>
-\[\begin{pmatrix} 1 & 2 & -1 & | & 3 \\ 0 & 1 & 2 & | & 2 \\ 0 & 0 & 1 & | & 1 \end{pmatrix}\]</div>
-<div class="step"><p>Back-substitution: \(z = 1\), \(y = 2 - 2(1) = 0\), \(x = 3 - 2(0) + 1 = 4\).</p></div>
-<p class="mt"><b>Solution:</b> \((x,y,z) = (4, 0, 1)\). Unique because \(\rank(A) = 3 = n\).</p>
-</div></details>
-
-<details><summary>Worked Example: System with infinitely many solutions</summary>
-<div class="db" style="counter-reset:step">
-<p>\[\begin{cases} x + y - z = 2 \\ 2x + y + z = 5 \\ 3x + 2y = 7 \end{cases}\]</p>
-<div class="step"><p>\(L_2 \leftarrow L_2 - 2L_1\), \(L_3 \leftarrow L_3 - 3L_1\):</p>
-\[\begin{pmatrix} 1&1&-1&|&2 \\ 0&-1&3&|&1 \\ 0&-1&3&|&1 \end{pmatrix}\]</div>
-<div class="step"><p>\(L_3 \leftarrow L_3 - L_2\):</p>
-\[\begin{pmatrix} 1&1&-1&|&2 \\ 0&-1&3&|&1 \\ 0&0&0&|&0 \end{pmatrix}\]</div>
-<p class="mt">\(\rank(A) = 2 < n = 3\). Free variable: \(z = t\). Then \(y = 3t - 1\), \(x = 2 - y + z = 3 - 2t\).</p>
-<p class="mt"><b>Solution set:</b> \(\{(3-2t,\; -1+3t,\; t) : t \in \R\} = \underbrace{(3,-1,0)}_{\text{particular}} + t\underbrace{(-2,3,1)}_{\in \Ker A}\)</p>
-<div class="geo-box"><p class="sm">Three planes in \(\R^3\). The third plane is redundant (it's the sum of the first two). The two remaining planes intersect in a <b>line</b> — parameterized by \(t\).</p></div>
-</div></details>
-
-<details><summary>Worked Example: System with no solution</summary>
-<div class="db" style="counter-reset:step">
-<p>\[\begin{cases} x + y = 1 \\ x + y = 3 \end{cases}\]</p>
-<div class="step"><p>\(L_2 \leftarrow L_2 - L_1\): \(\begin{pmatrix}1&1&|&1\\0&0&|&2\end{pmatrix}\)</p></div>
-<p class="mt">Last row says \(0 = 2\): <b>contradiction</b>. \(\rank(A) = 1 \ne \rank(A|b) = 2\).</p>
-<div class="geo-box"><p class="sm">Two <b>parallel lines</b> in \(\R^2\) that never meet. They have the same normal direction but different offsets.</p></div>
-</div></details>
-
-<!-- ═══ 2. THEORY ═══ -->
-<h2 class="shd">Theoretical Framework</h2>
-
-<div class="cd fc"><div class="ct"><span class="bg bg-f">Theorem</span> Rouché-Capelli</div>
-<div class="fb">\[Ax = b \text{ compatible} \iff \rank(A) = \rank(A|b)\]</div>
-<p class="sm">When compatible, solution space dimension = \(n - \rank(A)\) = number of free variables.</p>
-</div>
-
-<div class="cd fc"><div class="ct"><span class="bg bg-f">Theorem</span> Structure of Solutions</div>
-<div class="fb">\[\text{Sol}(Ax = b) = x_0 + \Ker A\]</div>
-<p class="sm">\(x_0\) = any particular solution. \(\Ker A\) = solution set of the homogeneous system \(Ax = 0\).</p>
-<p class="sm mt">This is an <b>affine subspace</b> (not a vector subspace unless \(b = 0\)).</p>
-</div>
-
-<div class="cd wc"><div class="ct"><span class="bg bg-w">Trap</span> Classic Mistakes</div>
-<p class="sm">① "Rank = number of non-zero rows in echelon form" — yes, but only <b>after</b> complete elimination. Don't count prematurely.</p>
-<p class="sm mt">② Free variables correspond to columns <b>without pivots</b>, not to "extra" rows.</p>
-<p class="sm mt">③ If the system is homogeneous (\(b=0\)), it <b>always</b> has at least the trivial solution \(x = 0\). It has non-trivial solutions iff \(\rank(A) < n\).</p>
-<p class="sm mt">④ Cramer's rule: only works for \(n \times n\) systems with \(\det A \ne 0\). Never use it when \(\det A = 0\).</p>
-</div>
-
-<!-- ═══ 3. PARAMETRIC SYSTEMS ═══ -->
-<h2 class="shd">Parametric Systems</h2>
-
-<details><summary>Worked Example: System depending on parameter \(a\)</summary>
-<div class="db" style="counter-reset:step">
-<p>\[\begin{cases} x + ay = 1 \\ ax + y = a \end{cases} \qquad (a \in \R)\]</p>
-<div class="step"><p>Matrix: \(\begin{pmatrix}1&a&|&1\\a&1&|&a\end{pmatrix}\). \(L_2 \leftarrow L_2 - aL_1\):</p>
-\[\begin{pmatrix}1&a&|&1\\0&1-a^2&|&a-a\end{pmatrix} = \begin{pmatrix}1&a&|&1\\0&1-a^2&|&0\end{pmatrix}\]</div>
-<div class="step"><p><b>Case \(a^2 \ne 1\)</b> (i.e., \(a \ne \pm 1\)): \(\rank = 2\), unique solution: \(y = 0\), \(x = 1\). Sol = \(\{(1, 0)\}\).</p></div>
-<div class="step"><p><b>Case \(a = 1\)</b>: system becomes \(x + y = 1\) (one equation). \(\rank = 1\), sol = \(\{(1-t, t) : t \in \R\}\).</p></div>
-<div class="step"><p><b>Case \(a = -1\)</b>: system becomes \(x - y = 1\) and \(-x + y = -1\) (same equation). Same as \(a=1\).</p></div>
-</div></details>
-
-<details><summary>Worked Example: When does the system have solutions?</summary>
-<div class="db">
-<p>\[\begin{cases} x + y + z = 1 \\ x + 2y + 3z = 2 \\ 2x + 3y + (3+a)z = 3+b \end{cases}\]</p>
-<p class="mt">After elimination: last row becomes \((0, 0, a \;|\; b)\).</p>
-<p class="mt"><b>If \(a \ne 0\):</b> unique solution (full rank).</p>
-<p class="mt"><b>If \(a = 0, b = 0\):</b> infinitely many solutions (one free variable).</p>
-<p class="mt"><b>If \(a = 0, b \ne 0\):</b> no solution (\(0 = b\) contradiction).</p>
-<div class="geo-box"><p class="sm">The parameter \(a\) controls whether the third plane is "tilted" relative to the line formed by the first two planes. When \(a = 0\), the third plane becomes parallel to that line — it either contains it (\(b=0\), infinite solutions) or misses it (\(b \ne 0\), no solutions).</p></div>
-</div></details>
-
-<!-- ═══ 4. APPLICATIONS ═══ -->
-<h2 class="shd">Applications</h2>
-
-<div class="cd ec"><div class="ct"><span class="bg bg-e">Application</span> Computing \(A^{-1}\) via Gauss</div>
-<p class="sm">Augment \((A \;|\; I)\) and row-reduce to \((I \;|\; A^{-1})\). If at any point a pivot column has no non-zero entry, \(A\) is singular.</p>
-<p class="sm mt">This is more numerically stable and faster than the adjugate formula for \(n \ge 3\).</p>
-</div>
-
-<div class="cd ec"><div class="ct"><span class="bg bg-e">Application</span> Least Squares (when no exact solution exists)</div>
-<p class="sm">If \(Ax = b\) has no solution (overdetermined system, \(m > n\)), find the \(x\) that minimizes \(\|Ax - b\|^2\):</p>
-<div class="fb">\[A^TAx = A^Tb \quad \text{(normal equations)}\]</div>
-<p class="sm mt">This projects \(b\) onto \(\Im(A)\). The residual \(b - Ax\) is orthogonal to the column space.</p>
-<div class="geo-box"><p class="sm">You're finding the closest point on the "screen" (\(\Im A\)) to the target \(b\). The error vector is perpendicular to the screen. This is <b>linear regression</b>.</p></div>
-</div>
-
-</div>
-<div class="footer">MC2 Review · Linear Systems & Gauss Elimination</div>
-</body>
-</html>
+<h2 class="shd">Gauss 消元</h2>
+<div class="cd tc"><div class="ct"><span class="bg bg-t">方法</span> 行阶梯形（REF）</div><p class="sm">允许的初等行变换不会改变解集：</p><p class="sm mt">① 交换两行：\(L_i\leftrightarrow L_j\)。</p><p class="sm mt">② 用非零数乘一行：\(L_i\leftarrow\alpha L_i\)，\(\alpha\ne0\)。</p><p class="sm mt">③ 一行加上另一行的倍数：\(L_i\leftarrow L_i+\alpha L_j\)。</p><div class="geo-box"><p class="sm">每个初等行变换都等价于左乘一个初等矩阵。Gauss 消元的几何本质是把复杂系统化成更容易读解的上三角/阶梯形系统。</p></div></div>
+<details><summary>例题：完整 Gauss 消元</summary><div class="db" style="counter-reset:step"><p>\[\begin{pmatrix}1&2&-1&|&3\\2&5&0&|&8\\3&6&-2&|&10\end{pmatrix}\]</p><div class="step"><p>做 \(L_2\leftarrow L_2-2L_1\)，\(L_3\leftarrow L_3-3L_1\)：</p>\[\begin{pmatrix}1&2&-1&|&3\\0&1&2&|&2\\0&0&1&|&1\end{pmatrix}\]</div><div class="step"><p>回代：\(z=1\)，\(y=0\)，\(x=4\)。</p></div><p class="mt"><b>解：</b>\((x,y,z)=(4,0,1)\)。因为 \(\rank(A)=3=n\)，所以解唯一。</p></div></details>
+<details><summary>例题：无穷多解</summary><div class="db"><p>若消元后出现零行且无矛盾，例如最后得到 \(\rank(A)=2<n=3\)，则有一个自由变量。解集可写成 \(x_0+t v\)，其中 \(v\in\Ker A\)。几何上，三个平面可能交于一条直线。</p></div></details>
+<details><summary>例题：无解</summary><div class="db"><p>系统 \(x+y=1\)，\(x+y=3\) 消元后得到 \(0=2\)，矛盾。因此 \(\rank(A)\ne\rank(A|b)\)，无解。几何上是两条平行直线不相交。</p></div></details>
+<h2 class="shd">理论框架</h2>
+<div class="cd fc"><div class="ct"><span class="bg bg-f">定理</span> Rouché-Capelli</div><div class="fb">\[Ax=b\text{ 有解}\Longleftrightarrow \rank(A)=\rank(A|b)\]</div><p class="sm">当系统相容时，解空间维数为 \(n-\rank(A)\)，也就是自由变量个数。</p></div>
+<div class="cd fc"><div class="ct"><span class="bg bg-f">定理</span> 解集结构</div><div class="fb">\[\mathrm{Sol}(Ax=b)=x_0+\Ker A\]</div><p class="sm">\(x_0\) 是任意一个特解，\(\Ker A\) 是齐次系统 \(Ax=0\) 的解集。若 \(b\ne0\)，解集通常是仿射子空间而不是向量子空间。</p></div>
+<div class="cd wc"><div class="ct"><span class="bg bg-w">易错</span> 常见错误</div><p class="sm">① 秩要在消元完成后数非零行，不要过早判断。② 自由变量对应没有主元的列。③ 齐次系统至少有零解，非零解存在当且仅当 \(\rank(A)<n\)。④ Cramer 法则只适用于方阵且 \(\det A\ne0\)。</p></div>
+<h2 class="shd">含参系统</h2>
+<details><summary>例题：依赖参数 \(a\) 的系统</summary><div class="db"><p>对 \(\begin{cases}x+ay=1\\ax+y=a\end{cases}\)，消元得到第二行系数 \(1-a^2\)。</p><p class="mt">若 \(a\ne\pm1\)，满秩，唯一解 \((1,0)\)。若 \(a=1\)，得到一条直线 \(x+y=1\)，无穷多解。若 \(a=-1\)，两式等价于 \(x-y=1\)，也有无穷多解。</p></div></details>
+<details><summary>例题：什么时候有解？</summary><div class="db"><p>若消元最后一行为 \((0,0,a\mid b)\)：</p><p class="mt">\(a\ne0\)：有主元，唯一解。\(a=0,b=0\)：零行，无穷多解。\(a=0,b\ne0\)：矛盾，无解。</p></div></details>
+<h2 class="shd">应用</h2>
+<div class="cd ec"><div class="ct"><span class="bg bg-e">应用</span> 用 Gauss 求逆矩阵</div><p class="sm">把 \((A|I)\) 做行化简。若能化成 \((I|A^{-1})\)，右半边就是逆矩阵；若某列无法找到主元，则 \(A\) 不可逆。</p></div>
+<div class="cd ec"><div class="ct"><span class="bg bg-e">应用</span> 最小二乘</div><p class="sm">当超定系统 \(Ax=b\) 无精确解时，找使 \(\|Ax-b\|^2\) 最小的 \(x\)。正规方程为：</p><div class="fb">\[A^TAx=A^Tb\]</div><p class="sm mt">几何上，这是把 \(b\) 投影到 \(\Im(A)\) 上；残差向量与列空间正交。</p></div>
+</div><div class="footer">MC2 复习 · 线性方程组与高斯消元</div></body></html>

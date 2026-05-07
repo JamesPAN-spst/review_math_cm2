@@ -64,145 +64,28 @@ details[open] summary{border-radius:10px 10px 0 0;border-bottom-color:transparen
 </head>
 <body>
 <a class="back" href="index.html">← 返回主页</a>
-<div class="hero"><div class="tag">Algèbre · Deep Dive</div><h1>线性代数的<span class="hl">几何灵魂</span></h1><p>The Geometric Soul of Linear Algebra</p></div>
+<div class="hero"><div class="tag">代数 · 深度理解</div><h1>线性代数的<span class="hl">几何灵魂</span></h1><p>用几何直觉理解矩阵、行列式、核与像、换基、秩、线性方程组、内积与 SVD</p></div>
 <div class="wrap">
-
-<!-- ═══ 1. MATRIX = TRANSFORMATION ═══ -->
-<h2 class="shd">Matrix = Geometric Transformation</h2>
-
-<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> A matrix IS a function on space</div>
-<p class="sm">Every \(m \times n\) matrix \(A\) defines a function \(f: \R^n \to \R^m\) by \(f(x) = Ax\). The columns of \(A\) tell you <b>where the basis vectors land</b>.</p>
-<div class="fb">\[A = \begin{pmatrix} | & | \\ Ae_1 & Ae_2 \\ | & | \end{pmatrix}\]</div>
-<p class="sm mt">Column \(j\) of \(A\) = the image of the \(j\)-th standard basis vector \(e_j\).</p>
-<div class="analogy"><p class="sm">Think of it like this: a matrix is a <b>recipe</b>. It tells you: "send \(e_1\) here, send \(e_2\) there." Since the map is linear, everything else follows: any vector \(v = x_1 e_1 + x_2 e_2\) gets mapped to \(x_1 (Ae_1) + x_2 (Ae_2)\).</p></div>
-</div>
-
-<div class="cd gc"><div class="ct"><span class="bg bg-g">Gallery</span> What common matrices look like</div>
-<p class="sm"><b>Identity \(I\):</b> Does nothing. Every vector maps to itself.</p>
-<p class="sm mt"><b>Scaling \(\begin{pmatrix}k&0\\0&k\end{pmatrix}\):</b> Uniform zoom by factor \(k\).</p>
-<p class="sm mt"><b>Stretch \(\begin{pmatrix}a&0\\0&b\end{pmatrix}\):</b> Stretch \(x\)-axis by \(a\), \(y\)-axis by \(b\). If \(a \ne b\), circles become ellipses.</p>
-<p class="sm mt"><b>Rotation \(\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}\):</b> Rotate by \(\theta\) counterclockwise. Preserves lengths and angles.</p>
-<p class="sm mt"><b>Reflection \(\begin{pmatrix}1&0\\0&-1\end{pmatrix}\):</b> Reflect across the \(x\)-axis.</p>
-<p class="sm mt"><b>Shear \(\begin{pmatrix}1&k\\0&1\end{pmatrix}\):</b> Slides points horizontally proportional to their \(y\). Turns rectangles into parallelograms.</p>
-<p class="sm mt"><b>Projection \(\begin{pmatrix}1&0\\0&0\end{pmatrix}\):</b> Collapses onto the \(x\)-axis. All vertical information is lost.</p>
-</div>
-
-<!-- ═══ 2. DETERMINANT ═══ -->
-<h2 class="shd">Determinant = Signed Volume Factor</h2>
-
-<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> What \(\det A\) really means</div>
-<div class="fb">\[\det A = \text{signed factor by which } A \text{ scales volumes}\]</div>
-<p class="sm"><b>|det A| = 2:</b> areas double. <b>|det A| = 0.5:</b> areas halve. <b>det A = 0:</b> dimension collapses (flat).</p>
-<p class="sm mt"><b>Sign:</b> positive = orientation preserved; negative = orientation flipped (like a reflection).</p>
-<div class="analogy"><p class="sm">Take the unit square (vertices at origin, \(e_1\), \(e_2\), \(e_1+e_2\)). After applying \(A\), it becomes a parallelogram. Its area = \(|\det A|\). If the vertices go clockwise instead of counterclockwise, \(\det A < 0\).</p></div>
-</div>
-
-<div class="cd wc"><div class="ct"><span class="bg bg-w">Deep Point</span> Why \(\det(AB) = \det A \cdot \det B\)</div>
-<p class="sm">Applying \(A\) then \(B\): first scale volumes by \(\det A\), then by \(\det B\). Total scaling = product. This is why composition of transformations corresponds to multiplication of matrices <b>and</b> multiplication of determinants.</p>
-</div>
-
-<details><summary>Example: \(\det\begin{pmatrix} 3&1\\0&2 \end{pmatrix} = 6\)</summary>
-<div class="db">
-<p>The unit square gets mapped to a parallelogram with vertices at \((0,0)\), \((3,0)\), \((1,2)\), \((4,2)\).</p>
-<p class="mt">Area = base × height = 3 × 2 = 6 ✓. Positive sign: orientation preserved (counterclockwise stays counterclockwise).</p>
-</div></details>
-
-<!-- ═══ 3. KERNEL & IMAGE ═══ -->
-<h2 class="shd">Kernel & Image: What survives, what's lost</h2>
-
-<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> Ker = what gets killed, Im = what gets reached</div>
-<p class="sm"><b>\(\Ker A\):</b> all vectors that \(A\) maps to \(\vec{0}\). These are the "invisible" directions — the dimensions that get <b>collapsed</b>.</p>
-<p class="sm mt"><b>\(\Im A\):</b> all vectors that can be reached as outputs. This is the "effective range" of the transformation.</p>
-<div class="geo-box"><p class="sm">Imagine projecting 3D space onto a plane. The <b>kernel</b> is the direction perpendicular to the plane (everything along this line gets crushed to zero). The <b>image</b> is the plane itself (every output lands here). Rank-nullity: 3 = 1 + 2.</p></div>
-</div>
-
-<div class="cd fc"><div class="ct"><span class="bg bg-f">Theorem</span> Rank-Nullity (Geometric Version)</div>
-<div class="fb">\[\underbrace{\dim \R^n}_{\text{original space}} = \underbrace{\dim \Ker A}_{\text{collapsed dimensions}} + \underbrace{\rank A}_{\text{surviving dimensions}}\]</div>
-<div class="analogy"><p class="sm">Think of a tablecloth (2D) being crumpled onto a line (1D). One dimension survives (\(\rank = 1\)), one is lost (\(\dim \Ker = 1\)). Total = 2. The theorem says you can't create or destroy dimensions — you can only redistribute them between "surviving" and "killed".</p></div>
-</div>
-
-<!-- ═══ 4. CHANGE OF BASIS ═══ -->
-<h2 class="shd">Change of Basis: Same map, different coordinates</h2>
-
-<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> \(A' = P^{-1}AP\)</div>
-<p class="sm">The linear map \(f\) doesn't change — only your <b>coordinate system</b> changes. \(P\) converts from new basis to old basis.</p>
-<div class="fb">\[\underbrace{P^{-1}}_{\text{new coords}} \underbrace{A}_{\text{apply map}} \underbrace{P}_{\text{old coords}} = A'\]</div>
-<div class="analogy"><p class="sm">Imagine you're in Paris and someone gives you directions in miles. You convert miles → km, follow the directions, then convert the result km → miles. The physical path is the same; only the units changed. \(P\) is the unit converter.</p></div>
-</div>
-
-<div class="cd tc"><div class="ct"><span class="bg bg-t">Method</span> Transition Matrix</div>
-<p class="sm">If \(\mathcal{B} = (b_1, \ldots, b_n)\) is the old basis and \(\mathcal{B}' = (b'_1, \ldots, b'_n)\) is the new basis:</p>
-<p class="sm mt">\(P_{\mathcal{B}' \to \mathcal{B}}\) has columns = coordinates of new basis vectors in the old basis.</p>
-<p class="sm mt"><b>Formula:</b> \([v]_{\mathcal{B}} = P \cdot [v]_{\mathcal{B}'}\) and \([v]_{\mathcal{B}'} = P^{-1} \cdot [v]_{\mathcal{B}}\).</p>
-</div>
-
-<details><summary>Worked Example: Rotation is diagonal in the right basis</summary>
-<div class="db">
-<p>\(R_{45°} = \begin{pmatrix}\frac{\sqrt2}{2}&-\frac{\sqrt2}{2}\\\frac{\sqrt2}{2}&\frac{\sqrt2}{2}\end{pmatrix}\) in the standard basis.</p>
-<p class="mt">Over \(\C\), eigenvalues are \(e^{\pm i\pi/4}\). In the eigenbasis, \(R_{45°}\) becomes \(\begin{pmatrix}e^{i\pi/4}&0\\0&e^{-i\pi/4}\end{pmatrix}\).</p>
-<div class="geo-box"><p class="sm">A rotation in 2D has <b>no real eigenvectors</b> (nothing stays on its line!). But in complex coordinates, the two "circular" modes \(e^{\pm i\theta}\) decouple perfectly. This is the deep reason Fourier analysis works: rotations become diagonal in the frequency basis.</p></div>
-</div></details>
-
-<!-- ═══ 5. RANK ═══ -->
-<h2 class="shd">Rank: The true dimension of information</h2>
-
-<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> Rank = effective dimension of the output</div>
-<p class="sm">\(\rank(A)\) = dimension of the column space = number of "independent directions" in the image.</p>
-<p class="sm mt"><b>Full rank</b> (\(\rank = \min(m,n)\)): no dimension is wasted. The map is as "spread out" as possible.</p>
-<p class="sm mt"><b>Rank deficient</b>: some dimensions collapse. Output lives in a lower-dimensional subspace.</p>
-<div class="analogy"><p class="sm">A \(1000 \times 1000\) matrix with rank 3 is like a movie projector: it takes a 1000-dimensional input but the output lives on a 3D "screen". The other 997 dimensions are redundant. This is why <b>low-rank approximation</b> (SVD) is the foundation of data compression.</p></div>
-</div>
-
-<!-- ═══ 6. SYSTEMS Ax=b ═══ -->
-<h2 class="shd">Systems \(Ax = b\): Geometry of solutions</h2>
-
-<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> Three cases, geometrically</div>
-<p class="sm"><b>Case 1: \(b \in \Im A\) and \(\Ker A = \{0\}\)</b> → Unique solution. The map is bijective, so there's exactly one preimage.</p>
-<p class="sm mt"><b>Case 2: \(b \in \Im A\) but \(\Ker A \ne \{0\}\)</b> → Infinitely many solutions. One particular solution \(x_0\) plus any element of \(\Ker A\): the solution set is the <b>affine subspace</b> \(x_0 + \Ker A\).</p>
-<p class="sm mt"><b>Case 3: \(b \notin \Im A\)</b> → No solution. The target \(b\) is "off the screen".</p>
-<div class="geo-box"><p class="sm">For a \(2 \times 2\) system with \(\Ker A = \) a line through origin: solutions form a <b>line parallel to the kernel</b>, shifted to pass through any particular solution. All solution lines for different \(b\) are parallel.</p></div>
-</div>
-
-<div class="cd tc"><div class="ct"><span class="bg bg-t">Theorem</span> Rouché-Capelli (Kronecker-Capelli)</div>
-<div class="fb">\[Ax = b \text{ has a solution} \iff \rank(A) = \rank(A|b)\]</div>
-<p class="sm">The augmented matrix \((A|b)\) has the same rank as \(A\) iff \(b\) is in the column space of \(A\).</p>
-<p class="sm mt">When solutions exist, the solution space has dimension \(n - \rank(A)\).</p>
-</div>
-
-<details><summary>Worked Example: Geometric interpretation of a \(3 \times 3\) system</summary>
-<div class="db">
-<p>\[\begin{cases} x+y+z=1 \\ 2x+2y+2z=2 \\ x-y+z=0 \end{cases}\]</p>
-<p class="mt">Row 2 = 2 × Row 1 (redundant). So rank = 2, but \(n = 3\). Solution space has dim = 1 (a line).</p>
-<p class="mt">Geometrically: equations 1 and 2 define the <b>same plane</b>. Equation 3 defines a different plane. Their intersection = a <b>line</b> in \(\R^3\).</p>
-<p class="mt">Parametrically: from row 1 and 3: \(z = 1-x-y\) and \(x+z = y \implies y = x + (1-x-y) \implies 2y = 1 \implies y = 1/2\). Then \(x + z = 1/2\), so \(x = t, z = 1/2 - t\). Solution: \((t, 1/2, 1/2-t)\), a line.</p>
-</div></details>
-
-<!-- ═══ 7. INNER PRODUCT ═══ -->
-<h2 class="shd">Inner Product: Length, angle, projection</h2>
-
-<div class="cd gc"><div class="ct"><span class="bg bg-g">Core Idea</span> Dot product = "how much does \(u\) point in the direction of \(v\)?"</div>
-<div class="fb">\[\langle u, v \rangle = \|u\| \cdot \|v\| \cos \theta\]</div>
-<p class="sm">If \(\theta = 0\): vectors aligned, dot product maximal. If \(\theta = 90°\): orthogonal, dot product zero. If \(\theta = 180°\): opposed, dot product minimal (most negative).</p>
-<div class="analogy"><p class="sm"><b>Projection formula:</b> The shadow of \(u\) onto \(v\) has length \(\frac{\langle u,v\rangle}{\|v\|}\). This is the foundation of <b>Fourier analysis</b> (project a signal onto sinusoids) and <b>least squares</b> (project data onto a model).</p></div>
-</div>
-
-<div class="cd tc"><div class="ct"><span class="bg bg-t">Application</span> Orthogonal Projection Matrix</div>
-<div class="fb">\[P_v = \frac{vv^T}{v^Tv}\]</div>
-<p class="sm">\(P_v u\) = projection of \(u\) onto the line spanned by \(v\). Note: \(P_v^2 = P_v\) (projecting twice = projecting once) and \(P_v^T = P_v\) (symmetric).</p>
-<p class="sm mt">For projection onto a subspace spanned by columns of \(Q\) (orthonormal): \(P = QQ^T\).</p>
-</div>
-
-<!-- ═══ 8. SVD PREVIEW ═══ -->
-<h2 class="shd">Extension: SVD — The Ultimate Decomposition</h2>
-
-<div class="cd ec"><div class="ct"><span class="bg bg-e">Preview</span> Singular Value Decomposition</div>
-<div class="fb">\[A = U \Sigma V^T\]</div>
-<p class="sm">Every matrix — any size, any rank — can be decomposed as: rotate (\(V^T\)) → scale (\(\Sigma\)) → rotate (\(U\)).</p>
-<p class="sm mt">The \(\sigma_i\) (singular values) tell you how much stretching happens along each principal axis. Eigenvalues are only defined for square matrices; SVD works for <b>everything</b>.</p>
-<div class="geo-box"><p class="sm">A linear map sends the unit sphere to an <b>ellipsoid</b>. The singular values are the <b>semi-axis lengths</b> of this ellipsoid, and \(U, V\) encode the orientation. SVD = the ellipsoid decomposition. This is why it's the backbone of PCA, recommender systems, image compression, and pseudo-inverses.</p></div>
-</div>
-
-</div>
-<div class="footer">MC2 Review · The Geometric Soul of Linear Algebra</div>
-</body>
-</html>
+<h2 class="shd">矩阵 = 几何变换</h2>
+<div class="cd gc"><div class="ct"><span class="bg bg-g">核心</span> 矩阵就是空间上的函数</div><p class="sm">每个 \(m\times n\) 矩阵 \(A\) 都定义线性函数 \(f:\mathbb R^n\to\mathbb R^m\)，\(f(x)=Ax\)。矩阵的第 \(j\) 列就是标准基向量 \(e_j\) 的像。</p><div class="fb">\[A=\begin{pmatrix}|&|\\Ae_1&Ae_2\\|&|\end{pmatrix}\]</div><p class="sm mt">因此矩阵像一份“规则”：告诉你每个基向量去哪儿，其余向量由线性性自动决定。</p></div>
+<div class="cd gc"><div class="ct"><span class="bg bg-g">图像</span> 常见矩阵的几何效果</div><p class="sm"><b>恒等矩阵：</b>所有向量不变。</p><p class="sm mt"><b>缩放：</b>\(\begin{pmatrix}k&0\\0&k\end{pmatrix}\) 整体放大 \(k\) 倍。</p><p class="sm mt"><b>拉伸：</b>\(\begin{pmatrix}a&0\\0&b\end{pmatrix}\) 分别拉伸横轴和纵轴，圆可变成椭圆。</p><p class="sm mt"><b>旋转/反射/剪切/投影：</b>分别对应保持长度旋转、翻转定向、把矩形推成平行四边形、把空间压到子空间。</p></div>
+<h2 class="shd">行列式 = 有符号体积倍率</h2>
+<div class="cd gc"><div class="ct"><span class="bg bg-g">核心</span> \(\det A\) 的真实含义</div><div class="fb">\[|\det A|=\text{体积缩放倍数}\]</div><p class="sm">\(|\det A|=2\) 表示面积/体积翻倍；\(\det A=0\) 表示维度塌缩。符号为正表示保持定向，符号为负表示翻转定向。</p></div>
+<div class="cd wc"><div class="ct"><span class="bg bg-w">深入</span> 为什么 \(\det(AB)=\det A\det B\)</div><p class="sm">先作用 \(A\) 时体积乘以 \(\det A\)，再作用 \(B\) 时乘以 \(\det B\)。复合变换的总体倍率就是乘积。</p></div>
+<h2 class="shd">核与像：什么被压掉，什么能到达</h2>
+<div class="cd gc"><div class="ct"><span class="bg bg-g">核心</span> \(\Ker A\) 与 \(\Im A\)</div><p class="sm"><b>\(\Ker A\)：</b>所有被映到 \(0\) 的向量，是被压缩掉的方向。</p><p class="sm mt"><b>\(\Im A\)：</b>所有可能输出，是变换实际能到达的子空间。</p><p class="sm mt">投影三维空间到平面时，核是垂直平面的方向，像就是该平面。</p></div>
+<div class="cd fc"><div class="ct"><span class="bg bg-f">定理</span> 秩-零化度</div><div class="fb">\[\dim\mathbb R^n=\dim\Ker A+\rank A\]</div><p class="sm">线性映射不会凭空创造或消灭总维度，只是在“保留的维度”和“被压缩的维度”之间分配。</p></div>
+<h2 class="shd">换基：同一个映射，不同坐标</h2>
+<div class="cd gc"><div class="ct"><span class="bg bg-g">核心</span> \(A'=P^{-1}AP\)</div><p class="sm">线性映射本身不变，改变的只是描述它的坐标系。\(P\) 把新基坐标转换到旧基坐标，\(P^{-1}\) 再转换回来。</p><div class="fb">\[P^{-1}\,A\,P=A'\]</div></div>
+<div class="cd tc"><div class="ct"><span class="bg bg-t">方法</span> 过渡矩阵</div><p class="sm">若 \(\mathcal B\) 是旧基、\(\mathcal B'\) 是新基，则 \(P_{\mathcal B'\to\mathcal B}\) 的列是新基向量在旧基下的坐标。</p></div>
+<h2 class="shd">秩：信息的真实维数</h2>
+<div class="cd gc"><div class="ct"><span class="bg bg-g">核心</span> rank = 输出的有效维度</div><p class="sm">\(\rank(A)\) 是列空间维数，也就是像中独立方向的个数。满秩表示没有维度浪费；秩亏表示输出落在较低维子空间。</p><p class="sm mt">低秩矩阵像投影仪：高维输入最终只落在低维“屏幕”上，这也是低秩近似和数据压缩的直觉来源。</p></div>
+<h2 class="shd">线性方程组 \(Ax=b\) 的几何</h2>
+<div class="cd gc"><div class="ct"><span class="bg bg-g">核心</span> 三种情形</div><p class="sm"><b>唯一解：</b>\(b\in\Im A\) 且 \(\Ker A=\{0\}\)。</p><p class="sm mt"><b>无穷多解：</b>\(b\in\Im A\) 且 \(\Ker A\ne\{0\}\)，解集为 \(x_0+\Ker A\)。</p><p class="sm mt"><b>无解：</b>\(b\notin\Im A\)，目标向量不在可达输出空间中。</p></div>
+<div class="cd tc"><div class="ct"><span class="bg bg-t">定理</span> Rouché-Capelli</div><div class="fb">\[Ax=b\text{ 有解}\Longleftrightarrow \rank(A)=\rank(A|b)\]</div><p class="sm">有解时，解空间维数为 \(n-\rank(A)\)。</p></div>
+<h2 class="shd">内积：长度、角度、投影</h2>
+<div class="cd gc"><div class="ct"><span class="bg bg-g">核心</span> 点积衡量方向分量</div><div class="fb">\[\langle u,v\rangle=\|u\|\,\|v\|\cos\theta\]</div><p class="sm">同向时点积最大，正交时为 0，反向时为负。投影公式是 Fourier 分析与最小二乘法的几何基础。</p></div>
+<div class="cd tc"><div class="ct"><span class="bg bg-t">应用</span> 正交投影矩阵</div><div class="fb">\[P_v=\frac{vv^T}{v^Tv}\]</div><p class="sm">\(P_vu\) 是 \(u\) 到 \(v\) 张成直线上的投影，且 \(P_v^2=P_v\)。</p></div>
+<h2 class="shd">SVD 预览：终极分解</h2>
+<div class="cd ec"><div class="ct"><span class="bg bg-e">拓展</span> 奇异值分解</div><div class="fb">\[A=U\Sigma V^T\]</div><p class="sm">任意矩阵都可理解为“旋转 → 缩放 → 旋转”。奇异值给出主轴方向上的拉伸倍数。线性映射把单位球送到椭球，SVD 就是这个椭球分解。</p><p class="sm mt">这解释了 PCA、推荐系统、图像压缩和伪逆为什么都依赖 SVD。</p></div>
+</div><div class="footer">MC2 复习 · 线性代数的几何灵魂</div></body></html>

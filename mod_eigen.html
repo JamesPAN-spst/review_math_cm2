@@ -72,200 +72,25 @@ details[open] summary{border-radius:10px 10px 0 0;border-bottom-color:transparen
 </head>
 <body>
 <a class="back" href="index.html">← 返回主页</a>
-<div class="hero"><div class="tag">Algèbre · Module 5</div><h1>特征值与<span class="hl">对角化</span></h1><p>Valeurs propres, vecteurs propres et diagonalisation</p></div>
+<div class="hero"><div class="tag">代数 · 模块 5</div><h1><span class="hl">特征值</span>与对角化</h1><p>特征空间、特征多项式、对角化判据、谱定理与典型证明题</p></div>
 <div class="wrap">
-
-<!-- ═══ 1. DEFINITIONS ═══ -->
-<h2 class="shd">基本定义</h2>
-
-<div class="cd fc"><div class="ct"><span class="bg bg-f">Definition</span> Eigenvalue & Eigenvector</div>
-<div class="fb">\[A v = \lambda v, \quad v \ne \vec{0}\]</div>
-<p class="sm">A scalar \(\lambda \in \K\) is an <b>eigenvalue</b> (valeur propre) of \(A \in M_n(\K)\) if \(\exists v \ne 0\) such that \(Av = \lambda v\). The non-zero vector \(v\) is called an <b>eigenvector</b> (vecteur propre).</p>
-<div class="geo-box">
-<p class="sm">An eigenvector is a direction that the linear map <b>does not rotate</b> — it only stretches or compresses it by factor \(\lambda\). If \(\lambda > 0\), same direction. If \(\lambda < 0\), reversed. If \(\lambda = 1\), fixed. If \(\lambda = 0\), collapsed to origin (in the kernel).</p>
-</div>
-</div>
-
-<div class="cd fc"><div class="ct"><span class="bg bg-f">Definition</span> Eigenspace</div>
-<div class="fb">\[E_\lambda = \Ker(A - \lambda I) = \{v \in \K^n : Av = \lambda v\}\]</div>
-<p class="sm">\(E_\lambda\) is a <b>subspace</b>. Its dimension \(\dim E_\lambda\) is called the <b>geometric multiplicity</b> (multiplicité géométrique).</p>
-<p class="sm mt">The <b>algebraic multiplicity</b> (multiplicité algébrique) \(m_\lambda\) is the multiplicity of \(\lambda\) as a root of the characteristic polynomial.</p>
-<p class="sm mt"><b>Key inequality:</b> \(1 \le \dim E_\lambda \le m_\lambda\)</p>
-</div>
-
-<div class="cd fc"><div class="ct"><span class="bg bg-f">Definition</span> Spectrum & Characteristic Polynomial</div>
-<div class="fb">\[\chi_A(\lambda) = \det(A - \lambda I)\]</div>
-<p class="sm">The <b>spectrum</b> \(\Sp(A)\) is the set of all eigenvalues: the roots of \(\chi_A\).</p>
-<p class="sm mt">For \(A \in M_n(\R)\), \(\chi_A\) is a degree-\(n\) polynomial in \(\lambda\). It has at most \(n\) real roots.</p>
-</div>
-
-<!-- ═══ 2. COMPUTATION ═══ -->
+<h2 class="shd">核心定义</h2>
+<div class="cd fc"><div class="ct"><span class="bg bg-f">定义</span> 特征值与特征向量</div><div class="fb">\[Av=\lambda v,\qquad v\ne0\]</div><p class="sm">若存在非零向量 \(v\) 使 \(Av=\lambda v\)，则 \(\lambda\) 是 \(A\) 的特征值，\(v\) 是对应特征向量。几何上，特征向量方向不会被旋转，只会被 \(\lambda\) 倍拉伸、压缩或反向。</p></div>
+<div class="cd fc"><div class="ct"><span class="bg bg-f">定义</span> 特征空间与重数</div><div class="fb">\[E_\lambda=\Ker(A-\lambda I)\]</div><p class="sm">\(E_\lambda\) 是子空间，\(\dim E_\lambda\) 称为几何重数。\(\lambda\) 作为特征多项式根的重数称为代数重数 \(m_\lambda\)。关键不等式：\(1\le\dim E_\lambda\le m_\lambda\)。</p></div>
+<div class="cd fc"><div class="ct"><span class="bg bg-f">公式</span> 特征多项式</div><div class="fb">\[\chi_A(\lambda)=\det(A-\lambda I)\]</div><p class="sm">谱 \(\Sp(A)\) 是所有特征值的集合，也就是 \(\chi_A\) 的根。</p></div>
 <h2 class="shd">计算方法</h2>
-
-<div class="cd tc"><div class="ct"><span class="bg bg-t">Method</span> Finding Eigenvalues (Step by Step)</div>
-<p class="sm"><b>Step 1.</b> Compute \(\chi_A(\lambda) = \det(A - \lambda I)\).</p>
-<p class="sm mt"><b>Step 2.</b> Solve \(\chi_A(\lambda) = 0\) to find eigenvalues \(\lambda_1, \ldots, \lambda_k\).</p>
-<p class="sm mt"><b>Step 3.</b> For each \(\lambda_i\), solve \((A - \lambda_i I)x = 0\) to find the eigenspace \(E_{\lambda_i}\).</p>
-</div>
-
-<details><summary>Worked Example: \(A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}\)</summary>
-<div class="db">
-<p><b>Step 1.</b> \(\chi_A(\lambda) = \det\begin{pmatrix} 4-\lambda & 1 \\ 2 & 3-\lambda \end{pmatrix} = (4-\lambda)(3-\lambda) - 2 = \lambda^2 - 7\lambda + 10\)</p>
-<p class="mt"><b>Step 2.</b> \(\lambda^2 - 7\lambda + 10 = (\lambda-2)(\lambda-5) = 0 \implies \lambda_1 = 2,\; \lambda_2 = 5\)</p>
-<p class="mt"><b>Step 3a.</b> \(E_2: (A-2I)x=0 \implies \begin{pmatrix}2&1\\2&1\end{pmatrix}x=0 \implies x_1 = -\frac{1}{2}x_2 \implies E_2 = \Vect\begin{pmatrix}-1\\2\end{pmatrix}\)</p>
-<p class="mt"><b>Step 3b.</b> \(E_5: (A-5I)x=0 \implies \begin{pmatrix}-1&1\\2&-2\end{pmatrix}x=0 \implies x_1 = x_2 \implies E_5 = \Vect\begin{pmatrix}1\\1\end{pmatrix}\)</p>
-<div class="geo-box"><p class="sm">The vector \((-1,2)^T\) gets scaled by 2 (stretched), and \((1,1)^T\) gets scaled by 5. Any other vector is a mix of both and gets "sheared" — but in the eigenbasis, the map is just two independent scalings.</p></div>
-</div></details>
-
-<details><summary>Worked Example: \(3 \times 3\) matrix with repeated eigenvalue</summary>
-<div class="db">
-<p>Let \(A = \begin{pmatrix} 2&1&0\\0&2&0\\0&0&3 \end{pmatrix}\)</p>
-<p class="mt">\(\chi_A(\lambda) = (2-\lambda)^2(3-\lambda)\), so \(\lambda_1 = 2\) (algebraic mult. 2) and \(\lambda_2 = 3\) (mult. 1).</p>
-<p class="mt">\(E_2: (A-2I)x = 0 \implies \begin{pmatrix}0&1&0\\0&0&0\\0&0&1\end{pmatrix}x = 0 \implies x_2 = x_3 = 0,\; x_1\) free. So \(E_2 = \Vect(e_1)\), dim = 1.</p>
-<p class="mt">Here geometric mult (1) < algebraic mult (2): <b>\(A\) is NOT diagonalizable.</b></p>
-<p class="mt">\(E_3 = \Vect(e_3)\), dim = 1. Total eigenvectors span only a 2D subspace of \(\R^3\): not enough for a basis.</p>
-<div class="geo-box"><p class="sm">The "missing" eigenvector at \(\lambda=2\) means there's a <b>shearing</b> in the \(e_1\)-\(e_2\) plane that can't be undone by a change of basis. This is precisely the Jordan block \(\begin{pmatrix}2&1\\0&2\end{pmatrix}\).</p></div>
-</div></details>
-
-<!-- ═══ 3. KEY SHORTCUTS ═══ -->
-<h2 class="shd">速算技巧</h2>
-
-<div class="cd tc"><div class="ct"><span class="bg bg-t">Shortcut</span> Trace & Determinant</div>
-<div class="fb">\[\tr(A) = \sum \lambda_i, \qquad \det(A) = \prod \lambda_i\]</div>
-<p class="sm">For a \(2 \times 2\) matrix, this gives you both eigenvalues immediately: they're the roots of \(\lambda^2 - \tr(A)\lambda + \det(A) = 0\).</p>
-</div>
-
-<div class="cd tc"><div class="ct"><span class="bg bg-t">Shortcut</span> Triangular Matrix</div>
-<p class="sm">If \(A\) is upper or lower triangular, the eigenvalues are the <b>diagonal entries</b>. No computation needed.</p>
-</div>
-
-<div class="cd tc"><div class="ct"><span class="bg bg-t">Shortcut</span> Rank-1 Updates</div>
-<p class="sm">If \(A = I + uv^T\) (rank-1 perturbation of identity), then eigenvalues are \(1 + v^Tu\) (once) and \(1\) (with multiplicity \(n-1\)).</p>
-</div>
-
-<div class="cd wc"><div class="ct"><span class="bg bg-w">Trap</span> Common Mistakes</div>
-<p class="sm">① \(\det(A - \lambda I) \ne \det(A) - \lambda\). You must expand properly.</p>
-<p class="sm mt">② Eigenvectors are <b>non-zero</b> by definition. \(\vec{0}\) is never an eigenvector.</p>
-<p class="sm mt">③ \(\lambda = 0\) is a perfectly valid eigenvalue. It means \(\Ker A \ne \{0\}\) (A is singular).</p>
-<p class="sm mt">④ Eigenspaces of <b>distinct</b> eigenvalues always intersect trivially: \(E_{\lambda_1} \cap E_{\lambda_2} = \{0\}\).</p>
-</div>
-
-<!-- ═══ 4. DIAGONALIZATION ═══ -->
+<div class="cd tc"><div class="ct"><span class="bg bg-t">方法</span> 三步求特征值</div><p class="sm">1. 计算 \(\chi_A(\lambda)=\det(A-\lambda I)\)。</p><p class="sm">2. 解 \(\chi_A(\lambda)=0\)，得到特征值。</p><p class="sm">3. 对每个 \(\lambda\)，解 \((A-\lambda I)x=0\)，得到 \(E_\lambda\)。</p></div>
+<details><summary>例题：\(A=\begin{pmatrix}4&1\\2&3\end{pmatrix}\)</summary><div class="db"><p>\(\chi_A=(4-\lambda)(3-\lambda)-2=\lambda^2-7\lambda+10=(\lambda-2)(\lambda-5)\)。</p><p>\(E_2=\Vect((-1,2)^T)\)，\(E_5=\Vect((1,1)^T)\)。在这组特征基中，矩阵只做两个独立缩放。</p></div></details>
+<h2 class="shd">速算与易错点</h2>
+<div class="cd tc"><div class="ct"><span class="bg bg-t">速算</span> 迹、行列式、三角矩阵</div><p class="sm">对 \(2\times2\) 矩阵，特征值满足 \(\lambda^2-\tr(A)\lambda+\det(A)=0\)。三角矩阵的特征值就是对角线元素。</p></div>
+<div class="cd wc"><div class="ct"><span class="bg bg-w">易错</span> 常见错误</div><p class="sm">① \(\det(A-\lambda I)\ne\det A-\lambda\)。② 零向量不是特征向量。③ \(\lambda=0\) 是合法特征值，表示 \(\Ker A\ne\{0\}\)。④ 不同特征值的特征空间交集只有 \(\{0\}\)。</p></div>
 <h2 class="shd">对角化</h2>
-
-<div class="cd fc"><div class="ct"><span class="bg bg-f">Theorem</span> Diagonalization Criterion</div>
-<div class="fb">\[A \text{ is diagonalizable} \iff \forall \lambda_i \in \Sp(A): \dim E_{\lambda_i} = m_{\lambda_i}\]</div>
-<p class="sm">Equivalently: \(A\) is diagonalizable iff there exists a basis of \(\K^n\) consisting entirely of eigenvectors of \(A\).</p>
-<p class="sm mt"><b>Sufficient condition:</b> If \(A \in M_n\) has \(n\) <b>distinct</b> eigenvalues, then \(A\) is diagonalizable.</p>
-</div>
-
-<div class="cd tc"><div class="ct"><span class="bg bg-t">Method</span> Diagonalizing \(A = PDP^{-1}\)</div>
-<p class="sm"><b>Step 1.</b> Find all eigenvalues and eigenspaces.</p>
-<p class="sm mt"><b>Step 2.</b> Check: total number of independent eigenvectors = \(n\)?</p>
-<p class="sm mt"><b>Step 3.</b> Form \(P\) = matrix whose columns are the eigenvectors.</p>
-<p class="sm mt"><b>Step 4.</b> \(D = \diag(\lambda_1, \ldots, \lambda_n)\), in the same column order as \(P\).</p>
-<p class="sm mt"><b>Verification:</b> \(AP = PD\) (check column by column: \(Av_i = \lambda_i v_i\)).</p>
-<div class="geo-box"><p class="sm">\(P\) is a <b>change of basis</b> to the eigenbasis. In this new coordinate system, the linear map is just independent scalings along each axis. \(P^{-1}\) converts to eigenbasis, \(D\) scales, \(P\) converts back.</p></div>
-</div>
-
-<details><summary>Worked Example: Full diagonalization of \(A = \begin{pmatrix} 1&2\\2&1 \end{pmatrix}\)</summary>
-<div class="db">
-<p>\(\chi_A(\lambda) = \lambda^2 - 2\lambda - 3 = (\lambda-3)(\lambda+1)\). Eigenvalues: \(\lambda_1=3, \lambda_2=-1\).</p>
-<p class="mt">\(E_3: \begin{pmatrix}-2&2\\2&-2\end{pmatrix}x=0 \implies v_1 = \begin{pmatrix}1\\1\end{pmatrix}\)</p>
-<p class="mt">\(E_{-1}: \begin{pmatrix}2&2\\2&2\end{pmatrix}x=0 \implies v_2 = \begin{pmatrix}1\\-1\end{pmatrix}\)</p>
-<p class="mt">\(P = \begin{pmatrix}1&1\\1&-1\end{pmatrix},\quad D = \begin{pmatrix}3&0\\0&-1\end{pmatrix},\quad P^{-1} = \frac{1}{2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}\)</p>
-<p class="mt"><b>Application:</b> \(A^{100} = PD^{100}P^{-1} = P\begin{pmatrix}3^{100}&0\\0&1\end{pmatrix}P^{-1}\)</p>
-<div class="geo-box"><p class="sm">\(A\) is a <b>symmetric matrix</b>. Its eigenvectors \((1,1)^T\) and \((1,-1)^T\) are <b>orthogonal</b> (this always happens for symmetric matrices). The map stretches by 3 along the diagonal \(y=x\) and reflects (\(\times(-1)\)) along \(y=-x\).</p></div>
-</div></details>
-
-<details><summary>Worked Example: Fibonacci via diagonalization</summary>
-<div class="db">
-<p>The recurrence \(F_{n+2} = F_{n+1} + F_n\) can be written as \(\begin{pmatrix}F_{n+1}\\F_n\end{pmatrix} = \underbrace{\begin{pmatrix}1&1\\1&0\end{pmatrix}}_{M} \begin{pmatrix}F_n\\F_{n-1}\end{pmatrix}\).</p>
-<p class="mt">\(\chi_M(\lambda) = \lambda^2 - \lambda - 1\), roots: \(\varphi = \frac{1+\sqrt{5}}{2}\) and \(\psi = \frac{1-\sqrt{5}}{2}\).</p>
-<p class="mt">After diagonalization: \(M^n = P\begin{pmatrix}\varphi^n&0\\0&\psi^n\end{pmatrix}P^{-1}\), giving Binet's formula:</p>
-\[F_n = \frac{\varphi^n - \psi^n}{\sqrt{5}}\]
-<div class="geo-box"><p class="sm">The golden ratio \(\varphi\) is the dominant eigenvalue. As \(n \to \infty\), the system aligns with the eigenvector of \(\varphi\), so \(F_{n+1}/F_n \to \varphi\). The minor eigenvalue \(|\psi| < 1\) decays exponentially — it's the "transient" component.</p></div>
-</div></details>
-
-<!-- ═══ 5. APPLICATIONS ═══ -->
-<h2 class="shd">Applications & Deep Results</h2>
-
-<div class="cd tc"><div class="ct"><span class="bg bg-t">Application</span> Powers of Matrices</div>
-<p class="sm">If \(A = PDP^{-1}\), then \(A^k = PD^kP^{-1}\). This reduces matrix exponentiation to scalar exponentiation.</p>
-<p class="sm mt">For \(e^{tA}\) (matrix exponential, used in ODE \(\dot{x} = Ax\)):</p>
-<div class="fb">\[e^{tA} = P \begin{pmatrix} e^{t\lambda_1} & & \\ & \ddots & \\ & & e^{t\lambda_n} \end{pmatrix} P^{-1}\]</div>
-<div class="geo-box"><p class="sm">Each eigendirection evolves independently: if \(\lambda_i > 0\), that direction <b>explodes</b>; if \(\lambda_i < 0\), it <b>decays</b>; if \(\lambda_i = 0\), it's <b>stationary</b>. This is the foundation of stability analysis in dynamical systems and neural ODEs.</p></div>
-</div>
-
-<div class="cd tc"><div class="ct"><span class="bg bg-t">Application</span> Symmetric Matrices (Spectral Theorem)</div>
-<div class="fb">\[A = A^T \implies A = Q\Lambda Q^T, \quad Q \text{ orthogonal } (Q^{-1} = Q^T)\]</div>
-<p class="sm">Symmetric matrices are <b>always</b> diagonalizable, with <b>real</b> eigenvalues and <b>orthogonal</b> eigenvectors.</p>
-<div class="geo-box"><p class="sm">A symmetric matrix represents a map that only <b>stretches/compresses along orthogonal axes</b> — no rotation, no shearing. The eigenvectors are the "principal axes". This is why PCA works: the covariance matrix is symmetric, and its eigenvectors are the directions of maximum variance.</p></div>
-</div>
-
-<div class="cd ec"><div class="ct"><span class="bg bg-e">Extension</span> Cayley-Hamilton Theorem</div>
-<div class="fb">\[\chi_A(A) = 0\]</div>
-<p class="sm">Every matrix satisfies its own characteristic equation. For \(2 \times 2\): \(A^2 - \tr(A) \cdot A + \det(A) \cdot I = 0\).</p>
-<p class="sm mt"><b>Application:</b> Express \(A^{-1}\) without computing it directly: \(A^{-1} = \frac{1}{\det A}(\tr(A) \cdot I - A)\) (for \(2 \times 2\)).</p>
-</div>
-
-<div class="cd ec"><div class="ct"><span class="bg bg-e">Extension</span> Gershgorin Circle Theorem</div>
-<p class="sm">Every eigenvalue of \(A\) lies in at least one <b>Gershgorin disc</b>:</p>
-<div class="fb">\[D_i = \left\{\lambda \in \C : |\lambda - a_{ii}| \le \sum_{j \ne i} |a_{ij}|\right\}\]</div>
-<p class="sm mt">Center = diagonal entry, radius = sum of absolute off-diagonal entries in that row. Useful for quick eigenvalue bounds without computing \(\chi_A\).</p>
-</div>
-
-<div class="cd ec"><div class="ct"><span class="bg bg-e">Extension</span> AI Connection: Eigenvalues Everywhere</div>
-<p class="sm"><b>PCA:</b> Eigenvectors of covariance matrix = principal components. Eigenvalues = explained variance.</p>
-<p class="sm mt"><b>PageRank:</b> Google's algorithm finds the dominant eigenvector of the web's adjacency matrix.</p>
-<p class="sm mt"><b>Graph Neural Networks:</b> Spectral convolutions use eigenvalues of the graph Laplacian \(L = D - A\).</p>
-<p class="sm mt"><b>Stability of training:</b> The Hessian's eigenvalues determine if you're at a minimum (all \(\lambda > 0\)), maximum (all \(\lambda < 0\)), or saddle point (mixed signs).</p>
-</div>
-
-<!-- ═══ 6. EXERCISES ═══ -->
-<h2 class="shd">Exercises</h2>
-
-<details><summary>⭐ Exercise 1: Eigenvalues of a projection</summary>
-<div class="db">
-<p><b>Q:</b> Let \(P\) be a projection matrix (\(P^2 = P\)). Show that the only possible eigenvalues are 0 and 1.</p>
-<p class="mt"><b>Solution:</b> If \(Pv = \lambda v\) with \(v \ne 0\), then \(P^2 v = P(\lambda v) = \lambda Pv = \lambda^2 v\). But \(P^2 = P\), so \(P^2 v = Pv = \lambda v\). Thus \(\lambda^2 = \lambda \implies \lambda(\lambda - 1) = 0\).</p>
-<div class="geo-box"><p class="sm">A projection "flattens" space onto a subspace. Points already on the subspace stay fixed (\(\lambda=1\)), points orthogonal to it collapse to zero (\(\lambda=0\)). No other behavior is possible.</p></div>
-</div></details>
-
-<details><summary>⭐ Exercise 2: Nilpotent matrix</summary>
-<div class="db">
-<p><b>Q:</b> If \(A^k = 0\) for some \(k \ge 1\), show that every eigenvalue of \(A\) is 0.</p>
-<p class="mt"><b>Solution:</b> If \(Av = \lambda v\), then \(A^k v = \lambda^k v\). But \(A^k = 0\), so \(\lambda^k v = 0\). Since \(v \ne 0\), \(\lambda^k = 0 \implies \lambda = 0\).</p>
-<p class="mt"><b>Converse is false:</b> Not every matrix with all eigenvalues 0 is nilpotent (it is, but this requires Jordan theory to prove).</p>
-</div></details>
-
-<details><summary>⭐⭐ Exercise 3: \(AB\) and \(BA\) have the same eigenvalues</summary>
-<div class="db">
-<p><b>Q:</b> Let \(A \in M_{m \times n}\), \(B \in M_{n \times m}\). Show that \(AB\) and \(BA\) have the same <b>non-zero</b> eigenvalues.</p>
-<p class="mt"><b>Solution:</b> Let \(\lambda \ne 0\) with \(ABv = \lambda v\). Set \(w = Bv\). Then \(BAw = BA(Bv) = B(ABv) = B(\lambda v) = \lambda Bv = \lambda w\). Is \(w \ne 0\)? Yes: if \(w = Bv = 0\), then \(ABv = A \cdot 0 = 0 = \lambda v\), so \(\lambda = 0\), contradiction.</p>
-<p class="mt"><b>Application:</b> For \(A \in M_{1000 \times 3}\) and \(B \in M_{3 \times 1000}\), \(AB\) is \(1000 \times 1000\) but \(BA\) is only \(3 \times 3\). Compute eigenvalues of the small matrix!</p>
-</div></details>
-
-<details><summary>⭐⭐ Exercise 4: Diagonalize \(A = \begin{pmatrix} 0&0&1\\1&0&0\\0&1&0 \end{pmatrix}\) (permutation matrix)</summary>
-<div class="db">
-<p>\(A\) is the cyclic permutation \((1\;2\;3)\). Since \(A^3 = I\), eigenvalues satisfy \(\lambda^3 = 1\).</p>
-<p class="mt">Roots: \(\lambda = 1, \omega, \omega^2\) where \(\omega = e^{2i\pi/3} = -\frac{1}{2} + \frac{\sqrt{3}}{2}i\).</p>
-<p class="mt">Over \(\C\): three distinct eigenvalues → diagonalizable. Over \(\R\): only \(\lambda = 1\) is real → NOT diagonalizable over \(\R\).</p>
-<div class="geo-box"><p class="sm">This matrix rotates 3D space around the axis \((1,1,1)\) by \(120°\). The only real "fixed direction" is \((1,1,1)\) itself (\(\lambda=1\)). The complex eigenvalues encode the rotation angle.</p></div>
-</div></details>
-
-<details><summary>⭐⭐⭐ Exercise 5: Prove the Spectral Theorem for \(2 \times 2\)</summary>
-<div class="db">
-<p><b>Q:</b> Show that any real symmetric \(2 \times 2\) matrix has real eigenvalues and orthogonal eigenvectors.</p>
-<p class="mt"><b>Solution:</b> Let \(A = \begin{pmatrix} a & b \\ b & d \end{pmatrix}\). Then \(\chi_A(\lambda) = \lambda^2 - (a+d)\lambda + (ad - b^2)\).</p>
-<p class="mt">Discriminant: \(\Delta = (a+d)^2 - 4(ad - b^2) = (a-d)^2 + 4b^2 \ge 0\). So roots are always <b>real</b>.</p>
-<p class="mt">For orthogonality: if \(\lambda_1 \ne \lambda_2\) with \(Av_1 = \lambda_1 v_1, Av_2 = \lambda_2 v_2\):</p>
-\[\lambda_1 \langle v_1, v_2 \rangle = \langle Av_1, v_2 \rangle = \langle v_1, A^Tv_2 \rangle = \langle v_1, Av_2 \rangle = \lambda_2 \langle v_1, v_2 \rangle\]
-<p class="mt">\((\lambda_1 - \lambda_2)\langle v_1, v_2 \rangle = 0\). Since \(\lambda_1 \ne \lambda_2\), we get \(\langle v_1, v_2 \rangle = 0\). ∎</p>
-</div></details>
-
-</div>
-
-<div class="footer">MC2 Review · Eigenvalues & Diagonalization</div>
-</body>
-</html>
+<div class="cd fc"><div class="ct"><span class="bg bg-f">定理</span> 对角化判据</div><div class="fb">\[A\text{ 可对角化}\Longleftrightarrow \forall\lambda_i,\ \dim E_{\lambda_i}=m_{\lambda_i}\]</div><p class="sm">等价地，空间存在一组完全由 \(A\) 的特征向量组成的基。若 \(n\) 阶矩阵有 \(n\) 个互异特征值，则一定可对角化。</p></div>
+<div class="cd tc"><div class="ct"><span class="bg bg-t">方法</span> 构造 \(A=PDP^{-1}\)</div><p class="sm">先求特征值和特征空间；若能找到 \(n\) 个线性无关特征向量，将它们作为 \(P\) 的列，\(D\) 对角线上按同样顺序放对应特征值。验证方式：\(AP=PD\)。</p></div>
+<details><summary>例题：\(A=\begin{pmatrix}1&2\\2&1\end{pmatrix}\)</summary><div class="db"><p>\(\chi_A=\lambda^2-2\lambda-3=(\lambda-3)(\lambda+1)\)。</p><p>\(v_1=(1,1)^T\) 对应 \(3\)，\(v_2=(1,-1)^T\) 对应 \(-1\)。所以 \(P=\begin{pmatrix}1&1\\1&-1\end{pmatrix}\)，\(D=\begin{pmatrix}3&0\\0&-1\end{pmatrix}\)。</p></div></details>
+<h2 class="shd">应用与证明题</h2>
+<div class="cd ec"><div class="ct"><span class="bg bg-e">应用</span> 矩阵幂与谱定理</div><p class="sm">若 \(A=PDP^{-1}\)，则 \(A^k=PD^kP^{-1}\)，矩阵幂化为标量幂。实对称矩阵总可正交对角化：\(A=Q\Lambda Q^T\)，特征值全实，特征向量可取正交。</p></div>
+<details><summary>证明题：投影矩阵的特征值只能是 0 或 1</summary><div class="db"><p>若 \(P^2=P\) 且 \(Pv=\lambda v\)，则 \(P^2v=P(\lambda v)=\lambda^2v\)。另一方面 \(P^2v=Pv=\lambda v\)。因 \(v\ne0\)，得 \(\lambda^2=\lambda\)，故 \(\lambda=0\) 或 \(1\)。</p></div></details>
+<details><summary>证明题：幂零矩阵的特征值全为 0</summary><div class="db"><p>若 \(A^k=0\) 且 \(Av=\lambda v\)，则 \(A^kv=\lambda^kv=0\)。由于 \(v\ne0\)，\(\lambda^k=0\)，所以 \(\lambda=0\)。</p></div></details>
+<details><summary>证明题：实对称 \(2\times2\) 矩阵有实特征值且特征向量正交</summary><div class="db"><p>设 \(A=\begin{pmatrix}a&b\\b&d\end{pmatrix}\)。判别式 \(\Delta=(a-d)^2+4b^2\ge0\)，故特征值为实数。若 \(Av_i=\lambda_i v_i\)，\(\lambda_1\ne\lambda_2\)，则 \(\lambda_1\langle v_1,v_2\rangle=\langle Av_1,v_2\rangle=\langle v_1,Av_2\rangle=\lambda_2\langle v_1,v_2\rangle\)，因此内积为 0。</p></div></details>
+</div><div class="footer">MC2 复习 · 特征值与对角化</div></body></html>
