@@ -323,9 +323,6 @@ body::before {
       <div class="desc">一阶线性方程 · 常数变易法 · 叠加原理 · 二阶常系数方程</div>
       <div class="tag">进入模块 <span class="arrow">→</span></div>
     </a>
-  </div>
-
-  <div class="grid" style="margin-top:14px">
     <a class="card" href="mod_french_process.html" style="--card-accent:#f59e0b;--icon-bg:#b45309">
       <div class="icon">Fr</div>
       <div class="title">法语过程书写与词汇速记</div>
@@ -437,14 +434,20 @@ body::before {
     <h3 style="color:var(--rose)">⚠ 最高频易错点</h3>
     <ul>
       <li><strong>p-判别法条件反转</strong>：无穷积分 p&gt;1 收敛，瑕积分 p&lt;1 收敛。口诀：远严近宽。</li>
+      <li><strong>Riemann 和区间误判</strong>：积分区间不一定是 [0,1]；求和上下限变了，区间也要跟着变，必要时先平移指标。</li>
       <li><strong>极限比较法单向性</strong>：极限为 0 时只能从分母推分子（分母收敛→分子收敛），不能反推。</li>
       <li><strong>Dirichlet 条件</strong>：对振荡部分要求的是「积分有界」，而非函数本身有界。</li>
       <li><strong>级数必要条件</strong>：∑uₙ 收敛必有 uₙ→0，但 uₙ→0 不能推出收敛。</li>
       <li><strong>变号级数等价陷阱</strong>：等价比较优先用于正项级数；变号级数需先看绝对收敛或 Leibniz。</li>
       <li><strong>微分方程通解结构</strong>：非齐次线性方程必须写「齐次通解 + 一个特解」，初值最后代入完整通解。</li>
+      <li><strong>子空间先看零向量</strong>：非齐次条件如 x+y=1 一定不是子空间；含“或”、绝对值的集合也要优先警惕。</li>
       <li><strong>子空间并集</strong>：两个子空间的并集一般不是子空间，交集才是。</li>
+      <li><strong>线性映射判定要看两条</strong>：必须同时满足加法和数乘；常数项、乘积项、max、det 这类映射通常都不是线性映射。</li>
       <li><strong>det(A+B) ≠ det A + det B</strong>：行列式对行/列线性，但不对矩阵加法线性。</li>
       <li><strong>det(λA) = λⁿ det A</strong>：不要忘记 n 次方。</li>
+      <li><strong>Gauss 消元看主元列</strong>：秩要在消元结束后数非零行；自由变量对应没有主元的列，不是随便挑的。</li>
+      <li><strong>非齐次解集不是子空间</strong>：Sol(Ax=b)=x₀+Ker A，通常是仿射子空间，不一定经过原点。</li>
+      <li><strong>特征多项式写法</strong>：χ_A(λ)=det(A-λI)，不是 det A-λ。</li>
       <li><strong>特征值 λ=0 是合法的</strong>：意味着 Ker A ≠ {0}，矩阵奇异。零向量永远不是特征向量。</li>
       <li><strong>几何重数 ≤ 代数重数</strong>：不等时矩阵不可对角化（Jordan块）。</li>
       <li><strong>对称矩阵总可对角化</strong>：特征值全实，特征向量正交（谱定理）。</li>
