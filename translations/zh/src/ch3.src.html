@@ -1,0 +1,168 @@
+<!--META{"n":3,"num":"03","title":"有限维向量空间","fr":"Espaces vectoriels de dimension finie"}-->
+<p>本章中始终设 $n\geq1$，$E$ 为 $\K$-向量空间，通常 $\K=\R$ 或 $\C$。</p>
+<env t="定义" fr="Définition"><p>若 $E$ 有一个有限生成族，则称 $E$ 是<em>有限维</em>的；否则称 $E$ 是<em>无限维</em>的。</p></env>
+
+<h2 n="3.1" fr="Théorème de la base incomplète">不完全基定理</h2>
+<p>回顾第 1 章 §1.7 中叙述（并证明）的定理：</p>
+<env t="定理" fr="Théorème"><p>若向量空间 $E$ 有一个含 $n$ 个元素的生成族，则任何至少含 $n+1$ 个向量的族都线性相关；因此，任何线性无关族至多含 $n$ 个元素。</p></env>
+<env t="定理" fr="Théorème de la base incomplète"><p><b>（不完全基定理）</b>设 $\mathcal{G}$ 为 $E$ 的一个有限生成族（因而 $E$ 是有限维的）。则 $E$ 的任一线性无关族 $\mathcal{L}$ 都可以用 $\mathcal{G}$ 中的元素补全为 $E$ 的一组基。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>首先化归到线性无关族 $\mathcal{L}$ 含于 $\mathcal{G}$ 的情形：由上面回顾的定理，$\mathcal{L}$ 是有限的。令 $\mathcal{G}'=\mathcal{G}\cup\mathcal{L}$，则</p>
+$$\mathcal{L}\subset\mathcal{G}\cup\mathcal{L}=\mathcal{G}',$$
+<p>且 $\mathcal{G}'$ 是有限的，又因包含 $\mathcal{G}$ 而为生成族。</p>
+<p>考虑包含 $\mathcal{L}$ 且含于 $\mathcal{L}\cup\mathcal{G}$ 的线性无关族，从中选取一个基数最大者，记作 $\mathcal{B}$，并记 $F=\Vect(\mathcal{B})$。若 $F\neq E$，则可找到 $\v{g}\in\mathcal{G}$ 不属于 $F$。于是 $\mathcal{B}\cup\{\v{g}\}$ 仍是包含 $\mathcal{L}$ 且含于 $\mathcal{L}\cup\mathcal{G}$ 的线性无关族，并且严格包含 $\mathcal{B}$；这与 $\mathcal{B}$ 的极大性矛盾，因此 $F=E$。这样我们找到了一个生成 $E$ 的极大线性无关族，它正是 $E$ 的一组基。</p></env>
+<env t="命题" fr="Proposition"><p>任何不为 $\{\v{0}\}$ 的有限维 $\K$-向量空间都有有限基；并且这组基可以从任意有限生成族中抽取出来。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>按定义，由于 $E$ 是有限维的，存在一个有限生成族，记作 $\mathcal{G}$。取 $\v{g}\in\mathcal{G}$ 使 $\v{g}\neq\v{0}$：若不存在这样的向量，则 $E=\{\v{0}\}$，与假设矛盾。于是 $\mathcal{L}=\{\v{g}\}$ 线性无关且含于 $\mathcal{G}$，由此存在一组基 $\mathcal{B}$ 使得</p>
+$$\{\v{g}\}\subset\mathcal{B}\subset\mathcal{G}.$$</env>
+<p>以下结果都是前述定理的直接应用：</p>
+<env t="命题" fr="Proposition"><p>在有限维 $n$ 的向量空间 $E$ 中：</p>
+<ol><li>任何含 $n+1$ 个以上向量的族都线性相关；</li>
+<li>任何含 $n$ 个元素的生成族都是基；</li>
+<li>任何含少于 $n$ 个向量的族都不是生成族；</li>
+<li>任何线性无关族至多含 $n$ 个元素；</li>
+<li>任何含 $n$ 个元素的线性无关族都是基。</li></ol></env>
+<env t="命题" fr="Proposition">
+$$(\v{f}_1,\dots,\v{f}_n)\ \text{是 }E\text{ 的基}\iff\forall\v{x}\in E,\ \exists!\,(x_1,\dots,x_n)\in\K^n,\quad\v{x}=\sum_{i=1}^nx_i\cdot\v{f}_i.$$
+<p>此时，$x_i$ 称为 $\v{x}$ 在基 $(\v{f}_1,\dots,\v{f}_n)$ 下的<em>分量</em>或<em>坐标</em>。</p></env>
+
+<h2 n="3.2" fr="Dimension d’un sous-espace vectoriel">子空间的维数</h2>
+<env t="注" fr="Remarque" k="note"><p>若 $F$ 是向量空间 $E$ 的子空间，则它本身具有向量空间结构，生成族、维数等概念都可以相对于 $F$ 来研究。</p></env>
+<env t="命题" fr="Proposition"><p>若 $E$ 是有限维向量空间，则 $E$ 的任一子空间 $F$ 都是有限维的，且 $\dim F\leq\dim E$。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>首先注意，$F$ 中的线性无关族在 $E$ 中也线性无关，因而至多含 $n$ 个元素。设 $X$ 为 $F$ 中线性无关族的全体，它们都至多含 $n$ 个元素。于是可考虑 $X$ 中的一个极大元（基数最大者），记作 $(\v{x}_1,\v{x}_2,\cdots,\v{x}_p)$，$p\leq n$。由于 $(\v{x}_1,\v{x}_2,\cdots,\v{x}_p)$ 是极大线性无关族，它是 $F$ 的基，故 $\dim F=p\leq n$。</p></env>
+<env t="命题" fr="Proposition"><p>设 $E$ 为向量空间，$F,G$ 为 $E$ 的两个有限维子空间，则</p>
+$$\left.\begin{aligned}&F\subset G\\&\dim F=\dim G\end{aligned}\right\}\ \Longrightarrow\ F=G.$$</env>
+<env t="证明" fr="Démonstration" k="proof"><p>设 $\mathcal{F}$ 为 $F$ 的一组基。由包含关系，它是 $G$ 中的线性无关族。又由 $\dim F=\dim G$，它的元素个数等于 $G$ 的维数，因此它是 $G$ 的基，从而 $G=\Vect(\mathcal{F})=F$。</p></env>
+<env t="推论" fr="Corollaire"><p>设 $F$ 为 $E$ 的子空间，则 $F=E$ 当且仅当 $\dim F=\dim E$。</p></env>
+
+<h2 n="3.3" fr="Sommes de sous-espaces vectoriels">子空间的和</h2>
+<env t="定理" fr="Théorème"><p>在向量空间 $E$ 中，任一子空间 $F$ 都有补空间，即存在子空间 $G$ 使 $E=F\oplus G$。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>已知 $F$ 有一组基 $\mathcal{F}$，它是 $E$ 中的线性无关族。由不完全基定理，存在族 $\mathcal{G}$ 使 $\mathcal{F}\cup\mathcal{G}$ 为 $E$ 的基。则 $G=\Vect(\mathcal{G})$ 是 $F$ 的补空间。事实上，</p>
+$$F+G=\Vect(\mathcal{F})+\Vect(\mathcal{G})\supset\Vect(\mathcal{F}\cup\mathcal{G})=E,$$
+<p>故 $F+G=E$。此外，若 $\v{x}\in F\cap G$，则</p>
+$$\v{x}=\sum_{i\in I}\lambda_i\cdot\v{f}_i=\sum_{j\in J}\mu_j\cdot\v{g}_j,$$
+<p>其中 $I,J$ 有限，$\{\v{f}_i,\ i\in I\}\subset\mathcal{F}$，$\{\v{g}_j,\ j\in J\}\subset\mathcal{G}$，即</p>
+$$\sum_{i\in I}(-\lambda_i)\cdot\v{f}_i+\sum_{j\in J}\mu_j\cdot\v{g}_j=\v{0}.$$
+<p>由于 $\mathcal{F}\cup\mathcal{G}$ 线性无关，所有 $\lambda_i$ 与 $\mu_j$ 都为零，故 $\v{x}=\v{0}$。因此 $F\cap G=\{\v{0}\}$。</p></env>
+<env t="推论" fr="Corollaire"><p>设 $F,H$ 为向量空间 $E$ 的两个子空间，$F\subset H$，则 $F$ 在 $H$ 中有补空间。</p></env>
+<env t="命题" fr="Proposition"><p>若 $E=F\oplus G$，$\mathcal{F}$ 为 $F$ 的基，$\mathcal{G}$ 为 $G$ 的基，则 $\mathcal{F}\cup\mathcal{G}$ 是 $E$ 的基。</p>
+<p>反之，若能找到 $F$ 的基 $\mathcal{F}$ 与 $G$ 的基 $\mathcal{G}$，使 $\mathcal{F}\cup\mathcal{G}$ 为 $E$ 的基，则 $E=F\oplus G$。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>设 $E=F\oplus G$，记 $(\v{f}_1,\cdots,\v{f}_p)$ 为 $F$ 的基，$(\v{g}_1,\cdots,\v{g}_m)$ 为 $G$ 的基。</p>
+<p>先证 $(\v{f}_1,\cdots,\v{f}_p,\v{g}_1,\cdots,\v{g}_m)$ 是 $E$ 中的线性无关族：设标量族 $(\lambda_1,\cdots,\lambda_p,\mu_1,\cdots,\mu_m)$ 满足</p>
+$$\sum_{k=1}^p\lambda_k\v{f}_k+\sum_{l=1}^m\mu_l\v{g}_l=\v{0},\quad\text{则}\quad\sum_{k=1}^p\lambda_k\v{f}_k=\sum_{l=1}^m(-\mu_l)\v{g}_l\in F\cap G,$$
+$$\text{从而}\quad\sum_{k=1}^p\lambda_k\v{f}_k=\v{0}\quad\text{且}\quad\sum_{l=1}^m\mu_l\v{g}_l=\v{0},$$
+<p>由于 $(\v{f}_1,\cdots,\v{f}_p)$ 与 $(\v{g}_1,\cdots,\v{g}_m)$ 都线性无关，得 $\lambda_1=\cdots=\lambda_p=\mu_1=\cdots=\mu_m=0$。</p>
+<p>再证 $(\v{f}_1,\cdots,\v{f}_p,\v{g}_1,\cdots,\v{g}_m)$ 生成 $E$：设 $\v{x}\in E$，可分解为 $\v{x}=\v{y}+\v{z}$，$\v{y}\in F$，$\v{z}\in G$。由于 $(\v{f}_1,\cdots,\v{f}_p)$ 是 $F$ 的基，$(\v{g}_1,\cdots,\v{g}_m)$ 是 $G$ 的基，存在两族标量 $(\lambda_1,\cdots,\lambda_p)$ 与 $(\mu_1,\cdots,\mu_m)$ 使</p>
+$$\v{y}=\sum_{k=1}^p\lambda_k\v{f}_k,\quad\v{z}=\sum_{l=1}^m\mu_l\v{g}_l,\quad\text{从而}\quad\v{x}=\sum_{k=1}^p\lambda_k\v{f}_k+\sum_{l=1}^m\mu_l\v{g}_l,$$
+<p>因此 $(\v{f}_1,\cdots,\v{f}_p,\v{g}_1,\cdots,\v{g}_m)$ 是 $E$ 的生成族。</p>
+<p>反之，设 $\mathcal{F}=(\v{f}_1,\cdots,\v{f}_p)$ 为 $F$ 的基，$\mathcal{G}=(\v{g}_1,\cdots,\v{g}_m)$ 为 $G$ 的基，且 $\mathcal{F}\cup\mathcal{G}$ 为 $E$ 的基。先证 $F\cap G=\{\v{0}\}$：设 $\v{x}\in F\cap G$，则</p>
+$$\v{x}\in F\Longrightarrow\exists(\lambda_1,\cdots,\lambda_p)\in\K^p,\ \v{x}=\sum_{k=1}^p\lambda_k\v{f}_k;\qquad\v{x}\in G\Longrightarrow\exists(\mu_1,\cdots,\mu_m)\in\K^m,\ \v{x}=\sum_{l=1}^m\mu_l\v{g}_l.$$
+<p>于是 $\sum_{k=1}^p\lambda_k\v{f}_k-\sum_{l=1}^m\mu_l\v{g}_l=\v{0}$，而 $\mathcal{F}\cup\mathcal{G}$ 线性无关，故所有标量为零，从而 $\v{x}=\v{0}$。</p>
+<p>再证 $E=F+G$：设 $\v{x}\in E$，由于 $\mathcal{F}\cup\mathcal{G}$ 生成 $E$，</p>
+$$\exists(\lambda_1,\cdots,\lambda_p,\mu_1,\cdots,\mu_m)\in\K^{p+m},\quad\v{x}=\sum_{k=1}^p\lambda_k\v{f}_k+\sum_{l=1}^m\mu_l\v{g}_l.$$
+<p>其中第一个和属于 $F$，第二个和属于 $G$，故 $\v{x}\in F+G$；另一方向的包含关系显然。</p></env>
+<env t="定理" fr="Théorème · formule de Grassmann"><p>设 $E$ 为有限维向量空间，$F,G$ 为 $E$ 的两个子空间，则</p>
+$$\dim(F+G)=\dim F+\dim G-\dim(F\cap G).$$
+<p>因此：</p>
+$$F+G\ \text{为直和}\iff\dim(F+G)=\dim F+\dim G.$$</env>
+<env t="证明" fr="Démonstration" k="proof"><p>上一命题已说明：若 $F+G$ 为直和，则 $\dim(F\oplus G)=\dim F+\dim G$。</p>
+<p>一般情形下，取 $F\cap G$ 在 $F$ 中的补空间 $F_1$，以及 $F\cap G$ 在 $G$ 中的补空间 $G_1$：</p>
+$$F=(F\cap G)\oplus F_1,\qquad G=(F\cap G)\oplus G_1.$$
+<p>则</p>
+$$F+G=\underbrace{\big((F\cap G)+F_1\big)}_{F}+G_1.$$
+<p>此外，若 $\v{x}\in F\cap G_1$，则 $\v{x}\in(F\cap G)\cap G_1$，故 $\v{x}=\v{0}$。于是可写</p>
+$$F+G=\big((F\cap G)\oplus F_1\big)\oplus G_1,$$
+<p>从而</p>
+$$\dim(F+G)=\dim G_1+\dim F_1+\dim(F\cap G).$$
+<p>而</p>
+$$\dim F=\dim(F\cap G)+\dim F_1,\qquad\dim G=\dim(F\cap G)+\dim G_1.$$
+<p>综合得</p>
+$$\dim(F+G)=\dim F+\dim G-\dim(F\cap G).$$</env>
+<env t="推论" fr="Corollaire"><p>设 $E$ 为有限维向量空间，$F,G$ 为 $E$ 的两个子空间，则</p>
+$$E=F\oplus G\iff\begin{cases}E=F+G\\F\cap G=\{\v{0}\}\end{cases}\iff\begin{cases}\dim E=\dim F+\dim G\\F\cap G=\{\v{0}\}\end{cases}\iff\begin{cases}E=F+G\\\dim E=\dim F+\dim G\end{cases}$$</env>
+
+<h2 n="3.4" fr="Dimension et isomorphisme">维数与同构</h2>
+<env t="命题" fr="Proposition"><p>设 $E$ 为有限维 $\K$-向量空间。$\K$-向量空间 $F$ 与 $E$ 同构，当且仅当 $F$ 是有限维的且 $\dim F=\dim E$。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>设存在同构 $u:E\to F$，即从 $E$ 到 $F$ 的双射线性映射。由于 $E$ 是有限维的，可取 $E$ 的一组基，记作 $(\v{e}_1,\cdots,\v{e}_n)$。对任意 $i\in\{1,\cdots,n\}$，令 $\v{f}_i=u(\v{e}_i)$。下证 $(\v{f}_1,\cdots,\v{f}_n)$ 是 $F$ 的基：</p>
+<ul>
+<li>$(\v{f}_1,\cdots,\v{f}_n)$ 线性无关：设 $(\lambda_1,\cdots,\lambda_n)\in\K^n$ 满足 $\sum_{k=1}^n\lambda_k\v{f}_k=\v{0}$，则
+$$\sum_{k=1}^n\lambda_k\v{f}_k=\sum_{k=1}^n\lambda_ku(\v{e}_k)=u\Big(\sum_{k=1}^n\lambda_k\v{e}_k\Big)=\v{0}_F,$$
+由于 $u$ 是双射且 $u(\v{0}_E)=\v{0}_F$，得 $\sum_{k=1}^n\lambda_k\v{e}_k=\v{0}_E$；又 $(\v{e}_1,\cdots,\v{e}_n)$ 线性无关，只能 $\lambda_1=\cdots=\lambda_n=0$。</li>
+<li>$(\v{f}_1,\cdots,\v{f}_n)$ 生成 $F$：设 $\v{y}\in F$，由于 $u$ 是双射，存在 $\v{x}\in E$ 使 $\v{y}=u(\v{x})$。将 $\v{x}$ 在基 $(\v{e}_1,\cdots,\v{e}_n)$ 下分解：$\exists(\lambda_1,\cdots,\lambda_n)\in\K^n$，$\v{x}=\sum_{k=1}^n\lambda_k\v{e}_k$。于是
+$$\v{y}=u(\v{x})=u\Big(\sum_{k=1}^n\lambda_k\v{e}_k\Big)=\sum_{k=1}^n\lambda_k\v{f}_k.$$</li>
+</ul>
+<p>反之，设 $E$ 与 $F$ 都是 $n$ 维的，取 $E$ 的基 $(\v{e}_1,\cdots,\v{e}_n)$ 与 $F$ 的基 $(\v{f}_1,\cdots,\v{f}_n)$。定义线性映射 $u$：</p>
+$$\forall(\lambda_1,\cdots,\lambda_n)\in\K^n,\quad u\Big(\sum_{k=1}^n\lambda_k\v{e}_k\Big)=\sum_{k=1}^n\lambda_k\v{f}_k.$$
+<p>易验证该映射是线性的。它是满射：任一 $\v{y}\in F$ 在基 $(\v{f}_1,\cdots,\v{f}_n)$ 下有分解 $\v{y}=\sum_{k=1}^n\lambda_k\v{f}_k=\sum_{k=1}^n\lambda_ku(\v{e}_k)=u\big(\sum_{k=1}^n\lambda_k\v{e}_k\big)$，因此 $\v{y}$ 有原像 $\sum_{k=1}^n\lambda_k\v{e}_k$。另一方面，$u$ 是单射：若 $E$ 中两个向量 $\v{x}$ 与 $\v{w}$ 满足 $u(\v{x})=u(\v{w})$，将其分解为 $\v{x}=\sum_{k=1}^n\lambda_k\v{e}_k$，$\v{w}=\sum_{k=1}^n\mu_k\v{e}_k$，则</p>
+$$u(\v{x})=\sum_{k=1}^n\lambda_k\v{f}_k=u(\v{w})=\sum_{k=1}^n\mu_k\v{f}_k,\quad\text{即}\quad\sum_{k=1}^n(\lambda_k-\mu_k)\v{f}_k=\v{0}_F,$$
+<p>由于 $(\v{f}_1,\cdots,\v{f}_n)$ 线性无关，这只有在 $\forall i\in\{1,\cdots,n\},\ \lambda_i=\mu_i$ 时才可能，即 $\v{x}=\v{w}$。</p></env>
+<env t="推论" fr="Corollaire"><p>任一 $n$ 维 $\K$-向量空间都与 $\K^n$ 同构。</p></env>
+
+<h2 n="3.5" fr="Dimension d’un produit d’ev">乘积空间的维数</h2>
+<env t="命题" fr="Proposition"><p>设 $E$ 与 $F$ 为两个有限维 $\K$-向量空间，则 $E\times F$ 是有限维的，且 $\dim(E\times F)=\dim E+\dim F$。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>设 $(\v{e}_1,\cdots,\v{e}_n)$ 为 $E$ 的基，$(\v{f}_1,\cdots,\v{f}_p)$ 为 $F$ 的基。可验证</p>
+$$\big((\v{e}_1,\v{0}_F),\cdots,(\v{e}_n,\v{0}_F),(\v{0}_E,\v{f}_1),\cdots,(\v{0}_E,\v{f}_p)\big)$$
+<p>是 $E\times F$ 的基，而它含 $n+p=\dim E+\dim F$ 个元素。</p></env>
+<env t="推论" fr="Corollaire"><p>设 $E_1,E_2,\cdots,E_p$ 为 $p$ 个有限维 $\K$-向量空间，则 $\prod_{i=1}^pE_i$ 是有限维的，且</p>
+$$\dim\Big(\prod_{i=1}^pE_i\Big)=\sum_{i=1}^p\dim(E_i).$$</env>
+
+<h2 n="3.6" fr="Rang d’une famille de vecteurs">向量族的秩</h2>
+<env t="定义" fr="Définition"><p>设 $(\v{f}_1,\dots,\v{f}_n)$ 为向量空间 $E$ 中的有限向量族。称如下的量为该族的<em>秩</em>（rang）：</p>
+$$\rg(\v{f}_1,\dots,\v{f}_n)=\dim\Big[\Vect\{\v{f}_1,\dots,\v{f}_n\}\Big].$$</env>
+<env t="命题" fr="Proposition"><ul>
+<li>$(\v{f}_1,\dots,\v{f}_n)$ 是 $\Vect\{\v{f}_1,\dots,\v{f}_n\}$ 的生成族，故 $\rg(\v{f}_1,\dots,\v{f}_n)\leq n$，等号成立当且仅当 $(\v{f}_1,\dots,\v{f}_n)$ 线性无关。</li>
+<li>若 $(\v{f}_1,\dots,\v{f}_n)$ 含有一个由 $r$ 个向量构成的线性无关族，则 $\rg(\v{f}_1,\dots,\v{f}_n)\geq r$，等号成立当且仅当这 $r$ 个向量构成 $\Vect\{\v{f}_1,\dots,\v{f}_n\}$ 的生成族。</li>
+</ul></env>
+<env t="命题" fr="Proposition"><p>以下操作不改变向量族的秩：</p>
+<ul><li>对向量作置换；</li><li>将其中一个向量乘以非零实数；</li><li>将其余向量的一个线性组合加到其中某个向量上。</li></ul></env>
+<env t="定义" fr="Définition"><p>设 $E,F$ 为两个 $\K$-向量空间，$u\in\mathcal{L}(E,F)$。若 $\Im(u)$ 的维数有限，称其为 $u$ 的<em>秩</em>，记作 $\rg(u)$。</p></env>
+<env t="命题" fr="Proposition"><p>若 $E$ 是有限维的且 $(\v{e}_1,\cdots,\v{e}_n)$ 为 $E$ 的基，则</p>
+$$\rg(u)=\dim\Big[\Vect\{u(\v{e}_1),\dots,u(\v{e}_n)\}\Big].$$</env>
+<env t="证明" fr="Démonstration" k="proof"><p>实际上只需验证 $\Im(u)=\Vect\{u(\v{e}_1),\dots,u(\v{e}_n)\}$。由于 $\Im(u)=\{u(\v{x}),\ \v{x}\in E\}$，且 $(\v{e}_1,\cdots,\v{e}_n)$ 是 $E$ 的基，$E$ 中任一向量 $\v{x}$ 可分解为 $\v{x}=\sum_{k=1}^n\lambda_k\v{e}_k$，故</p>
+$$u(\v{x})=\sum_{k=1}^n\lambda_ku(\v{e}_k)\in\Vect\{u(\v{e}_1),\dots,u(\v{e}_n)\},$$
+<p>从而 $\Im(u)\subset\Vect\{u(\v{e}_1),\dots,u(\v{e}_n)\}$。反之，对任意 $i\in\{1,\cdots,n\}$，$u(\v{e}_i)\in\Im(u)$，故 $\Vect\{u(\v{e}_1),\dots,u(\v{e}_n)\}\subset\Im(u)$。</p></env>
+<env t="命题" fr="Proposition"><ul>
+<li>若 $\dim F=p$，则 $\rg(u)\leq p$，且当 $u$ 为满射时等号成立；</li>
+<li>若 $\dim E=n$，则 $\rg(u)\leq n$，且当 $u$ 为单射时等号成立。</li>
+</ul></env>
+<env t="证明" fr="Démonstration" k="proof"><p>第一点显然，因为 $\Vect\{u(\v{e}_1),\dots,u(\v{e}_n)\}\subset F$，且若维数相等，则 $\Vect\{u(\v{e}_1),\dots,u(\v{e}_n)\}=F$。</p>
+<p>第二点，直接得到 $\rg(u)=\dim\big[\Vect\{u(\v{e}_1),\dots,u(\v{e}_n)\}\big]\leq n$。当 $(u(\v{e}_1),\dots,u(\v{e}_n))$ 是 $F$ 中的线性无关族时等号成立；此时论证与 §3.4 中的证明类似：$u$ 是从 $E$ 到 $\Vect\{u(\v{e}_1),\dots,u(\v{e}_n)\}$ 的同构。</p></env>
+<env t="定理" fr="Théorème du rang"><p><b>（秩定理）</b>设 $E$ 为有限维 $\K$-向量空间，$F$ 为 $\K$-向量空间，$u\in\mathcal{L}(E,F)$，则</p>
+$$\dim E=\dim\big(\Ker(u)\big)+\dim\big(\Im(u)\big).$$</env>
+<env t="证明" fr="Démonstration" k="proof"><p>$\Ker(u)$ 是 $E$ 的子空间，因而在 $E$ 中有补空间；取定一个，记作 $E_0$：$E=\Ker(u)\oplus E_0$。由于和是直和，$\dim E=\dim(\Ker(u))+\dim E_0$。</p>
+<p>下证 $E_0$ 与 $\Im(u)$ 同构，从而二者维数相同。考虑</p>
+$$v=u|_{E_0}:\ E_0\to\Im(u),\qquad x\mapsto u(x).$$
+<p>$v$ 是单射：$\Ker(v)=\{x\in E_0,\ u(x)=0_F\}=\Ker(u)\cap E_0=\{0_E\}$，因为和是直和。</p>
+<p>最后证 $v$ 是满射：设 $y\in\Im(u)$，则存在 $x\in E$ 使 $y=u(x)$。分解 $x=x_1+x_2$，$x_1\in\Ker(u)$，$x_2\in E_0$，得 $y=u(x)=u(x_1)+u(x_2)=u(x_2)$，故 $y$ 在 $E_0$ 中至少有一个原像。</p></env>
+<env t="例" fr="Exemple" k="note"><p><b>任一次数至多为 $n$ 的多项式都可写成 $P(X+1)-P(X)$ 的形式，其中 $\dg(P)\leq n+1$。</b></p>
+<p>定义 $\Delta\in\mathcal{L}(\R_{n+1}[X])$：对任意 $P\in\R_{n+1}[X]$，$\Delta(P)=P(X+1)-P(X)$。</p>
+<p>首先验证 $\Ker(\Delta)=\R_0[X]$：任一常数多项式显然满足 $P(X+1)-P(X)=0$。另一方面，若 $P$ 满足 $P(X+1)-P(X)=0$，用归纳法可证每个整数都是多项式 $Q(X)=P(0)-P(X)$ 的根，即 $Q$ 有无穷多个根。这只有在 $Q$ 为零多项式时才可能，故 $P(X)=P(0)$，$P$ 是常数。</p>
+<p>最后验证 $\Im(\Delta)\subset\R_n[X]$：设 $P(X)=a_pX^p+a_{p-1}X^{p-1}+\cdots+a_0$，$a_p\neq0$，$p\leq n+1$。则 $P(X+1)=a_pX^p+R(X)$，其中 $\dg(R)<p$，因此 $P(X)$ 与 $P(X+1)$ 有相同的首项，在作差 $P(X+1)-P(X)$ 时相消。故 $\dg\Delta(P)\leq p-1\leq n$。</p>
+<p>于是 $\rg(\Delta)=\dim(\R_{n+1}[X])-\dim(\Ker(\Delta))=n+2-1=n+1=\dim(\R_n[X])$，从而 $\Im(\Delta)=\R_n[X]$。</p></env>
+<env t="命题" fr="Proposition"><p>设 $E,F,G$ 为三个有限维 $\K$-向量空间，$u\in\mathcal{L}(E,F)$，$v\in\mathcal{L}(F,G)$。</p>
+<ul><li>$\rg(v\circ u)\leq\min(\rg(v),\rg(u))$；</li>
+<li>$u$ 为满射 $\Longrightarrow\rg(v\circ u)=\rg(v)$；</li>
+<li>$v$ 为单射 $\Longrightarrow\rg(v\circ u)=\rg(u)$。</li></ul></env>
+<env t="证明" fr="Démonstration" k="proof"><p>第一点来自以下两个关系：</p>
+$$\begin{aligned}&\Im(v\circ u)\subset\Im(v)\ \Longrightarrow\ \rg(v\circ u)\leq\rg(v),\\&\Ker(u)\subset\Ker(v\circ u)\ \Longrightarrow\ \rg(v\circ u)=\dim E-\dim(\Ker(v\circ u))\leq\dim E-\dim(\Ker(u))=\rg(u).\end{aligned}$$
+<p>第二点：若 $u$ 为满射，则 $\Im(u)=F$，$\Im(v\circ u)=\Im(v)$，故 $\rg(v\circ u)=\rg(v)$。</p>
+<p>第三点：若 $v$ 为单射，则 $v\circ u(x)=0_G\iff u(x)=0_F$，故 $\Ker(u)=\Ker(v\circ u)$，代入上式即得 $\rg(v\circ u)=\rg(u)$。</p></env>
+
+<h2 n="3.7" fr="Caractérisation des isomorphismes">同构的刻画</h2>
+<env t="定理" fr="Théorème"><p>设 $E$ 为有限维向量空间，$F$ 为与 $E$ 维数相同的向量空间，$u\in\mathcal{L}(E,F)$。以下三条等价：</p>
+<ol><li>$u$ 是单射；</li><li>$u$ 是满射；</li><li>$u$ 是双射。</li></ol></env>
+<env t="证明" fr="Démonstration" k="proof"><p>只需证明 1 ⟺ 2。而</p>
+$$u\text{ 单射}\iff\Ker(u)=\{0_E\}\iff\dim(\Ker(u))=0\iff\rg(u)=n\iff\Vect\{u(e_1),\dots,u(e_n)\}=F.$$</env>
+<env t="注意" fr="Attention" k="warn"><p>若 $E$ 不是有限维的，可能出现：</p>
+<ul>
+<li>$u$ 是单射但不是满射：$u:\ \R[X]\to\R[X],\ P\mapsto X\cdot P(X)$；</li>
+<li>$u$ 是满射但不是单射：$u:\ \R[X]\to\R[X],\ P\mapsto P'$。</li>
+</ul></env>
+
+<h2 n="3.8" fr="Hyperplans et formes linéaires">超平面与线性形式</h2>
+<env t="命题" fr="Proposition"><p>设 $E$ 为有限维 $n\geq1$ 的 $\K$-向量空间，$H$ 为 $E$ 的子空间。以下三条等价：</p>
+<ul><li>$\dim H=n-1$；</li>
+<li>存在向量直线 $D$ 使 $E=H\oplus D$；</li>
+<li>存在非零的 $f\in\mathcal{L}(E,\K)$ 使 $H=\Ker(f)$。</li></ul>
+<p>此时称 $H$ 为 $E$ 的<em>超平面</em>（hyperplan）。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>前两条显然等价，因为 $E$ 的任一子空间 $H$ 都有补空间 $D$，且 $\dim D=1\iff\dim H=n-1$。</p>
+<p>设 $\dim H=n-1$，考虑沿 $H$ 到 $D$ 上的投影，再复合 $D$ 到 $\K$ 的同构，即得 $f$。</p>
+<p>设非零的 $f\in\mathcal{L}(E,\K)$ 满足 $H=\Ker(f)$，则 $\rg(f)\leq1$，且由 $f$ 非零得 $\rg(f)>0$。故 $\rg(f)=1$，由秩定理 $\dim H=n-1$。</p></env>

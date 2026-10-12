@@ -1,0 +1,380 @@
+<!--META{"n":1,"num":"01","title":"向量空间的结构","fr":"Structure d’espace vectoriel"}-->
+<p>以下 $\K$ 表示一个域（corps），通常取 $\K=\R$ 或 $\K=\C$。</p>
+
+<h2 n="1.1" fr="Rappels de première année">一年级内容回顾</h2>
+
+<h3 n="1.1.1" fr="Vecteurs du plan">平面向量</h3>
+<p>称 $\R^2=\R\times\R$ 中的任一元素为<em>平面向量</em>，即任一有序对 $(x_1,x_2)$，其中 $x_1\in\R$，$x_2\in\R$。实数 $x_1$ 称为该有序对的第一分量，$x_2$ 为第二分量。此时向量记作带箭头的形式：$\v{u}=(1,2)$。</p>
+<p>平面向量上有两种运算：</p>
+<ul>
+<li><b>加法</b>：若 $\v{x}=(x_1,x_2)$，$\v{y}=(y_1,y_2)$，令 $\v{x}+\v{y}=(x_1+y_1,\,x_2+y_2)$。</li>
+<li><b>数乘</b>：若 $\v{x}=(x_1,x_2)$，$\lambda\in\R$，令 $\lambda\cdot\v{x}=(\lambda x_1,\,\lambda x_2)$。</li>
+</ul>
+<env t="注" fr="Remarque" k="note"><p>任一向量 $\v{x}=(x_1,x_2)$ 均可写成 $\v{x}=x_1\cdot\v{e}_1+x_2\cdot\v{e}_2$，其中 $\v{e}_1=(1,0)$，$\v{e}_2=(0,1)$（在先前的课程中常记作 $\v{i}$ 与 $\v{j}$）。</p></env>
+
+<h3 n="1.1.2" fr="Vecteurs de l’espace">空间向量</h3>
+<p>同样地，定义（三维）空间向量为如下集合中的元素：</p>
+$$\R^3=\{(x_1,x_2,x_3)\;;\;x_1\in\R,\ x_2\in\R,\ x_3\in\R\}.$$
+<p>$\R^3$ 中的元素 $(x_1,x_2,x_3)$ 称为<em>三元组</em>。与前面一样，在其上定义：</p>
+<ul>
+<li><b>加法</b>：若 $\v{x}=(x_1,x_2,x_3)$，$\v{y}=(y_1,y_2,y_3)$，则 $\v{x}+\v{y}=(x_1+y_1,\,x_2+y_2,\,x_3+y_3)$；</li>
+<li><b>数乘</b>：若 $\v{x}=(x_1,x_2,x_3)$，$\lambda\in\R$，则 $\lambda\cdot\v{x}=(\lambda x_1,\,\lambda x_2,\,\lambda x_3)$。</li>
+</ul>
+<p>在向量平面或三维空间中，所有分量均为零的向量称为<em>零向量</em>，即 $\R^2$ 中的 $\v{0}=(0,0)$ 与 $\R^3$ 中的 $\v{0}=(0,0,0)$。</p>
+<p>由于 $\R^2$ 与 $\R^3$ 是关于加法与实数数乘具有某些性质的向量集合，我们称它们为<em>向量空间</em>的例子。向量空间的一般理论将在本章后面展开，但我们先在 $\R^2$ 或 $\R^3$ 的情形下熟悉其中一些概念。</p>
+
+<h3 n="1.1.3" fr="Sous-espace vectoriel">向量子空间</h3>
+<p>一个重要的概念是<em>向量子空间</em>（简称子空间，s.e.v.）：它是向量空间中对加法与实数数乘封闭的子集。确切地说，称 $F$ 为子空间，若 $F$ 是一个非空子集，且满足：</p>
+<ul>
+<li>$\v{x}\in F$ 且 $\v{y}\in F\ \Rightarrow\ \v{x}+\v{y}\in F$；</li>
+<li>$\v{x}\in F$ 且 $\lambda\in\R\ \Rightarrow\ \lambda\cdot\v{x}\in F$。</li>
+</ul>
+<env t="注" fr="Remarque" k="note"><p>若 $F$ 是子空间，则对第二条性质取 $\lambda=0$ 可得 $\v{0}\in F$。</p></env>
+
+<h3 n="1.1.4" fr="Exemples">例</h3>
+<p>下列 $\R^3$ 的子集中，哪些是子空间？</p>
+<ul>
+<li>$A=\{(x_1,x_2,x_3)\;;\;x_1-2x_2+7x_3=0\}$</li>
+<li>$B=\{(x_1,x_2,x_3)\;;\;x_1+3x_2-5x_3=4\}$</li>
+<li>$C=\{(x_1,x_2,x_3)\;;\;x_1=3x_2=-7x_3\}$</li>
+</ul>
+<p class="sub">• $A$ 是子空间。</p>
+<p>若 $\v{x}=(x_1,x_2,x_3)\in A$，即 $x_1-2x_2+7x_3=0$，且 $\v{y}=(y_1,y_2,y_3)\in A$，即 $y_1-2y_2+7y_3=0$，则 $\v{x}+\v{y}=(x_1+y_1,x_2+y_2,x_3+y_3)$ 属于 $A$，因为</p>
+$$\begin{aligned}(x_1+y_1)-2(x_2+y_2)+7(x_3+y_3)&=(x_1-2x_2+7x_3)+(y_1-2y_2+7y_3)\\&=0+0=0.\end{aligned}$$
+<p>此外，若 $\v{x}=(x_1,x_2,x_3)\in A$ 且 $\lambda\in\R$，则 $\lambda\cdot\v{x}=(\lambda x_1,\lambda x_2,\lambda x_3)$ 属于 $A$，因为</p>
+$$\lambda x_1-2\lambda x_2+7\lambda x_3=\lambda(x_1-2x_2+7x_3)=\lambda\cdot 0=0.$$
+<p class="sub">• $B$ 不是子空间：$\v{0}\notin B$。</p>
+<p class="sub">• $C$ 是子空间（留作练习）。</p>
+
+<h3 n="1.1.5" fr="Droite vectorielle">向量直线</h3>
+<p>事实上有</p>
+$$\begin{aligned}C&=\Big\{(x_1,x_2,x_3)\;;\;x_2=\tfrac13x_1,\ x_3=-\tfrac17x_1\Big\}\\&=\Big\{\big(x_1,\tfrac13x_1,-\tfrac17x_1\big)\;;\;x_1\in\R\Big\}\\&=\Big\{x_1\cdot\big(1,\tfrac13,-\tfrac17\big)\;;\;x_1\in\R\Big\}.\end{aligned}$$
+<p>这说明 $C$ 是由 $\big(1,\tfrac13,-\tfrac17\big)$ “生成”的一条<em>向量直线</em>。</p>
+<p>后面将证明：$\R^2$ 的子空间只有 $\{\v{0}\}$、$\R^2$ 以及向量直线。向量直线在图上表现为经过 $\v{0}$ 的直线，其形式为</p>
+$$\{\lambda\cdot\v{u},\ \lambda\in\R\},$$
+<p>其中 $\v{u}$ 是一个取定的非零向量，称为该直线的<em>方向向量</em>。这样的 $\v{u}$ 不唯一（该向量直线上任一非零向量都可以）。</p>
+
+<h3 n="1.1.6" fr="Plan vectoriel">向量平面</h3>
+<p>而 $A$ 则称为<em>向量平面</em>：</p>
+$$\begin{aligned}A&=\{(x_1,x_2,x_3)\;;\;x_1=2x_2-7x_3\}\\&=\{(2x_2-7x_3,\,x_2,\,x_3)\;;\;x_2,x_3\in\R\}\\&=\{x_2\cdot(2,1,0)+x_3\cdot(-7,0,1)\;;\;x_2,x_3\in\R\}.\end{aligned}$$
+<p>$A$ 中的向量是 $(2,1,0)$ 与 $(-7,0,1)$ 的<em>线性组合</em>。</p>
+<p>我们将看到，$\R^3$ 的子空间可以是 $\{\v{0}\}$、$\R^3$、一条向量直线，或一个“向量平面”，即</p>
+$$\{\lambda\cdot\v{u}+\mu\cdot\v{v},\ \lambda,\mu\in\R\},$$
+<p>其中 $\v{u}$ 与 $\v{v}$ 是两个取定的、不共线的向量：不存在 $\alpha\in\R$ 使得 $\v{u}=\alpha\cdot\v{v}$ 或 $\v{v}=\alpha\cdot\v{u}$。</p>
+
+<h3 n="1.1.7" fr="Autres exemples de structures vectorielles">向量结构的其他例子</h3>
+<p class="sub">a) $\R^n$</p>
+<p>设整数 $n\geq 2$。集合 $\R^n=\R\times\cdots\times\R$ 由 $n$ 元组 $(x_1,x_2,\dots,x_n)$ 构成，其中每个分量 $x_i$ 都是实数。在该集合上定义：</p>
+<ul>
+<li>加法：若 $\v{x}=(x_1,\dots,x_n)$，$\v{y}=(y_1,\dots,y_n)$，则 $\v{x}+\v{y}=(x_1+y_1,\dots,x_n+y_n)$；</li>
+<li>数乘：若 $\v{x}=(x_1,\dots,x_n)$，$\lambda\in\R$，则 $\lambda\cdot\v{x}=(\lambda x_1,\dots,\lambda x_n)$。</li>
+</ul>
+<p class="sub">b) 多项式</p>
+<p>以 $X$ 为未定元的一元多项式全体记作 $\R[X]$，其上可定义两种运算：</p>
+<ul>
+<li>加法：若 $P=p_0+p_1X+\cdots+p_kX^k$，$Q=q_0+q_1X+\cdots+q_kX^k$，则<br>$P+Q=(p_0+q_0)+(p_1+q_1)X+\cdots+(p_k+q_k)X^k$；</li>
+<li>数乘：若 $P=p_0+p_1X+\cdots+p_kX^k$，$\lambda\in\R$，则 $\lambda P=\lambda p_0+\lambda p_1X+\cdots+\lambda p_kX^k$。</li>
+</ul>
+<p class="sub">c) 映射</p>
+<p>记 $\mathcal{F}(A,\K)$ 为从集合 $A$ 到 $\K=\R$ 或 $\C$ 的全体映射所成之集。定义加法：若 $f,g\in\mathcal{F}(A,\K)$，令</p>
+$$f+g:\ A\longrightarrow\K,\qquad x\longmapsto f(x)+g(x);$$
+<p>以及数乘：若 $f\in\mathcal{F}(A,\K)$，$\lambda\in\R$，则</p>
+$$\lambda f:\ A\longrightarrow\K,\qquad x\longmapsto\lambda f(x).$$
+<p class="sub">d) 数列</p>
+<p>这是上一情形取 $A=\N$ 的特例。例如，实数列全体即 $\mathcal{F}(\N,\R)$。按上述定义，数列 $u=(u_n)_{n\in\N}$ 与 $v=(v_n)_{n\in\N}$ 之和是通项为 $u_n+v_n$ 的数列，记作 $u+v$；对 $\lambda\in\R$，数列 $\lambda u$ 的通项为 $\lambda u_n$。</p>
+<p class="sub">e) 复数</p>
+<p>$\C$ 自然地具有向量空间结构，其两种运算为：</p>
+<ul>
+<li>两个复数相加：$(a+ib)+(a'+ib')=(a+a')+i(b+b')$；</li>
+<li>复数与实数相乘：$\lambda(a+ib)=\lambda a+i\lambda b\quad(\lambda\in\R)$。</li>
+</ul>
+<p>除记号不同外，这正是 $\R^2$ 上的结构，对应关系为</p>
+$$\R^2\longleftrightarrow\C,\qquad (a,b)\longleftrightarrow a+ib.$$
+<p>不过，$\C$ 中还有一种额外运算——内部乘法，它不在本节向量空间研究的范围之内。</p>
+
+<h2 n="1.2" fr="Définition d’un espace vectoriel réel">向量空间的定义</h2>
+<env t="定义" fr="Définition"><p>设 $\K$ 为域，$E$ 为一个集合，配备一个内部运算（记作 $+$）以及一个映射（称为外部运算）：</p>
+$$\K\times E\to E,\qquad(\alpha,\v{x})\mapsto\alpha.\v{x}.$$
+<p>称 $(E,+,.)$ 为 $\K$ 上的向量空间（或 $\K$-向量空间），若：</p>
+<ol>
+<li>$(E,+)$ 是阿贝尔群，即：
+<ol class="alpha">
+<li>$\forall(\v{x},\v{y},\v{z})\in E^3,\ (\v{x}+\v{y})+\v{z}=\v{x}+(\v{y}+\v{z})$（结合律）；</li>
+<li>存在 $E$ 中的元素，记作 $\v{0}_E$，称为 $E$ 的零元（中性元），使得 $\forall\v{x}\in E,\ \v{x}+\v{0}_E=\v{0}_E+\v{x}=\v{x}$；</li>
+<li>$\forall\v{x}\in E,\ \exists\v{y}\in E$ 使得 $\v{x}+\v{y}=\v{y}+\v{x}=\v{0}_E$，记 $\v{y}=-\v{x}$（逆元的存在性）；</li>
+<li>$\forall(\v{x},\v{y})\in E^2,\ \v{x}+\v{y}=\v{y}+\v{x}$（“阿贝尔”即交换）。</li>
+</ol></li>
+<li>$\forall(\v{x},\v{y})\in E^2,\ \forall(\alpha,\beta)\in\K^2$：
+<ol class="alpha">
+<li>$\alpha.(\v{x}+\v{y})=(\alpha.\v{x})+(\alpha.\v{y})$；</li>
+<li>$(\alpha+\beta).\v{x}=(\alpha.\v{x})+(\beta.\v{x})$；</li>
+<li>$\alpha.(\beta.\v{x})=(\alpha\beta).\v{x}$；</li>
+<li>$1.\v{x}=\v{x}$。</li>
+</ol></li>
+</ol></env>
+<env t="例" fr="Exemples" k="note"><p>上一节中所有例子都是 $\R$-向量空间。</p></env>
+<env t="注" fr="Remarque" k="note"><p>若 $E$ 为向量空间且 $\v{x}\in E$，则 $-\v{x}=(-1_\K).\v{x}\in E$。</p></env>
+<env t="命题" fr="Proposition"><p>若 $E$ 为 $\K$-向量空间，则</p>
+$$\forall\alpha\in\K,\ \forall\v{x}\in E,\quad 0_\K.\v{x}=\v{0}_E,\quad \alpha.\v{0}_E=\v{0}_E,\quad -(\alpha.\v{x})=\alpha.(-\v{x})=(-\alpha).\v{x}.$$</env>
+<env t="证明" fr="Démonstration" k="proof"><ol>
+<li>$\v{0}_E+0_\K.\v{x}=0_\K.\v{x}=(0_\K+0_\K).\v{x}=0_\K.\v{x}+0_\K.\v{x}$，由于 $(E,+)$ 是群，得 $0_\K.\v{x}=\v{0}_E$。</li>
+<li>$\alpha.\v{0}_E=\alpha.(\v{0}_E+\v{0}_E)=\alpha.\v{0}_E+\alpha.\v{0}_E$，故 $\alpha.\v{0}_E=\v{0}_E$。</li>
+<li>$\alpha.\v{x}+(-\alpha).\v{x}=(\alpha-\alpha).\v{x}=0_\K.\v{x}=\v{0}_E$，即 $(-\alpha).\v{x}=-(\alpha.\v{x})$。</li>
+<li>$\alpha.\v{x}+\alpha.(-\v{x})=\alpha.(\v{x}-\v{x})=\alpha.\v{0}_E=\v{0}_E$，即 $\alpha.(-\v{x})=-(\alpha.\v{x})$。</li>
+</ol></env>
+<env t="命题" fr="Proposition"><p>设 $E$ 为 $\K$-向量空间。若 $\alpha\in\K$ 与 $\v{x}\in E$ 满足 $\alpha.\v{x}=\v{0}_E$，则 $\alpha=0_\K$ 或 $\v{x}=\v{0}_E$。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>设 $\alpha\in\K$，$\v{x}\in E$，满足 $\alpha.\v{x}=\v{0}_E$。</p>
+<ol>
+<li>若 $\alpha=0_\K$，结论成立。</li>
+<li>若 $\alpha\neq0_\K$，则 $\alpha$ 可逆，且
+$$\alpha^{-1}.(\alpha.\v{x})=(\alpha^{-1}\alpha).\v{x}=\v{x}\quad\text{且}\quad\alpha^{-1}.(\alpha.\v{x})=\alpha^{-1}.\v{0}_E=\v{0}_E,$$
+故 $\v{x}=\v{0}_E$。</li>
+</ol></env>
+<env t="命题" fr="Proposition"><p>设 $E$ 与 $F$ 为两个 $\K$-向量空间。集合 $E\times F$ 配备如下乘积运算：</p>
+<ul>
+<li>加法：$\forall(\v{x},\v{y}),(\v{x}',\v{y}')\in E\times F,\ (\v{x},\v{y})+(\v{x}',\v{y}')=(\v{x}+\v{x}',\,\v{y}+\v{y}')$；</li>
+<li>外部运算：$\forall\lambda\in\K,\ \forall(\v{x},\v{y})\in E\times F,\ \lambda.(\v{x},\v{y})=(\lambda.\v{x},\,\lambda.\v{y})$，</li>
+</ul>
+<p>则它是一个 $\K$-向量空间，称为<em>乘积向量空间</em>。</p></env>
+
+<h2 n="1.3" fr="Sous-espace vectoriel">向量子空间</h2>
+<p>本节中 $(E,+,.)$ 表示 $\K$ 上的一个向量空间。</p>
+<env t="定义" fr="Définition"><p>称 $E$ 的子集 $F$ 为 $E$ 的<em>向量子空间</em>（子空间），若 $F$ 非空且对 $+$ 与 $\cdot$ 两种运算封闭，即</p>
+$$F\neq\varnothing,\qquad \v{x}\in F,\ \v{y}\in F\Rightarrow\v{x}+\v{y}\in F,\qquad \v{x}\in F,\ \lambda\in\K\Rightarrow\lambda\cdot\v{x}\in F.$$
+<p>此时 $F$ 配备这两种运算后具有向量空间结构。</p></env>
+<env t="注" fr="Remarque" k="note"><p>任一子空间必含 $\v{0}$。$\{\v{0}\}$ 是 $E$ 的子空间。</p></env>
+<env t="例" fr="Exemples" k="note"><ul>
+<li>在 $\R^2$ 与 $\R^3$ 中，我们已见过多种类型的子空间。</li>
+<li>在 $\R[X]$ 中，对 $n\in\N$ 及取定的 $x_0\in\R$，
+$$\R_n[X]=\{P\in\R[X],\ \dg P\leq n\},\qquad\{P\in\R[X],\ P(x_0)=0\}$$
+都是子空间。</li>
+<li>反之，以下 $\R[X]$ 的子集都<b>不是</b>子空间：
+$$\{P\in\R[X],\ \dg P\geq1\},\qquad\{P\in\R[X],\ \dg P=n\},\qquad\{P\in\R[X],\ P(x_0)=1\}.$$</li>
+<li>在实数列空间 $\mathcal{F}(\N,\R)$ 中，
+$$\{(u_n)_{n\in\N},\ u_n\to0\},\quad\{(u_n)_{n\in\N},\ \forall n\geq1,\ u_{n+1}=au_n\},\quad\{(u_n)_{n\in\N},\ \exists n_0\in\N,\ \forall k\geq n_0,\ u_k=0\}$$
+给出了三个子空间的例子。</li>
+</ul></env>
+<env t="命题" fr="Proposition"><p>设 $F$ 为 $E$ 的子集，下列两条等价：</p>
+<ol><li>$F$ 是 $E$ 的子空间；</li>
+<li>$\v{0}_E\in F$，且 $\forall(\v{x},\v{y})\in F^2,\ \forall(\lambda,\mu)\in\K^2,\ \lambda\cdot\v{x}+\mu\cdot\v{y}\in F$。</li></ol></env>
+<env t="证明" fr="Démonstration" k="proof">
+<p class="step">1 ⟹ 2</p>
+<p>因 $F$ 非空，取 $\v{x}\in F$。令 $\lambda=0_\K$，则 $\lambda.\v{x}=0_\K.\v{x}=\v{0}_E\in F$。</p>
+<p>任取 $\lambda,\mu\in\K$ 及 $\v{x},\v{y}\in F$。由子空间定义，$\lambda.\v{x}$ 与 $\mu.\v{y}$ 都属于 $F$（对数乘封闭），从而 $\lambda\cdot\v{x}+\mu\cdot\v{y}\in F$（对加法封闭）。</p>
+<p class="step">2 ⟹ 1</p>
+<p>因 $\v{0}_E\in F$，$F$ 非空。</p>
+<p>任取 $\v{x},\v{y}\in F$，令 $\lambda=\mu=1_\K$，得 $1_\K.\v{x}+1_\K.\v{y}=\v{x}+\v{y}\in F$。</p>
+<p>任取 $\lambda\in\K$ 及 $\v{x}\in F$，令 $\mu=0_\K$，$\v{y}=\v{x}$，则 $\lambda\cdot\v{x}+\mu\cdot\v{y}=\lambda.\v{x}+0_\K.\v{x}=\lambda.\v{x}+\v{0}_E=\lambda.\v{x}\in F$。</p></env>
+<env t="定义" fr="Définition"><p>设 $(\v{f}_i,\ i\in I)$ 为 $E$ 中的向量族。称形如</p>
+$$\sum_{j\in J}\lambda_j\cdot\v{f}_j$$
+<p>的向量为该族的<em>线性组合</em>，其中 $J\subset I$ 为有限集，且 $\forall j\in J,\ \lambda_j\in\K$。</p></env>
+<env t="注" fr="Remarque" k="note"><p>对有限族 $\{\v{f}_1,\dots,\v{f}_n\}$，线性组合即形如</p>
+$$\lambda_1\cdot\v{f}_1+\cdots+\lambda_n\cdot\v{f}_n=\sum_{i=1}^n\lambda_i\cdot\v{f}_i,\qquad\lambda_1,\dots,\lambda_n\in\K$$
+<p>的向量。</p></env>
+<env t="例" fr="Exemples" k="note"><p>$\R^3$ 中任一向量都是 $\v{e}_1=(1,0,0)$，$\v{e}_2=(0,1,0)$，$\v{e}_3=(0,0,1)$ 的线性组合，因为任一 $\v{x}=(x_1,x_2,x_3)$ 可写成</p>
+$$\v{x}=x_1\cdot\v{e}_1+x_2\cdot\v{e}_2+x_3\cdot\v{e}_3.$$
+<p>$\R[X]$ 中任一多项式都是族 $\{1,X,X^2,\dots\}=\{X^n,\ n\in\N\}$ 的线性组合。</p></env>
+<env t="命题" fr="Proposition"><p>任一子空间 $F$ 对线性组合封闭，即</p>
+$$\forall n\in\N^*,\ \forall(\v{x}_1,\dots,\v{x}_n)\in F^n,\ \forall(\lambda_1,\dots,\lambda_n)\in\K^n,\quad\sum_{i=1}^n\lambda_i\cdot\v{x}_i\in F.$$</env>
+<env t="证明" fr="Démonstration" k="proof"><p>对线性组合的项数作归纳。</p>
+<p>$n=2$ 时，取 $\v{x}_1,\v{x}_2\in F$。$\v{x}_1$ 与 $\v{x}_2$ 的线性组合形如 $\lambda\cdot\v{x}_1+\mu\cdot\v{x}_2$（$\lambda,\mu\in\K$），由子空间定义它仍在 $F$ 中。</p>
+<p>设 $F$ 对任意 $n$ 个向量的线性组合封闭，并设 $\{\v{x}_1,\dots,\v{x}_{n+1}\}$ 为 $F$ 中 $n+1$ 个向量构成的族，$\lambda_1,\dots,\lambda_{n+1}\in\K$。则</p>
+$$\sum_{i=1}^{n+1}\lambda_i\cdot\v{x}_i=\sum_{i=1}^{n}\lambda_i\cdot\v{x}_i+\lambda_{n+1}\cdot\v{x}_{n+1}.$$
+<p>右端第一个和式由归纳假设属于 $F$，第二项由对数乘的封闭性也属于 $F$，二者之和由对加法的封闭性属于 $F$。</p></env>
+<env t="命题" fr="Proposition"><p>子空间的任意交仍是子空间。确切地说，若 $(F_i,\ i\in I)$ 是 $E$ 的一族子空间，则 $\bigcap_{i\in I}F_i$ 是 $E$ 的子空间。</p></env>
+<env t="注" fr="Remarque" k="note"><p>相反，子空间的并一般不是子空间。例如 $\R^2$ 中两条不同向量直线之并不是子空间，因为该集合对加法不封闭。</p></env>
+
+<h2 n="1.4" fr="Somme de sous-espaces vectoriels, sev supplémentaires">子空间的和；补子空间</h2>
+<env t="定义" fr="Définition"><p>对 $E$ 的子空间 $F_1$ 与 $F_2$，令</p>
+$$F_1+F_2=\{\v{x}\in E,\ \exists\v{x}_1\in F_1,\ \exists\v{x}_2\in F_2,\ \v{x}=\v{x}_1+\v{x}_2\},$$
+<p>称为 $F_1$ 与 $F_2$ 的<em>和</em>，记作 $F_1+F_2$。</p></env>
+<env t="命题" fr="Proposition"><p>$F_1+F_2$ 是 $E$ 的子空间。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>$F_1+F_2$ 非空：$\v{0}=\v{0}+\v{0}\in F_1+F_2$。</p>
+<p>取 $F_1+F_2$ 中两元素 $\v{x}$ 与 $\v{y}$。则 $\v{x}=\v{x}_1+\v{x}_2$，$\v{x}_1\in F_1$，$\v{x}_2\in F_2$；同样 $\v{y}=\v{y}_1+\v{y}_2$，$\v{y}_1\in F_1$，$\v{y}_2\in F_2$。考虑 $\v{x}$ 与 $\v{y}$ 的线性组合：设 $\alpha,\beta\in\R$，</p>
+$$\begin{aligned}\alpha\cdot\v{x}+\beta\cdot\v{y}&=\alpha\cdot(\v{x}_1+\v{x}_2)+\beta\cdot(\v{y}_1+\v{y}_2)\\&=\underbrace{(\alpha\cdot\v{x}_1+\beta\cdot\v{y}_1)}_{\in F_1}+\underbrace{(\alpha\cdot\v{x}_2+\beta\cdot\v{y}_2)}_{\in F_2}\ \in F_1+F_2.\end{aligned}$$
+<p>故 $F_1+F_2$ 确为 $E$ 的子空间。</p></env>
+<env t="定义" fr="Définition"><p>称两个子空间 $F_1$ 与 $F_2$ 的和 $F_1+F_2$ 为<em>直和</em>，若 $F_1\cap F_2=\{\v{0}\}$。此时记作</p>
+$$F_1+F_2=F_1\oplus F_2.$$</env>
+<env t="命题" fr="Proposition">
+$$\begin{aligned}F_1+F_2\ \text{为直和}&\iff F_1\cap F_2=\{\v{0}\}&&(1)\\[2pt]&\iff\forall\v{x}\in F_1+F_2,\ \exists!\,(\v{x}_1,\v{x}_2)\in F_1\times F_2,\ \v{x}=\v{x}_1+\v{x}_2&&(2)\\[2pt]&\iff\Big(\v{x}_1+\v{x}_2=\v{0},\ \v{x}_1\in F_1,\ \v{x}_2\in F_2\ \Rightarrow\ \v{x}_1=\v{x}_2=\v{0}\Big)&&(3)\end{aligned}$$</env>
+<env t="证明" fr="Démonstration" k="proof"><p>第一个等价即直和的定义。</p>
+<p class="step">(1) ⟹ (2)</p>
+<p>设 (1) 成立，且 $\v{x}\in F_1+F_2$ 可写成 $\v{x}=\v{x}_1+\v{x}_2=\v{y}_1+\v{y}_2$，其中 $\v{x}_1,\v{y}_1\in F_1$，$\v{x}_2,\v{y}_2\in F_2$。则</p>
+$$\v{x}_1-\v{y}_1=\v{y}_2-\v{x}_2\in F_1\cap F_2,$$
+<p>故它是零向量，从而 $\v{x}_1=\v{y}_1$，$\v{x}_2=\v{y}_2$。</p>
+<p class="step">(2) ⟹ (3)</p>
+<p>考虑分解 $\v{0}+\v{0}=\v{0}$ 即得，平凡。</p>
+<p class="step">(3) ⟹ (1)</p>
+<p>若 $\v{x}\in F_1\cap F_2$，则 $\v{0}=\underbrace{\v{x}}_{\in F_1}+\underbrace{(-\v{x})}_{\in F_2}$，由 (3) 得 $\v{x}=-\v{x}=\v{0}$。</p></env>
+<env t="例" fr="Exemple" k="note"><p>在 $E=\mathcal{F}(\R,\R)$（$\R\to\R$ 的映射所成向量空间）中，记 $P$ 为偶函数全体，$I$ 为奇函数全体，则</p>
+$$E=P\oplus I.$$
+<p>事实上，若 $f\in P\cap I$，则对任意 $x\in\R$，$f(-x)=f(x)=-f(x)$，故 $f(x)=0$。这证明了 $P\cap I=\{0\}$。</p>
+<p>另一方面，任一函数 $f\in E$ 可写成 $f=u+v$，其中</p>
+$$u(x)=\tfrac12\big(f(x)+f(-x)\big)\in P,\qquad v(x)=\tfrac12\big(f(x)-f(-x)\big)\in I.$$</env>
+<env t="定义" fr="Définition"><p>设 $E$ 为向量空间，$F,G,H$ 为 $E$ 的三个子空间。称 $F$ 与 $G$ 在 $H$ 中<em>互补</em>，或称 $G$ 是 $F$ 在 $H$ 中的一个<em>补空间</em>（supplémentaire），若</p>
+$$H=F\oplus G.$$
+<p>若不加说明地谈论“$F$ 的一个补空间”，指的是 $F$ 在 $E$ 中的补空间。</p></env>
+<env t="例" fr="Exemple" k="note"><p>上面已看到 $P$ 与 $I$ 互补（在 $E=\mathcal{F}(\R,\R)$ 中）。</p></env>
+
+<h2 n="1.5" fr="Sev engendré par une famille de vecteurs">向量族生成的子空间</h2>
+<env t="命题" fr="Proposition"><p>设 $A$ 为 $E$ 的子集，则存在 $E$ 中包含 $A$ 的（按包含关系）最小子空间，称为由 $A$ <em>生成的子空间</em>，记作 $\Vect(A)$。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>设 $\mathcal{A}$ 为 $E$ 中所有包含 $A$ 的子空间之集：$\mathcal{A}$ 非空，因为 $E\in\mathcal{A}$。令 $F=\bigcap_{G\in\mathcal{A}}G$，则 $F$ 是 $E$ 中包含 $A$ 的子空间。此外，若 $F'$ 是包含 $A$ 的子空间，则 $F\subset F'$（这说明 $F$ 最小）：事实上 $F'\in\mathcal{A}$，故 $F=\bigcap_{G\in\mathcal{A}}G\subset F'$。</p></env>
+<env t="推论" fr="Conséquence" k="note"><ol><li>若 $A$ 是 $E$ 的子空间，则 $\Vect(A)=A$。</li><li>若 $A\subset B$，则 $\Vect(A)\subset\Vect(B)$。</li></ol></env>
+<env t="命题" fr="Proposition"><p>设 $\mathcal{F}=(\v{f}_i)_{i\in I}$ 为 $E$ 中的向量族。以下三者相等：</p>
+<ol><li>$\mathcal{F}$ 的全体线性组合之集；</li><li>$E$ 中所有包含 $\mathcal{F}$ 的子空间之交；</li><li>$E$ 中包含 $\mathcal{F}$ 的（按包含关系）最小子空间。</li></ol>
+<p>它是一个子空间，记作 $\Vect(\mathcal{F})$，称为由 $\mathcal{F}$ <em>生成的子空间</em>。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>分别记三者为 $F_1,F_2,F_3$。已证 $F_2=F_3$。其次，易见 $F_1$ 是包含 $\mathcal{F}$ 的子空间，故 $F_3\subset F_1$。而 $F_3$ 包含 $\mathcal{F}$ 且是子空间，从而对线性组合封闭，因此它包含 $\mathcal{F}$ 中元素的一切线性组合，即包含 $F_1$。</p></env>
+<env t="定义" fr="Définition"><p>若 $\Vect(\mathcal{F})=E$，称族 $\mathcal{F}$ 为向量空间 $E$ 的<em>生成族</em>（famille génératrice）。</p></env>
+<env t="例" fr="Exemples" k="note"><ul>
+<li>由于 $\Vect\{X^n,\ n\in\N\}=\R[X]$，族 $\{X^n,\ n\in\N\}$ 生成 $\R[X]$。</li>
+<li>沿用前面的记号，$\Vect(\v{e}_1,\v{e}_2,\v{e}_3)=\R^3$，故 $(\v{e}_1,\v{e}_2,\v{e}_3)$ 生成 $\R^3$。</li>
+<li>在实数列空间 $\mathcal{F}(\N,\R)$ 中，自然地考虑族 $\{u^k=(u^k_n)_{n\in\N},\ k\in\N\}$，其中
+$$u^k_n=\begin{cases}1&\text{若 } n=k,\\0&\text{否则.}\end{cases}$$
+则 $\Vect\{u^k,\ k\in\N\}$ 是从某项起全为零的数列之集。因此该族<b>不</b>生成 $\mathcal{F}(\N,\R)$。</li>
+</ul></env>
+<env t="注" fr="Remarque" k="note"><p>若 $\mathcal{F}\subset\tilde{\mathcal{F}}$，则 $\Vect(\mathcal{F})\subset\Vect(\tilde{\mathcal{F}})$；因此若 $\mathcal{F}$ 是生成族，$\tilde{\mathcal{F}}$ 亦然。</p></env>
+<env t="命题" fr="Proposition"><p>设 $F_1,F_2$ 为 $E$ 的两个子空间，则 $F_1+F_2=\Vect(F_1\cup F_2)$。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>向量空间 $F_1+F_2$ 包含 $F_1$，因为对任意 $\v{x}_1\in F_1$，它包含 $\v{x}_1=\v{x}_1+\v{0}_E$。同理它包含 $F_2$，从而包含 $F_1\cup F_2$，于是 $F_1+F_2\supset\Vect(F_1\cup F_2)$。另一方面，由 $F_1+F_2$ 的定义可见 $F_1+F_2\subset\Vect(F_1\cup F_2)$。故等式成立。</p></env>
+<env t="命题" fr="Proposition"><p>设 $(\v{f}_i)_{i\in I}$ 为 $E$ 中的向量族，其中某个向量 $\v{f}_{i_0}$（$i_0\in I$）是其余向量的线性组合：</p>
+$$\v{f}_{i_0}=\sum_{i\in J_0}\mu_i\cdot\v{f}_i,$$
+<p>其中 $J_0$ 是 $I\setminus\{i_0\}$ 的有限子集。则</p>
+$$\Vect(\v{f}_i,\ i\in I)=\Vect(\v{f}_i,\ i\in I\setminus\{i_0\}).$$</env>
+<env t="证明" fr="Démonstration" k="proof"><p>包含关系 $\supset$ 显然。反之，$\v{x}\in\Vect(\v{f}_i,\ i\in I)$ 可写成 $\v{x}=\sum_{i\in J}\lambda_i\cdot\v{f}_i$，$J$ 为 $I$ 的有限子集。</p>
+<p>若 $i_0\notin J$，则已有 $\v{x}\in\Vect(\v{f}_i,\ i\in I\setminus\{i_0\})$。</p>
+<p>若 $i_0\in J$，则</p>
+$$\begin{aligned}\v{x}&=\sum_{i\in J\setminus\{i_0\}}\lambda_i\cdot\v{f}_i+\lambda_{i_0}\cdot\v{f}_{i_0}=\sum_{i\in J\setminus\{i_0\}}\lambda_i\cdot\v{f}_i+\lambda_{i_0}\cdot\sum_{i\in J_0}\mu_i\cdot\v{f}_i\\&=\sum_{i\in(J\cup J_0)\setminus\{i_0\}}\alpha_i\cdot\v{f}_i,\end{aligned}$$
+<p>其中</p>
+$$\alpha_i=\begin{cases}\lambda_i+\lambda_{i_0}\mu_i&\text{若 } i\in J\cap J_0,\\\lambda_{i_0}\mu_i&\text{若 } i\in J_0\setminus J,\\\lambda_i&\text{若 } i\in(J\setminus\{i_0\})\setminus J_0.\end{cases}$$
+<p>故 $\v{x}\in\Vect(\v{f}_i,\ i\in I\setminus\{i_0\})$。</p></env>
+<p>因此，从一个生成族中去掉任一可由其余向量线性表出的向量，所得族仍为生成族。下一节我们将把“族中没有向量是其余向量的线性组合”这一概念形式化。</p>
+
+<h2 n="1.6" fr="Familles libres">线性无关族</h2>
+<env t="定义" fr="Définition"><p>称向量空间 $E$ 中的向量族 $(\v{f}_i)_{i\in I}$ 为<em>线性无关族</em>（famille libre，自由族），若该族唯一的零线性组合是系数全为零的那个。例如，有限族 $(\v{f}_1,\dots,\v{f}_n)$ 线性无关当且仅当</p>
+$$\lambda_1\cdot\v{f}_1+\cdots+\lambda_n\cdot\v{f}_n=\v{0}_E,\ \lambda_i\in\K\ \Longrightarrow\ \lambda_1=0_\K,\ \dots,\ \lambda_n=0_\K.$$</env>
+<env t="例" fr="Exemples" k="note"><ul>
+<li>证明 $\R^4$ 中由
+$$\v{u}_1=(2,0,3,0),\quad\v{u}_2=(0,-1,0,0),\quad\v{u}_3=(5,-2,0,0)$$
+给出的族 $(\v{u}_1,\v{u}_2,\v{u}_3)$ 线性无关：
+$$\begin{aligned}\lambda_1\cdot\v{u}_1+\lambda_2\cdot\v{u}_2+\lambda_3\cdot\v{u}_3=\v{0}&\Rightarrow(2\lambda_1+5\lambda_3,\,-\lambda_2-2\lambda_3,\,3\lambda_1,\,0)=(0,0,0,0)\\&\Rightarrow\begin{cases}2\lambda_1+5\lambda_3=0\\-\lambda_2-2\lambda_3=0\\3\lambda_1=0\end{cases}\Rightarrow\lambda_1=\lambda_2=\lambda_3=0.\end{aligned}$$</li>
+<li>证明 $\{X^2,\ X(X-1),\ (X-1)^2\}$ 在 $\R[X]$ 中线性无关：
+$$\begin{aligned}\lambda_1X^2+\lambda_2X(X-1)+\lambda_3(X-1)^2=0&\Rightarrow(\lambda_1+\lambda_2+\lambda_3)X^2+(-\lambda_2-2\lambda_3)X+\lambda_3=0\\&\Rightarrow\begin{cases}\lambda_1+\lambda_2+\lambda_3=0\\-\lambda_2-2\lambda_3=0\\\lambda_3=0\end{cases}\Rightarrow\lambda_1=\lambda_2=\lambda_3=0.\end{aligned}$$</li>
+<li>证明在 $\R\to\R$ 的映射空间 $\mathcal{F}(\R,\R)$ 中，族 $\{x\mapsto|x-i|,\ i\in\Z\}$ 线性无关。设
+$$\forall x\in\R,\quad\sum_{i\in J}\lambda_i|x-i|=0,$$
+其中 $J$ 是 $\Z$ 的有限子集。若存在 $i_0\in J$ 使 $\lambda_{i_0}\neq0$，则
+$$|x-i_0|=-\sum_{i\in J\setminus\{i_0\}}\frac{\lambda_i}{\lambda_{i_0}}|x-i|.$$
+然而左边的函数在 $i_0$ 处不可导，右边的函数在 $i_0$ 处可导，矛盾。故对所有 $i\in J$，$\lambda_i=0$，该族线性无关。</li>
+</ul></env>
+<env t="定义" fr="Définition"><p>不线性无关的族称为<em>线性相关族</em>（famille liée）。</p></env>
+<env t="注" fr="Remarque" k="note"><p>任何含 $\v{0}$ 的族都线性相关，因为 $1\cdot\v{0}=\v{0}$ 是该族的一个系数不全为零的零线性组合。</p></env>
+<env t="命题" fr="Proposition"><p>线性无关族的任一部分仍构成线性无关族。</p></env>
+<env t="注" fr="Remarque" k="note"><p>两个向量构成的族 $(\v{u},\v{v})$ 线性相关，当且仅当</p>
+$$(\exists\lambda\in\K,\ \v{u}=\lambda\cdot\v{v})\quad\text{或}\quad(\exists\mu\in\K,\ \v{v}=\mu\cdot\v{u}).$$
+<p>此时称 $\v{u}$ 与 $\v{v}$ <em>共线</em>。</p></env>
+<env t="例" fr="Exemples" k="note"><ul>
+<li>在 $\mathcal{F}(\R,\R)$ 中，族 $\{x\mapsto1,\ x\mapsto\cos^2x,\ x\mapsto\cos2x\}$ 线性相关，因为
+$$\forall x\in\R,\quad 1-2\cos^2x+\cos2x=0.$$</li>
+<li>$\{X^n,\ n\in\N\}$ 在 $\R[X]$ 中线性无关。事实上，该族的任一线性组合都是一个多项式，而多项式为零当且仅当其所有系数为零。</li>
+</ul></env>
+
+<h2 n="1.7" fr="Bases">基</h2>
+<env t="定义" fr="Définition"><p>向量空间 $E$ 中既线性无关又生成 $E$ 的族称为 $E$ 的一组<em>基</em>（base）。</p></env>
+<env t="例" fr="Exemples" k="note"><ul>
+<li>$\{X^n,\ n\in\N\}$ 是 $\R[X]$ 的一组基，称为 $\R[X]$ 的<em>标准基</em>（base canonique）。</li>
+<li>在 $\R^n$ 中，一组非常简单的基（因而称为标准基）由族 $(\v{e}_1,\v{e}_2,\dots,\v{e}_n)$ 给出：
+$$\v{e}_1=(1,0,\dots,0),\quad\v{e}_2=(0,1,0,\dots,0),\quad\v{e}_k=(0,\dots,0,\underset{\substack{\uparrow\\ \text{第 }k\text{ 位}}}{1},0,\dots,0).$$</li>
+</ul></env>
+<env t="定理" fr="Théorème"><p>若向量空间 $E$ 有一个含 $n$ 个元素的生成族，则任何至少含 $n+1$ 个向量的族都线性相关；因此，任何线性无关族至多含 $n$ 个元素。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>对 $n$ 作归纳。</p>
+<p>若 $n=1$，设 $E$ 有生成族 $\{\v{g}_1\}$。这意味着 $E$ 中任一向量都可写成 $\lambda\cdot\v{g}_1$（$\lambda\in\R$）。当 $\v{g}_1\neq\v{0}$ 时 $E$ 是一条向量直线；当 $\v{g}_1=\v{0}$ 时 $E=\{\v{0}\}$。任意两个向量的族 $\{\v{f}_1,\v{f}_2\}$ 满足 $\v{f}_1=\lambda_1\cdot\v{g}_1$，$\v{f}_2=\lambda_2\cdot\v{g}_1$。若 $\lambda_1,\lambda_2$ 中有一个为零，则族 $\{\v{f}_1,\v{f}_2\}$ 含 $\v{0}$，故线性相关。若 $\lambda_1\neq0_\K$ 且 $\lambda_2\neq0_\K$，则</p>
+$$\frac{1}{\lambda_1}\v{f}_1-\frac{1}{\lambda_2}\v{f}_2=\v{0}_E,$$
+<p>族 $\{\v{f}_1,\v{f}_2\}$ 线性相关。因此任何至少含两个元素的族都线性相关。</p>
+<p>现设该性质对 $n$（$n\in\N^*$）成立，即：在具有 $n$ 元生成族的向量空间中，任何至少含 $n+1$ 个元素的族都线性相关。我们来证明 $n+1$ 的情形。设向量空间 $E$ 有 $n+1$ 元生成族 $\{\v{g}_1,\dots,\v{g}_{n+1}\}$，考虑一个 $n+2$ 元族 $\{\v{f}_1,\dots,\v{f}_{n+2}\}$，下证其线性相关。对任意 $k\in\{1,\dots,n+2\}$，$\v{f}_k$ 可写成 $\{\v{g}_1,\dots,\v{g}_{n+1}\}$ 的线性组合：</p>
+$$\v{f}_k=\lambda_{k,1}\cdot\v{g}_1+\cdots+\lambda_{k,n}\cdot\v{g}_n+\lambda_{k,n+1}\cdot\v{g}_{n+1},\qquad\lambda_{k,1},\dots,\lambda_{k,n+1}\in\R.$$
+<p>记</p>
+$$\v{x}_k=\lambda_{k,1}\cdot\v{g}_1+\cdots+\lambda_{k,n}\cdot\v{g}_n,\qquad\mu_k=\lambda_{k,n+1},$$
+<p>于是 $\v{f}_k=\v{x}_k+\mu_k\cdot\v{g}_{n+1}$，并注意 $\v{x}_k\in\Vect(\v{g}_1,\dots,\v{g}_n)$。</p>
+<ul>
+<li>若 $\mu_1=\dots=\mu_{n+2}=0$，则 $\v{f}_1,\dots,\v{f}_{n+2}$ 是向量空间 $\Vect(\v{g}_1,\dots,\v{g}_n)$ 中的 $n+2$ 个向量，而该空间有 $n$ 元生成族。由归纳假设，族 $\{\v{f}_1,\dots,\v{f}_{n+2}\}$ 线性相关。</li>
+<li>现设 $\mu_1,\dots,\mu_{n+2}$ 不全为零，不妨设 $\mu_1\neq0_\K$。由 $\v{f}_1=\v{x}_1+\mu_1\cdot\v{g}_{n+1}$ 得
+$$\v{g}_{n+1}=\frac{1}{\mu_1}\cdot(\v{f}_1-\v{x}_1);$$
+另一方面，对 $k\in\{2,\dots,n+2\}$，$\v{f}_k=\v{x}_k+\mu_k\cdot\v{g}_{n+1}$，于是
+$$\v{f}_k=\v{x}_k+\frac{\mu_k}{\mu_1}\cdot(\v{f}_1-\v{x}_1),\qquad\text{从而}\qquad\v{f}_k-\frac{\mu_k}{\mu_1}\cdot\v{f}_1=\v{x}_k-\frac{\mu_k}{\mu_1}\cdot\v{x}_1\in\Vect(\v{g}_1,\dots,\v{g}_n).$$
+因此族
+$$\Big(\v{f}_k-\frac{\mu_k}{\mu_1}\cdot\v{f}_1,\ k\in\{2,\dots,n+2\}\Big)$$
+是 $\Vect(\v{g}_1,\dots,\v{g}_n)$ 中的 $n+1$ 个向量，而该空间有 $n$ 元生成族，由归纳假设它线性相关。于是存在不全为零的实数 $\alpha_2,\dots,\alpha_{n+2}$，使得
+$$\v{0}_E=\sum_{k=2}^{n+2}\alpha_k\cdot\Big(\v{f}_k-\frac{\mu_k}{\mu_1}\cdot\v{f}_1\Big)=-\Big(\sum_{k=2}^{n+2}\frac{\alpha_k\mu_k}{\mu_1}\Big)\cdot\v{f}_1+\sum_{k=2}^{n+2}\alpha_k\cdot\v{f}_k.$$
+这最后的表达式说明族 $\{\v{f}_1,\dots,\v{f}_{n+2}\}$ 线性相关，归纳证明完毕。</li>
+</ul></env>
+<env t="推论" fr="Corollaire"><p>若向量空间 $E$ 有两组有限基，则这两组基的元素个数相同。此时该数称为 $E$ 的<em>维数</em>，记作 $\dim E$。</p></env>
+<env t="例" fr="Exemple" k="note"><p>由前面给出的 $\R^n$ 的标准基，$\dim\R^n=n$。</p></env>
+<env t="注意" fr="Attention" k="warn"><p>只有某些向量空间具有有限基，称之为<em>有限维</em>的。例如，$\R^n$ 是有限维的；而 $\R[X]$ 不是有限维的，因为它以 $\{X^n,\ n\in\N\}$ 为基，而该族不是有限的。</p></env>
+<env t="命题" fr="Proposition"><ol><li>基是<em>极大线性无关族</em>，即它的任何严格扩充族都不线性无关。</li><li>基是<em>极小生成族</em>，即它的任何严格子族都不是生成族。</li></ol></env>
+<env t="证明" fr="Démonstration" k="proof">
+<p class="step">证明 1</p>
+<p>考虑一个极大的线性无关族 $(\v{f}_i)_{i\in I}$。这意味着对任意向量 $\v{x}$，族 $\{\v{f}_i,\ i\in I\}\cup\{\v{x}\}$ 线性相关。于是可写</p>
+$$\sum_{i\in J}\lambda_i\cdot\v{f}_i+\hat\lambda\cdot\v{x}=\v{0},$$
+<p>其中 $J$ 有限，系数 $\lambda_i$ 与 $\hat\lambda$ 不全为零。则 $\hat\lambda\neq0$，否则与 $(\v{f}_i)_{i\in I}$ 的线性无关性矛盾。于是</p>
+$$\v{x}=\sum_{i\in J}\Big(-\frac{\lambda_i}{\hat\lambda}\Big)\cdot\v{f}_i,$$
+<p>即任一向量 $\v{x}$ 都可写成 $(\v{f}_i)_{i\in I}$ 的线性组合，该族是生成族，从而是基。</p>
+<p>反之，考虑一组基，记作 $(\v{f}_i)_{i\in I}$。按定义它线性无关，只需说明它是极大的。往其中添加一个向量 $\v{y}$。由于 $(\v{f}_i)_{i\in I}$ 是基，它是生成族，故 $\v{y}$ 可写成 $\v{y}=\sum_{j\in J}\alpha_j\cdot\v{f}_j$（$J$ 有限）。于是</p>
+$$\sum_{j\in J}\alpha_j\cdot\v{f}_j+(-1)\cdot\v{y}=\v{0},$$
+<p>所以扩充族 $\{\v{f}_i,\ i\in I\}\cup\{\v{y}\}$ 线性相关。</p>
+<p class="step">证明 2</p>
+<p>首先考虑向量空间 $E$ 的一组基 $\mathcal{B}$。它当然是生成族，且线性无关。设 $\mathcal{F}$ 是 $\mathcal{B}$ 的严格子族，并假设 $\mathcal{F}$ 仍为生成族。又 $\mathcal{F}$ 作为线性无关族的子族也线性无关。于是 $\mathcal{F}$ 是基，而 $\mathcal{B}$ 是 $\mathcal{F}$ 的严格扩充族。由 1，$\mathcal{B}$ 线性相关，矛盾。</p>
+<p>反之，设 $\mathcal{G}$ 是 $E$ 的生成族，且其任何严格子族都不是生成族。下证它是基，即证它线性无关。假设不然，则存在整数 $N\in\N$、向量 $\v{g}_1,\dots,\v{g}_N\in\mathcal{G}$ 以及不全为零的实数 $\lambda_1,\dots,\lambda_N$，使</p>
+$$\lambda_1\cdot\v{g}_1+\cdots+\lambda_N\cdot\v{g}_N=\v{0}.$$
+<p>必要时重新编号，可设 $\lambda_1\neq0$，于是</p>
+$$\v{g}_1=-\frac{\lambda_2}{\lambda_1}\cdot\v{g}_2-\cdots-\frac{\lambda_N}{\lambda_1}\cdot\v{g}_N,$$
+<p>即 $\v{g}_1$ 是 $\v{g}_2,\dots,\v{g}_N$ 的线性组合，从而也是 $\mathcal{G}\setminus\{\v{g}_1\}$ 的线性组合。由前述，$\Vect(\mathcal{G})=\Vect(\mathcal{G}\setminus\{\v{g}_1\})$，于是 $\mathcal{G}\setminus\{\v{g}_1\}$ 生成 $E$，但它是 $\mathcal{G}$ 的严格子族，矛盾。</p></env>
+<env t="定理" fr="Théorème de la base incomplète"><p><b>（不完全基定理 / 基扩充定理）</b>设 $E$ 为向量空间，$\mathcal{L}$ 为线性无关族，$\mathcal{G}$ 为生成族。则存在 $E$ 的一组基 $\mathcal{B}$，使得</p>
+$$\mathcal{L}\subset\mathcal{B}\subset\mathcal{G}\cup\mathcal{L}.$$
+<p>$\mathcal{B}$ 由 $\mathcal{L}$ 添加 $\mathcal{G}$ 中的向量补全而得。</p></env>
+<env t="证明" fr="Démonstration" k="proof"><p>我们只在 $E$ 为有限维 $n$ 的情形下证明。考虑包含 $\mathcal{L}$ 且含于 $\mathcal{L}\cup\mathcal{G}$ 的线性无关族，从中选取一个基数最大者，记作 $\mathcal{B}$，并记 $F=\Vect(\mathcal{B})$。若 $F\neq E$，则可找到 $\v{g}\in\mathcal{G}$ 不属于 $F$。于是 $\mathcal{B}\cup\{\v{g}\}$ 仍是包含 $\mathcal{L}$ 且含于 $\mathcal{L}\cup\mathcal{G}$ 的线性无关族，并且严格包含 $\mathcal{B}$，这与 $\mathcal{B}$ 的极大性矛盾。</p></env>
+<env t="推论" fr="Corollaire"><p>任何不为 $\{\v{0}\}$ 的空间都有基。</p></env>
+<env t="注意" fr="Attention" k="warn"><p>对于无限维向量空间，有时无法具体写出一组基，例如 $\R\to\R$ 的映射空间 $\mathcal{F}(\R,\R)$。所幸许多无限维向量空间都有明确的基，例如 $\R[X]$，它以标准基 $\{X^n,\ n\in\N\}$ 为基。</p></env>
+<env t="命题" fr="Proposition"><p>设 $(\v{f}_i)_{i\in I}$ 为向量空间 $E$ 中的向量族。该族是 $E$ 的基，当且仅当对任意 $\v{x}\in E$，存在唯一一族除有限个外全为零的实数 $(\lambda_i)_{i\in I}$，使得</p>
+$$\v{x}=\sum_{\substack{i\in I\\\lambda_i\neq0}}\lambda_i\cdot\v{f}_i.$$</env>
+<env t="证明" fr="Démonstration" k="proof"><p>存在性源于基是生成族。</p>
+<p>唯一性：设有两族实数 $(\lambda_i)_{i\in I}$ 与 $(\mu_i)_{i\in I}$ 都满足命题中的条件。令</p>
+$$J=\{i\in I,\ \lambda_i\neq0\ \text{或}\ \mu_i\neq0\}.$$
+<p>注意 $J$ 有限，且</p>
+$$\v{x}=\sum_{i\in J}\lambda_i\cdot\v{f}_i=\sum_{i\in J}\mu_i\cdot\v{f}_i.$$
+<p>这推出 $\sum_{i\in J}(\lambda_i-\mu_i)\cdot\v{f}_i=\v{0}$，由于该族线性无关，得 $\forall i\in J,\ \lambda_i=\mu_i$。对 $i\notin J$，$\lambda_i=0=\mu_i$。</p></env>
+
+<h2 n="1.8" fr="L’espace vectoriel des polynômes">多项式向量空间</h2>
+<env t="定义" fr="Définition"><p>设 $\K$ 为交换域。称 $\K$ 中元素构成的数列 $P=(a_n)_{n\in\N}$ 为<em>系数在 $\K$ 中的多项式</em>，若</p>
+$$\exists n_0\in\N,\ \forall n>n_0,\ a_n=0.$$
+<p>于是，若 $P=(a_n)_{n\in\N}$ 是系数在 $\K$ 中的多项式，则集合 $\{i\in\N,\ a_i\neq0\}$ 是有限集，称为多项式 $P$ 的<em>支撑集</em>；$a_i$ 称为 $P$ 的第 $i$ 号系数。若 $P$ 的系数中除一个外全为零，称 $P$ 为<em>单项式</em>。若所有系数都为零，称 $P$ 为<em>零多项式</em>，仍记作 $0$。</p>
+<p>两个多项式相等定义为数列相等，即所有对应下标的系数相等。</p>
+<p>系数在 $\K$ 中的多项式全体记作 $\K[X]$，这一记号的合理性将在后文说明。</p></env>
+<env t="定义" fr="Définition"><p>设 $P\in\K[X]$ 为非零多项式，称其非零系数的最大下标为 $P$ 的<em>次数</em>，记作 $\dg P$。</p>
+<p>约定 $\dg 0=-\infty$。</p></env>
+<p>这一定义是合理的：若 $P$ 非零，其支撑集是 $\N$ 的非空有限子集，因而有最大元。</p>
+<env t="定理" fr="Théorème"><p>配备由 $\K$ 值数列集合上的运算所诱导的运算后，$\K[X]$ 具有 $\K$-向量空间结构。</p></env>
+<p>若 $P=(a_n)_{n\in\N}$ 与 $Q=(b_n)_{n\in\N}$ 是 $\K[X]$ 中任意两个多项式，$\lambda$ 为任意标量，则运算定义为：</p>
+$$\begin{aligned}P+Q&=(a_n)+(b_n)=(a_n+b_n)=(a_0+b_0,\,a_1+b_1,\,\cdots,\,a_n+b_n,\,\cdots),\\\lambda P&=\lambda(a_n)=(\lambda a_n)=(\lambda a_0,\,\lambda a_1,\,\cdots,\,\lambda a_n,\,\cdots).\end{aligned}$$
+<env t="定义" fr="Définition"><p>设 $P=(a_n)_{n\in\N}$ 与 $Q=(b_n)_{n\in\N}$ 为系数在 $\K$ 中的两个多项式，称如下定义的多项式为 $P$ 与 $Q$ 的<em>乘积</em>，记作 $PQ$：</p>
+$$PQ=(c_n)_{n\in\N},\qquad\forall n\in\N,\ c_n=a_0b_n+\dots+a_nb_0,\ \text{即}\ c_n=\sum_{i+j=n}a_ib_j.$$</env>
+<p>因此这种乘法<b>不是</b>数列的逐项相乘。</p>
+<env t="定理" fr="Théorème"><p>设 $\K$ 为交换域，$\K[X]$ 配备上述运算后具有交换环结构。</p></env>
+<env t="定理" fr="Théorème"><p>设 $P,Q$ 为 $\K[X]$ 中任意两个元素，则</p>
+$$\dg(P+Q)\leq\max(\dg P,\dg Q),\quad\text{且若 }\dg P\neq\dg Q\text{，则 }\dg(P+Q)=\max(\dg P,\dg Q);$$
+$$\dg(PQ)=\dg P+\dg Q.$$</env>
+<env t="证明" fr="Démonstration" k="proof"><p>和的公式显然，只证积的公式。若至少一个多项式为零多项式，结论显然。故设 $P,Q$ 非零，并记 $p,q$ 为它们各自的次数：$P=(a_n)$，$Q=(b_n)$，$a_p\neq0$，$b_q\neq0$，$\forall i>p,\ a_i=0$，$\forall j>q,\ b_j=0$。按定义 $PQ=(c_n)$，$\forall n\in\N,\ c_n=\sum_{i+j=n}a_ib_j$。若 $n>p+q$，则 $i\leq p$ 且 $i+j=n$ 推出 $j>q$，故定义 $c_n$ 的和式只含零项。若 $n=p+q$，则 $i<p$ 且 $i+j=n$ 推出 $j>q$，因此 $c_{p+q}=a_pb_q\neq0$。所以 $PQ$ 的次数为 $p+q$，即其非零系数的最大下标。</p></env>
+<p>由此可见，$\K[X]$ 中的可逆元恰为零次多项式。事实上，$PQ=1$ 推出 $\dg P+\dg Q=0$，故 $\dg P=\dg Q=0$，且 $(a_0,0,\dots)(b_0,0,\dots)=(1,0,\dots)\iff a_0b_0=1$。因此 $(a_0,0,\dots)$ 可逆当且仅当 $a_0$ 非零。</p>
+<p>最后，我们把 $\K$ 与次数至多为零的多项式（称为<em>常数多项式</em>）之集等同起来。这不会引起歧义，因为无论把 $\lambda$ 看作标量还是常数多项式，记号 $\lambda P$ 的含义都相同。</p>
+
+<h3 n="1.8.1" fr="Notation définitive">最终记号</h3>
+<p>设 $e_i=(0,\dots,0,1,0,\dots)$，其中 $1$ 位于第 $i+1$ 位，即系数为 $1$ 的 $i$ 次单项式。对任意 $i,j\in\N$ 有 $e_ie_j=e_{i+j}$，从而对 $i$ 归纳得：对任意自然数 $i$，$e_i=(e_1)^i$，并采用通常约定 $(e_1)^0=1=e_0$。</p>
+<p>由多项式及其运算的定义可知，任一多项式 $P=(a_n)$ 可唯一地写成</p>
+$$P=a_0e_0+a_1e_1+\dots+a_ne_n+\dots=\sum_{i\in\N}a_ie_i$$
+<p>（注意 $P$ 的支撑集有限，这个和式实际上只含有限项）。</p>
+<p>令 $e_1=X$，由 $e_0=1$ 得</p>
+$$P=a_0+a_1X+\dots+a_nX^n+\dots=\sum_{i\in\N}a_iX^i\quad(\text{有限和}).$$
+<p>$X$ 称为<em>未定元</em>。注意：它不是变量，而是一个特殊的多项式。这种记法的好处是便于运算，但不应把形如 $a_0+a_1X=0$ 的式子与关于 $X$ 的方程混淆。</p>
+<p>此后，多项式 $P$ 将写成下列等价形式之一：</p>
+$$P=a_0+a_1X+\dots+a_nX^n=a_nX^n+\dots+a_1X+a_0.$$
+<p>前者称为按<em>升幂</em>排列，后者称为按<em>降幂</em>排列。按约定，在这种写法中尽可能假设 $a_n\neq0$，从而 $n$ 表示多项式 $P$ 的次数。</p>
+<p>当 $a_n=1$ 时，称多项式 $P$ 为<em>首一</em>（unitaire / normalisé）多项式。两个首一多项式之积仍是首一的（但一般而言其和不是）。</p>
+<env t="定义" fr="Définition"><p>设 $P=a_0+a_1X+\dots+a_nX^n\in\K[X]$，称由下式定义的 $\K\to\K$ 映射为与 $P$ 相伴的<em>多项式函数</em>，记作 $\tilde P$：</p>
+$$\forall x\in\K,\quad\tilde P(x)=a_0+a_1x+\dots+a_nx^n.$$</env>
