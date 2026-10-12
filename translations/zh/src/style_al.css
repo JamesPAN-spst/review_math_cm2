@@ -1,0 +1,88 @@
+:root { --ink: #000; --mute: #555; --lab: 21mm; --gap: 4.5mm; }
+@page { size: A4; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; }
+body {
+  margin: 0; background: #fff; color: var(--ink);
+  font-family: "InterW", "Noto Sans SC", sans-serif;
+  font-weight: 400; font-size: 9.2pt; line-height: 1.62;
+  text-align: left; line-break: strict;
+}
+.katex { font-size: 1.04em; font-family: KaTeX_Main, "Noto Sans SC", "Times New Roman", serif; }
+.katex .cjk_fallback { font-family: "Noto Sans SC", sans-serif; }
+.katex-display { margin: 0; }
+.nw { white-space: nowrap; }
+i { font-style: normal; }
+
+/* ── 章首 ── */
+.cover {
+  display: grid; grid-template-columns: var(--lab) 1fr; column-gap: var(--gap);
+  border-top: 3pt solid var(--ink); padding-top: 4mm; margin-bottom: 5mm;
+}
+.cover .num { font-weight: 800; font-size: 42pt; line-height: .82; letter-spacing: -.04em; }
+.cover .kick { font-size: 7.5pt; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
+.cover h1 { font-size: 22pt; font-weight: 700; line-height: 1.2; margin: 2.5mm 0 1.5mm; letter-spacing: .01em; }
+.cover .fr { font-size: 10pt; font-weight: 300; color: var(--mute); }
+.cover .how { font-size: 7.5pt; color: var(--mute); margin: 3mm 0 0; line-height: 1.6; }
+
+/* ── 原文页标记 ── */
+.op { break-before: auto; }
+.op + .op .pm { margin-top: 6mm; }
+.cover + main > .op:first-child { break-before: auto; }
+.pm {
+  display: grid; grid-template-columns: var(--lab) 1fr; column-gap: var(--gap);
+  border-top: 1.6pt solid var(--ink); padding-top: 1.2mm; margin-bottom: 3mm;
+  break-after: avoid;
+}
+.pm .pn { font-weight: 800; font-size: 13pt; line-height: 1; letter-spacing: -.02em; }
+.pm .pt { font-size: 7.5pt; font-weight: 500; letter-spacing: .06em; padding-top: 1pt; }
+.pm .pt i { font-weight: 300; color: var(--mute); margin-left: 3mm; }
+
+/* ── 标题（悬挂编号） ── */
+h2.g, h3.g {
+  display: grid; grid-template-columns: var(--lab) 1fr; column-gap: var(--gap);
+  margin: 0; break-after: avoid;
+}
+h2.g { border-top: .8pt solid var(--ink); padding-top: 1.6mm; margin: 4.5mm 0 2.4mm; font-size: 12pt; font-weight: 700; line-height: 1.3; }
+.pm + h2.g { border-top: 0; padding-top: 0; margin-top: 0; }
+h2.g .n { font-weight: 700; }
+h3.g { margin: 3mm 0 1.4mm; font-size: 10pt; font-weight: 700; line-height: 1.4; }
+.pm + h3.g { margin-top: 0; }
+h3.g .n { font-weight: 500; font-size: 9pt; padding-top: .5pt; }
+h2.g .t i, h3.g .t i { display: block; font-weight: 300; font-size: 7.8pt; color: var(--mute); letter-spacing: .02em; margin-top: .3mm; }
+h2.g + h3.g { margin-top: 0; }
+
+/* ── 段落块：左栏为原文标签/段首词 ── */
+.blk {
+  display: grid; grid-template-columns: var(--lab) 1fr; column-gap: var(--gap);
+  margin: 0 0 2mm;
+}
+.blk .lab { font-size: 8pt; line-height: 1.5; padding-top: 1.5pt; }
+.blk .lab b { display: block; font-weight: 700; letter-spacing: .08em; }
+.blk .lab i { display: block; font-weight: 300; font-size: 7pt; color: var(--mute); letter-spacing: .01em; }
+.blk .lab i.anc { font-style: italic; font-weight: 400; font-size: 7.2pt; color: var(--ink); line-height: 1.35; }
+.blk .lab .ct { display: block; font-size: 6.5pt; color: var(--mute); margin-top: 1mm; }
+.blk .bd > :last-child { margin-bottom: 0; }
+
+p { margin: 0 0 1.2mm; orphans: 2; widows: 2; }
+.dm { margin: 1.1mm 0 1.4mm; text-align: center; }
+ul, ol { margin: 0 0 1mm; padding-left: 5mm; }
+li { margin: .15mm 0; }
+ul { list-style: none; }
+ul > li { position: relative; }
+ul > li::before { content: "—"; position: absolute; left: -5mm; }
+ul.dot > li::before { content: "•"; }
+ul.star > li::before { content: "*"; }
+ol { list-style: decimal; }
+ol.alpha { list-style: none; counter-reset: a; }
+ol.alpha > li { counter-increment: a; position: relative; }
+ol.alpha > li::before { content: "(" counter(a, lower-alpha) ")"; position: absolute; left: -6mm; }
+ol > li::marker { font-weight: 500; }
+b, strong { font-weight: 700; }
+em { font-style: italic; }
+.sub { font-weight: 700; }
+.qed { font-weight: 700; margin-left: 1.5mm; letter-spacing: .06em; }
+.tn { font-size: 7.8pt; color: var(--mute); }
+.step { font-weight: 700; }
+.ind { padding-left: 5mm; }
+u { text-decoration-thickness: .5pt; text-underline-offset: 1.5pt; }
