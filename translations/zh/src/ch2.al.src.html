@@ -1,0 +1,160 @@
+<!--META{"n":2,"num":"02","p0":13,"title":"线性映射","fr":"Applications linéaires"}-->
+@@ 1-2
+<h2 n="2.1" fr="Définitions">定义</h2>
+<h3 n="2.1.1" fr="Applications linéaires">线性映射</h3>
+@@ 3-12 | 定义 / Définition
+<p>设 $E$ 与 $F$ 是两个 $\K$-ev。</p>
+<ul>
+<li>称映射 $f$ 为<b>从 $E$ 到 $F$ 的线性映射</b>，如果 $f:E\to F$ 满足（线性性）
+$$\forall(x,y)\in E^2,\forall(\alpha,\beta)\in\K^2,\ f(\alpha x+\beta y)=\alpha f(x)+\beta f(y).$$
+从 $E$ 到 $F$ 的线性映射的集合记作 $\mathcal{L}(E,F)$。</li>
+<li>若此外 $E=F$，称 $f$ 为 $E$ 的<b>自同态</b>（endomorphisme）。$E$ 的自同态的集合记作 $\mathcal{L}(E)$。</li>
+<li>若 $f$ 是从 $E$ 到 $F$ 的双射线性映射，称 $f$ 为从 $E$ 到 $F$ 的<b>同构</b>（isomorphisme）（并称 $E$ 与 $F$ 同构）。</li>
+<li>若 $E=F$ 且 $f$ 是从 $E$ 到 $F$ 的双射线性映射，称 $f$ 为 $E$ 的<b>自同构</b>（automorphisme）。$E$ 的自同构的集合记作 $GL(E)$。</li>
+<li>从 $E$ 到 $\K$ 的线性映射称为 $E$ 上的<b>线性形式</b>（forme linéaire）。</li>
+</ul>
+@@ 13 | 注 / Remarques
+<p>– 若 $f$ 是线性的，则 $f(0_E)=0_F$。</p>
+<p>– 若 $f$ 是从 $E$ 到 $F$ 的线性映射，则</p>
+$$\forall(x_1,\cdots,x_n)\in E^n,\forall(\lambda_1,\cdots,\lambda_n)\in\K^n,\ f\Big(\sum_{i=1}^n\lambda_ix_i\Big)=\sum_{i=1}^n\lambda_if(x_i)$$
+@@ 14-17 | 例 / Exemples
+<ul>
+<li>若 $\lambda\in\K$，$x\mapsto\lambda x$ 是一个自同态。</li>
+<li>$D:\left\{\begin{array}{ccc}\mathcal{C}^1(\R)&\to&\mathcal{C}^0(\R)\\f&\mapsto&f'\end{array}\right.$ 是一个线性映射。</li>
+<li>$I:\left\{\begin{array}{ccc}\mathcal{C}^0([a,b])&\to&\R\\f&\mapsto&\int_a^bf(t)dt\end{array}\right.$ 是一个线性形式。</li>
+</ul>
+@@ 18
+<h3 n="2.1.2" fr="Noyau et image">核与像</h3>
+@@ 19 | « Commençons par… »
+<p>先给出两组关于映射的一般性回顾。</p>
+@@ 20-22 | « • Soient E et F… »
+<p>• 设 $E$ 与 $F$ 是两个集合，$A\subset E$，$B\subset F$，并设 $f$ 是从 $E$ 到 $F$ 的映射。</p>
+<ul>
+<li>回顾：$f(A)=\{f(x),x\in A\}$ 是 $A$ 在 $f$ 下的像集，且 $f(A)\subset F$。</li>
+<li>回顾：$f^{-1}(B)=\{x\in A,f(x)\in B\}$ 是 $B$ 在 $f$ 下的原像集（image réciproque），且 $f^{-1}(B)\subset E$。<span class="tn">〔译注：集合中应为 $x\in E$〕</span></li>
+</ul>
+@@ 23-28 | « • On rappelle aussi… »
+<p>• 还要回顾，从 $E$ 到 $F$ 的映射 $f$ 称为：</p>
+<ul>
+<li>单射（injective），如果 $F$ 的每个元素在 $E$ 中关于 $f$ 至多有一个原像：$\forall x_1,x_2\in E,\ f(x_1)=f(x_2)\Rightarrow x_1=x_2$。</li>
+<li>满射（surjective），如果 $F$ 的每个元素在 $E$ 中关于 $f$ 至少有一个原像：$\forall y\in F,\exists x\in E,\ y=f(x)$。</li>
+<li>双射（bijective），如果它既是单射又是满射：$F$ 的每个元素在 $E$ 中恰有一个原像，即 $\forall y\in F,\exists!x\in E,\ y=f(x)$。</li>
+</ul>
+@@ 29-31 | 命题 / Proposition
+<p>设 $f$ 是从 $E$ 到 $F$ 的线性映射。</p>
+<ol>
+<li>$E'$ 是 $E$ 的 sev $\Longrightarrow f(E')$ 是 $F$ 的 sev。</li>
+<li>$F'$ 是 $F$ 的 sev $\Longrightarrow f^{-1}(F')$ 是 $E$ 的 sev。</li>
+</ol>
+@@ 32-35 | 证明 / Démonstration
+<ol><li>设 $E'$ 是 $E$ 的 sev：
+<ul>
+<li>$0_F\in f(E')$，因为 $0_F=f(0_E)$ 且 $0_E\in E'$。</li>
+<li>设 $(\alpha,\beta)\in\K^2$，$(y_1,y_2)\in f(E')\times f(E')$。按 $f(E')$ 的定义，存在 $E'$ 中的两个向量 $x_1$ 与 $x_2$，使得 $f(x_1)=y_1$，$f(x_2)=y_2$。于是 $\alpha y_1+\beta y_2=\alpha f(x_1)+\beta f(x_2)=f(\alpha x_1+\beta x_2)\in f(E')$。</li>
+</ul></li></ol>
+@@ 36-38 | « 2. Soit F′ un sev de F »
+<ol start="2"><li>设 $F'$ 是 $F$ 的 sev：
+<ul>
+<li>$0_E\in f^{-1}(F')$，因为 $f(0_E)=0_F$ 且 $0_F\in F'$。</li>
+<li>设 $(\alpha,\beta)\in\K^2$，$(x_1,x_2)\in f^{-1}(F')\times f^{-1}(F')$。按 $f^{-1}(F')$ 的定义，$f(x_1)$ 与 $f(x_2)$ 属于 $F'$。于是 $f(\alpha x_1+\beta x_2)=\alpha f(x_1)+\beta f(x_2)\in F'$，这推出 $\alpha x_1+\beta x_2\in f^{-1}(F')$。</li>
+</ul></li></ol>
+<p><b class="qed">证毕</b></p>
+@@ 39-41 | 定义 / Définition
+<p>设 $f$ 是从 $E$ 到 $F$ 的线性映射，</p>
+<ul>
+<li>$\Ker(f)=f^{-1}(\{0_F\})=\{x\in E,f(x)=0_F\}$ 是 $f$ 的核（noyau）。</li>
+<li>$\Im(f)=f(E)=\{y\in F,\exists x\in E,y=f(x)\}$ 是 $f$ 的像（image）。</li>
+</ul>
+@@ 42 | « D’après la proposition… »
+<p>由上一命题，$\Ker(f)$ 是 $E$ 的 sev，$\Im(f)$ 是 $F$ 的 sev。</p>
+@@ 43-46 | 定理 / Théorème
+<p>设 $f$ 是从 $E$ 到 $F$ 的线性映射，下列三者等价：</p>
+<ol>
+<li>$f$ 是单射。</li>
+<li>$\Ker(f)=\{0_E\}$。</li>
+<li>$\forall x\in E,\ f(x)=0_F\Longrightarrow x=0_E$。</li>
+</ol>
+@@ 47-48 | 证明 / Démonstration
+<p><span class="step">1. $\Longrightarrow$ 2.</span> 设 $f\in\mathcal{L}(E,F)$，$f(0_E)=0_F$，所以 $0_E\in Ker f$。设 $f$ 是单射，则 $0_F$ 至多有一个原像，而它已经有一个，就不可能再有别的：$f^{-1}(\{0_F\})=Ker(f)=\{0_E\}$。</p>
+@@ 49 | « 2. ⇒ 3. »
+<p><span class="step">2. $\Longrightarrow$ 3.</span> 设 $Ker(f)=\{0_E\}$。设 $x\in E$，$f(x)=0_E$ 推出 $x\in Ker(f)$，从而 $x=0_E$。<span class="tn">〔译注：此处 $f(x)=0_E$ 应为 $f(x)=0_F$〕</span></p>
+@@ 50-52 | « 3. ⇒ 1. »
+<p><span class="step">3. $\Longrightarrow$ 1.</span> 设 3. 成立，我们来证明 1.。假设对 $x_1,x_2\in E^2$ 有 $f(x_1)=f(x_2)$。则由 $f$ 的线性性有：$f(x_1-x_2)=0_F$，再由假设 3.，$x_1-x_2=0_E$，即 $x_1=x_2$。这证明了 $f$ 是单射。</p>
+<p><b class="qed">证毕</b></p>
+@@ 53
+<h3 n="2.1.3" fr="Structures de L(E, F) et de L(E)">$\mathcal{L}(E,F)$ 与 $\mathcal{L}(E)$ 的结构</h3>
+@@ 54-61 | 命题 / Proposition
+<p>设 $E$ 与 $F$ 是两个 $\K$-向量空间。</p>
+<ol>
+<li>$\mathcal{L}(E,F)$ 配备函数的加法与函数的标量乘法，是一个 $\K$-ev。</li>
+<li>$(\mathcal{L}(E),+,\circ)$ 是一个环（一般不交换，即对 $u,v\in\mathcal{L}(E)^2$，$u\circ v$ 一般不等于 $v\circ u$）。<br>
+这意味着 $(\mathcal{L}(E),+)$ 是阿贝尔群（结合，有记作 $0$ 的中性元，存在逆元 + 阿贝尔 = 交换，即 $u+v=v+u$），且 $\circ$ 满足结合律（即对 $u,v,w\in\mathcal{L}(E)^3$，$(u\circ v\circ w=u\circ(v\circ w))$）<span class="tn">〔译注：应为 $(u\circ v)\circ w=u\circ(v\circ w)$〕</span>，并对 $+$ 满足分配律（即 $u\circ(v+w)=u\circ v+u\circ w$ 且 $(u+v)\circ w=u\circ w+v\circ w$）。</li>
+<li>$(GL(E),\circ)$ 是一个群（不交换，因为一般没有 $u\circ v=v\circ u$）。</li>
+</ol>
+@@ 62-63
+<h2 n="2.2" fr="Projecteurs et Symétries">投影与对称</h2>
+<h3 n="2.2.1" fr="Projections">投影</h3>
+@@ 64-65 | 定义 / Définition
+<p>设 $F$ 与 $G$ 是 $E$ 的两个 sev，满足 $F\oplus G=E$。映射 $p:E\to E$ 定义为：对任意 $x\in E$，$p(x)$ 是 $F$ 中满足“存在 $z\in G$ 使得 $x=y+z$”的唯一元素 $y$。称 $p$ 为沿 $G$ 到 $F$ 上的投影（projection sur $F$ parallèlement à $G$）。</p>
+<p>设 $p\in\mathcal{L}(E)$，若存在 $F$ 与 $G$ 使得 $p$ 是沿 $G$ 到 $F$ 上的投影，则称 $p$ 是一个投影算子（projecteur）。</p>
+@@ 66-69 | 命题 / Proposition
+<p>设 $F$ 与 $G$ 是 $E$ 的两个 sev，满足 $F\oplus G=E$。设 $p$ 是沿 $G$ 到 $F$ 上的投影，则：</p>
+<ol>
+<li>$p$ 是线性的。</li>
+<li>$\Ker(p)=G$。</li>
+<li>$\Im(p)=F=\{x\in E,x=p(x)\}$ 是 $p$ 的不变元的集合。</li>
+</ol>
+@@ 70-72 | 证明 / Démonstration
+<ol><li>设 $(\alpha,\beta)\in\K^2$，$(x_1,x_2)\in E^2$。由于 $F\oplus G=E$，可以分解 $x_1$ 与 $x_2$：$\exists(y_1,y_2)\in F^2,\exists(z_1,z_2)\in G^2$ 使得 $x_1=y_1+z_1$，$x_2=y_2+z_2$。于是 $\alpha x_1+\beta x_2=(\alpha y_1+\beta y_2)+(\alpha z_1+\beta z_2)$，其中 $\alpha y_1+\beta y_2\in F$，$\alpha z_1+\beta z_2\in G$，因此 $p(\alpha x_1+\beta x_2)=\alpha y_1+\beta y_2=\alpha p(x_1)+\beta p(x_2)\in F$。</li></ol>
+@@ 73-75 | « 2. Soit x ∈ E… »
+<ol start="2"><li>设 $x\in E$，$x$ 可唯一地分解为：$x=y+z$，$y\in F$，$z\in G$。若 $x\in Ker(p)$，则 $p(x)=y=0_E$，所以 $x=z\in G$，即 $\Ker(p)\subset G$。反之，若 $x\in G$，则 $y=0_E$ 且 $z=x$，从而 $p(x)=0_E$，即 $G\subset\Ker(p)$。所以这两个集合相等。</li></ol>
+@@ 76-79 | « 3. Im(p) ⊂ F… »
+<ol start="3"><li>$\Im(p)\subset F$，并且若 $y\in F$，$p(y)=y$，所以 $F\subset\Im(p)$。<br>
+还需验证 $F=\{x\in E,x=p(x)\}$。如上面已写过的，若 $y\in F$，$p(y)=y$，所以 $F\subset\{x\in E,x=p(x)\}$。另一方面，若 $x\in E$ 满足 $p(x)=x$，则 $x\in F$，所以 $\{x\in E,x=p(x)\}\subset F$，于是得到所要的等式。</li></ol>
+<p><b class="qed">证毕</b></p>
+@@ 80 | 例 / Exemple
+<p>在 $E=\R^2$ 中，若 $D$ 与 $D'$ 是两条不同的向量直线，则 $D\oplus D'=\R^2$，由此重新得到沿 $D'$ 到 $D$ 上的投影这一概念。</p>
+@@ 81 | 命题 / Proposition
+<p>设 $p\in\mathcal{L}(E)$，$p$ 是投影算子当且仅当 $p\circ p=p$。</p>
+@@ 82-83 | 证明 / Démonstration
+<ol><li>设 $p$ 是 $E$ 沿 $G$ 到 $F$ 上的投影，于是 $E=F\oplus G$。对任意 $x\in E$，$p(x)\in F$，从而 $p\circ p(x)=p(x)$，这确实证明了 $p\circ p=p$。</li></ol>
+@@ 84-85 | « 2. Réciproquement… »
+<ol start="2"><li>反之，设 $p$ 是 $E$ 的一个满足 $p\circ p=p$ 的自同态。令 $F=Im(p)$，$G=Ker(p)$，并验证：</li></ol>
+@@ 86 | « * E = F + G »
+<div class="ind"><ul class="star"><li>$E=F+G$：设 $x\in E$，可以写 $x=p(x)+(x-p(x))$，并且已知 $p(x)\in F$。此外 $p(x-p(x))=p(x)-p\circ p(x)=p(x)-p(x)=0_E$，所以 $x-p(x)\in G$。因此 $E$ 的任一元素 $x$ 确实可以分解为 $F$ 的一个元素与 $G$ 的一个元素之和，所以 $E=F+G$。</li></ul></div>
+@@ 87 | « * F ∩ G = {0<sub>E</sub>} »
+<div class="ind"><ul class="star"><li>$F\cap G=\{0_E\}$：设 $x\in F\cap G$，则 $x\in G$，所以 $p(x)=0_E$。此外 $x\in F$，所以存在 $y\in E$ 使得 $x=p(y)$，从而 $p(x)=p\circ p(y)=p(y)=x$，由此 $x=0_E$。</li></ul></div>
+@@ 88-90 | « Il reste à vérifier… »
+<div class="ind"><p>还需验证 $p$ 是 $E$ 沿 $G$ 到 $F$ 上的投影。把这个投影记作 $\Pi$。对任意 $x\in E$，刚才已看到可以把它唯一地分解为 $x=y+z$ 的形式，其中 $y=p(x)\in F$，$z=x-p(x)\in G$。于是 $\Pi(x)=y=p(x)$，且这对所有 $x\in E$ 都成立，所以 $p=\Pi$。</p></div>
+<p><b class="qed">证毕</b></p>
+@@ 91 | 定义 / Définition
+<p>称 $E$ 的两个自同态 $p$ 与 $q$ 是两个相伴投影算子（projecteurs associés），如果存在 $E$ 的两个互补 sev $F$ 与 $G$，使得 $p$ 是沿 $G$ 到 $F$ 上的投影，$q$ 是沿 $F$ 到 $G$ 上的投影。</p>
+@@ 92 | 命题 / Proposition
+<p>若 $p$ 与 $q$ 是两个相伴投影算子，则 $p+q=id$ 且 $p\circ q=q\circ p=O_{\mathcal{L}(E)}$。</p>
+@@ 93 | 证明 / Démonstration
+<p>设 $p$ 与 $q$ 是两个相伴投影算子：$p$ 是沿 $G$ 到 $F$ 上的投影，$q$ 是沿 $F$ 到 $G$ 上的投影，其中 $E=F\oplus G$。</p>
+@@ 94-95 | « 1. Pour tout x ∈ E… »
+<ol><li>对任意 $x\in E$，$x$ 可分解为 $x=y+z$ 的形式，其中 $y\in F$，$z\in G$。而 $p(x)=y$，$q(x)=z$，所以 $x=p(x)+q(x)$，且这对所有 $x$ 都成立，即 $p+q=id$。</li></ol>
+@@ 96-98 | « 2. Partons de l’égalité… »
+<ol start="2"><li>从上一个等式出发：对任意 $x\in E$，$x=p(x)+q(x)$。于是 $p(x)=p\circ p(x)+p\circ q(x)=p(x)+p\circ q(x)$，从而 $p\circ q(x)=0_E$，即 $p\circ q=0_{\mathcal{L}(E)}$。同样，$q(x)=q\circ p(x)+q\circ q(x)=q\circ p(x)+q(x)$，从而 $q\circ p(x)=0_E$，即 $q\circ p=0_{\mathcal{L}(E)}$。</li></ol>
+<p><b class="qed">证毕</b></p>
+@@ 99
+<h3 n="2.2.2" fr="Symétries">对称</h3>
+@@ 100 | 定义 / Définition
+<p>设 $F$ 与 $G$ 是 $E$ 的两个 sev，满足 $F\oplus G=E$。称 $\mathcal{L}(E)$ 中满足下式的映射 $s$ 为关于 $F$、平行于 $G$ 的对称（symétrie par rapport à $F$ parallèlement à $G$）：</p>
+$$\forall x\in E,\ \text{则}\ x=y+z,\ y\in F,\ z\in G,\ \text{并令}\ s(x)=y-z$$
+@@ 101 | 命题 / Proposition
+<p>对称是一个对合自同构（即满足 $s\circ s=id$）。</p>
+@@ 102 | 证明 / Démonstration
+<p>设 $F$ 与 $G$ 是 $E$ 的两个 sev，满足 $F\oplus G=E$，$s$ 是关于 $F$、平行于 $G$ 的对称，$p$ 是沿 $G$ 到 $F$ 上的投影。则 $s=2p-id$：事实上，若 $x\in E$ 分解为 $x=y+z$，其中 $y\in F$，$z\in G$，则 $s(x)=y-z$，且 $(2p-id)(x)=2p(x)-x=2y-(y+z)=y-z$。特别地，由此推出 $s$ 是线性的。</p>
+@@ 103 | « Par ailleurs… »
+<p>另一方面，有 $s\circ s=(2p-id)\circ(2p-id)=4p\circ p-2p\circ id-2id\circ p+id\circ id=4p-2p-2p+id=id$。此外，这个等式证明了 $s$ 是双射，且 $s^{-1}=s$。<b class="qed">证毕</b></p>
+@@ 104 | 命题 / Proposition
+<p>若 $s\in\mathcal{L}(E)$ 满足 $s\circ s=id$，则 $s$ 是关于 $Ker(s-id)$、平行于 $Ker(s+id)$ 的对称。</p>
+@@ 105 | 证明 / Démonstration
+<p>令 $p=\frac12(s+id)\in\mathcal{L}(E)$，有 $p\circ p=\frac14(s\circ s+s\circ id+id\circ s+id\circ id)=\frac14(2s+2id)=p$。所以 $p$ 是沿 $G=Ker(p)=Ker(s+id)$ 到 $F=Im(p)=Im(s+id)$ 上的投影算子，而 $s$ 是关于 $F$、平行于 $G$ 的对称。最后，若 $x\in E$ 写成 $x=y+z$，其中 $y\in F$，$z\in G$，则 $x\in Ker(s-id)\iff s(x)-x=0_E\iff s(x)=x\iff p(x)=\frac12(x+x)=x$。所以 $Ker(s-id)=\{x\in E,p(x)=x\}=F$ <b class="qed">证毕</b></p>
+@@ 106-108 | 例 / Exemples
+<ul>
+<li>$\C$ 上的共轭是关于 $\R$、平行于 $i\R$ 的对称。</li>
+<li>$\K[X]$ 的自同态 $s:P\mapsto P(-X)$ 是对合自同态。$s$ 是关于 $Ker(s-id)=\{f\in\K[X],\ f\text{ 为偶}\}$、平行于 $Ker(s+id)=\{f\in\K[X],\ f\text{ 为奇}\}$ 的对称。</li>
+</ul>
